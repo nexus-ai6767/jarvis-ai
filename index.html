@@ -718,30 +718,60 @@ footer{
 }
 </style>
 
+
 /* ===== JARVIS INTRO VIDEO ===== */
-#jarvisIntro{
-    position:fixed;
-    inset:0;
-    z-index:99999;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:1;
-    visibility:visible;
-    transition:opacity .8s ease, visibility .8s ease;
+html.intro-active, body.intro-active {
+    overflow: hidden !important;
+    height: 100% !important;
 }
-#jarvisIntro video{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+#jarvisIntro {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: 2147483647;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .65s ease, visibility .65s ease;
 }
-#jarvisIntro.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+#jarvisIntro video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100dvh;
+    object-fit: contain;
+    object-position: center center;
+    margin: 0;
+    padding: 0;
 }
+#jarvisIntro.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+#introAudioBtn {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 10px 18px;
+    border: 1px solid rgba(255,122,24,.55);
+    border-radius: 999px;
+    background: rgba(0,0,0,.72);
+    color: #ffb15c;
+    font: 600 12px/1 Arial, sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+}
+#introAudioBtn.hidden { display: none; }
 
 </head>
 
@@ -749,12 +779,11 @@ footer{
 
 <!-- JARVIS INTRO VIDEO -->
 <div id="jarvisIntro">
-    <video id="jarvisIntroVideo" autoplay muted playsinline preload="auto">
+    <video id="jarvisIntroVideo" autoplay playsinline preload="auto">
         <source src="intro.mp4" type="video/mp4">
     </video>
+    <button id="introAudioBtn" type="button">🔊 ENABLE AUDIO</button>
 </div>
-
-
 <!-- ================= NAV ================= -->
 
 <nav class="nav">
@@ -1554,20 +1583,62 @@ window.addEventListener("scroll",()=>{
 </script>
 
 
+
 /* ===== JARVIS INTRO VIDEO ===== */
-document.addEventListener("DOMContentLoaded", () => {
-    const intro = document.getElementById("jarvisIntro");
-    const video = document.getElementById("jarvisIntroVideo");
+(() => {
+    const startIntro = () => {
+        const intro = document.getElementById("jarvisIntro");
+        const video = document.getElementById("jarvisIntroVideo");
+        const audioBtn = document.getElementById("introAudioBtn");
+        if (!intro || !video) return;
 
-    if (!intro || !video) return;
+        document.documentElement.classList.add("intro-active");
+        document.body.classList.add("intro-active");
 
-    video.play().catch(() => {});
+        let finished = false;
+        const closeIntro = () => {
+            if (finished) return;
+            finished = true;
+            intro.classList.add("hide");
+            document.documentElement.classList.remove("intro-active");
+            document.body.classList.remove("intro-active");
+            setTimeout(() => intro.remove(), 700);
+        };
 
-    video.addEventListener("ended", () => {
-        intro.classList.add("hide");
-        setTimeout(() => intro.remove(), 900);
-    });
-});
+        const finishTimer = setTimeout(closeIntro, 6000);
+        video.addEventListener("ended", () => {
+            clearTimeout(finishTimer);
+            closeIntro();
+        }, { once: true });
+
+        // Try autoplay WITH audio. Browsers may block it.
+        video.muted = false;
+        video.volume = 1;
+        const attempt = video.play();
+        if (attempt && typeof attempt.catch === "function") {
+            attempt.catch(() => {
+                // Show a one-click audio/play fallback if autoplay with sound is blocked.
+                if (audioBtn) {
+                    audioBtn.classList.remove("hidden");
+                    audioBtn.addEventListener("click", () => {
+                        video.muted = false;
+                        video.volume = 1;
+                        video.play().then(() => audioBtn.classList.add("hidden")).catch(() => {});
+                    }, { once: true });
+                }
+                // Keep video visible; it can still autoplay muted on browsers that permit it.
+                video.muted = true;
+                video.play().catch(() => {});
+            });
+        }
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startIntro, { once: true });
+    } else {
+        startIntro();
+    }
+})();
 
 </body>
 </html>
