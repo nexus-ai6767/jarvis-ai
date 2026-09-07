@@ -1,18 +1,3 @@
 const glow=document.querySelector('.cursor-glow');document.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});document.querySelectorAll('.hero-copy,.reactor-stage,.section,.cta').forEach(e=>{e.classList.add('reveal');obs.observe(e)});document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const x=document.querySelector(a.getAttribute('href'));if(x){e.preventDefault();x.scrollIntoView({behavior:'smooth'})}}));
-/* ===== JARVIS INTRO VIDEO ===== */
-(function(){
-function initJarvisIntro(){
-const intro=document.getElementById("jarvisIntro"), video=document.getElementById("jarvisIntroVideo"), btn=document.getElementById("introAudioBtn");
-if(!intro||!video)return;
-document.documentElement.classList.add("intro-active"); document.body.classList.add("intro-active");
-video.muted=false;
-const p=video.play();
-if(p&&p.catch)p.catch(function(){video.muted=true; video.play().catch(function(){}); if(btn)btn.classList.remove("hidden");});
-if(btn)btn.addEventListener("click",function(){video.muted=false;video.volume=1;video.play().catch(function(){});btn.classList.add("hidden");});
-let done=false;
-function close(){if(done)return;done=true;intro.classList.add("hide");document.documentElement.classList.remove("intro-active");document.body.classList.remove("intro-active");setTimeout(function(){intro.remove()},800);}
-video.addEventListener("ended",close);
-video.addEventListener("loadedmetadata",function(){setTimeout(close,video.duration*1000+1200);});
-}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",initJarvisIntro);else initJarvisIntro();
-})();
+/* JARVIS INTRO VIDEO */
+(()=>{const init=()=>{const intro=document.getElementById('jarvisIntro'),video=document.getElementById('jarvisIntroVideo'),btn=document.getElementById('introAudioBtn');if(!intro||!video)return;document.documentElement.classList.add('jarvis-intro-active');document.body.classList.add('jarvis-intro-active');let closed=false;const close=()=>{if(closed)return;closed=true;intro.classList.add('hide');document.documentElement.classList.remove('jarvis-intro-active');document.body.classList.remove('jarvis-intro-active');setTimeout(()=>intro.remove(),750)};video.addEventListener('ended',close,{once:true});video.addEventListener('error',close,{once:true});video.muted=true;video.volume=1;const p=video.play();if(p&&p.catch)p.catch(()=>{});if(btn)btn.addEventListener('click',()=>{video.muted=false;video.volume=1;video.play().then(()=>btn.classList.add('hidden')).catch(()=>{})});const fallback=()=>{if(Number.isFinite(video.duration)&&video.duration>0)setTimeout(close,video.duration*1000+900)};if(video.readyState>=1)fallback();else video.addEventListener('loadedmetadata',fallback,{once:true})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init()})();
