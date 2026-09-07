@@ -717,20 +717,9 @@ footer{
     }
 }
 </style>
-
-/* JARVIS INTRO VIDEO */
-html.jarvis-intro-active,body.jarvis-intro-active{overflow:hidden!important;height:100%!important}
-#jarvisIntro{position:fixed;inset:0;width:100vw;height:100vh;z-index:2147483647;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:1;visibility:visible;transition:opacity .7s ease,visibility .7s ease}
-#jarvisIntro video{display:block;width:100vw;height:100vh;object-fit:contain;object-position:center center;background:#000}
-#jarvisIntro.hide{opacity:0;visibility:hidden;pointer-events:none}
-#introAudioBtn{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;padding:12px 20px;border:1px solid rgba(255,141,43,.75);border-radius:999px;background:rgba(0,0,0,.82);color:#ff9a42;font:700 12px Arial,sans-serif;letter-spacing:1px;cursor:pointer}
-#introAudioBtn.hidden{display:none}
 </head>
 
 <body>
-<!-- JARVIS INTRO VIDEO -->
-<div id="jarvisIntro" aria-label="JARVIS intro"><video id="jarvisIntroVideo" autoplay muted playsinline preload="auto"><source src="intro.mp4" type="video/mp4"></video><button id="introAudioBtn" type="button">🔊 ENABLE AUDIO</button></div>
-
 
 <!-- ================= NAV ================= -->
 
