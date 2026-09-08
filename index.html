@@ -717,9 +717,52 @@ footer{
     }
 }
 </style>
+
+
+/* ===== MOBILE VERSION COMING SOON ===== */
+.mobile-coming-banner{
+  position:fixed;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 18px;
+  border:1px solid rgba(255,128,0,.42);
+  border-radius:999px;
+  background:rgba(8,8,8,.88);
+  box-shadow:0 0 24px rgba(255,128,0,.12), inset 0 0 18px rgba(255,128,0,.035);
+  color:#ff9a3d;
+  font-size:11px;
+  letter-spacing:1.7px;
+  white-space:nowrap;
+  backdrop-filter:blur(10px);
+}
+.mobile-coming-banner strong{color:#fff;font-weight:700;}
+.mobile-coming-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#ff7a00;
+  box-shadow:0 0 10px rgba(255,122,0,.8);
+  animation:mobileComingPulse 1.6s ease-in-out infinite;
+}
+@keyframes mobileComingPulse{0%,100%{opacity:.45;transform:scale(.85)}50%{opacity:1;transform:scale(1.1)}}
+@media (max-width:600px){
+  .mobile-coming-banner{top:9px;padding:8px 13px;font-size:9px;letter-spacing:1.25px;}
+}
+
 </head>
 
 <body>
+<!-- MOBILE VERSION COMING SOON BANNER -->
+<div class="mobile-coming-banner" aria-label="JARVIS mobile version coming soon">
+  <span class="mobile-coming-dot"></span>
+  <span><strong>JARVIS MOBILE</strong> &nbsp;•&nbsp; COMING SOON</span>
+</div>
+
 
 <!-- ================= NAV ================= -->
 
@@ -741,7 +784,7 @@ footer{
         GET STARTED
     </a>
 
-    <a href="JARVIS_PC_RELEASE.zip" class="navbtn" target="_blank" rel="noopener">
+    <a href="https://github.com/nexus-ai6767/jarvis-pc/releases/download/v1.0.0/JARVIS_PC_RELEASE.zip" class="navbtn" target="_blank" rel="noopener">
         DOWNLOAD JARVIS
     </a>
 
@@ -1318,7 +1361,7 @@ footer{
     <!-- CHANGE THIS LINK TO YOUR ACTUAL DOWNLOAD LATER -->
 
     <a
-        href="JARVIS_PC_RELEASE.zip"
+        href="https://github.com/nexus-ai6767/jarvis-pc/releases/download/v1.0.0/JARVIS_PC_RELEASE.zip"
         target="_blank"
         class="primary"
     >
