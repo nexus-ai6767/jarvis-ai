@@ -716,6 +716,57 @@ footer{
         gap:15px;
     }
 }
+
+/* ================= FUTURISTIC MOBILE BANNER ================= */
+
+.mobile-coming-banner{
+    position:relative;
+    z-index:10;
+    width:100%;
+    padding:88px 3% 20px;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255,122,24,.08), transparent 55%),
+        #030303;
+}
+
+.mobile-banner-frame{
+    width:100%;
+    max-width:1500px;
+    margin:0 auto;
+    overflow:hidden;
+    border:1px solid rgba(255,122,24,.22);
+    background:#020202;
+    box-shadow:
+        0 0 45px rgba(255,100,0,.08),
+        inset 0 0 35px rgba(255,100,0,.035);
+}
+
+.mobile-banner-image{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+}
+
+/* Keep the complete banner visible on smaller screens. */
+@media (max-width:900px){
+    .mobile-coming-banner{
+        padding:82px 12px 16px;
+    }
+}
+
+@media (max-width:600px){
+    .mobile-coming-banner{
+        padding:78px 8px 12px;
+    }
+
+    .mobile-banner-frame{
+        border-left:0;
+        border-right:0;
+    }
+}
+
 </style>
 </head>
 
@@ -746,6 +797,20 @@ footer{
     </a>
 
 </nav>
+<!-- ================= JARVIS MOBILE COMING SOON ================= -->
+
+<section class="mobile-coming-banner" aria-label="JARVIS Mobile coming soon">
+    <div class="mobile-banner-frame">
+        <img
+            src="jarvis-mobile-coming-soon.png"
+            alt="JARVIS Mobile — Coming Soon"
+            class="mobile-banner-image"
+        >
+    </div>
+</section>
+
+<!-- ============================================================ -->
+
 
 
 <!-- ================= HERO ================= -->
