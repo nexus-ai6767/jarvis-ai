@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="jarvis-booting">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -822,10 +822,193 @@ footer{
 @keyframes jdot{50%{opacity:.35;transform:scale(.75)}}
 @media(max-width:600px){.jarvis-live-inner{padding:18px}.jarvis-terminal{font-size:11px;min-height:270px;padding:15px}.jarvis-live-top{align-items:flex-start;flex-direction:column}}
 
+/* ================= INTRO BOOT ANIMATION ================= */
+
+html.jarvis-booting,
+html.jarvis-booting body{
+    overflow:hidden;
+    height:100%;
+}
+
+#jarvis-intro{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#030303;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    transition:opacity .7s ease, visibility .7s ease;
+}
+
+#jarvis-intro.jarvis-intro-hide{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+#jarvis-intro:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.12;
+    background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:50px 50px;
+}
+
+.intro-reactor{
+    position:relative;
+    width:180px;
+    height:180px;
+    margin-bottom:42px;
+}
+
+.intro-core{
+    position:absolute;
+    inset:36%;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,
+        #fff 0%,
+        #ffd0a0 5%,
+        var(--orange) 20%,
+        rgba(255,90,0,.5) 45%,
+        transparent 72%);
+    box-shadow:
+        0 0 25px #ff7a18,
+        0 0 70px rgba(255,100,0,.5);
+    animation:introPulse 1.6s infinite ease-in-out;
+}
+
+.intro-ring{
+    position:absolute;
+    inset:8%;
+    border:1px solid rgba(255,122,24,.35);
+    border-top-color:var(--orange);
+    border-radius:50%;
+    animation:spin 2.2s linear infinite;
+}
+
+.intro-ring.r2{
+    inset:20%;
+    border:1px dashed rgba(255,178,110,.3);
+    border-top-color:var(--orange2);
+    animation:spin 3.4s linear infinite reverse;
+}
+
+.intro-ring.r3{
+    inset:0;
+    border:1px solid rgba(255,122,24,.15);
+    animation:spin 6s linear infinite;
+}
+
+@keyframes introPulse{
+    0%,100%{transform:scale(.88);opacity:.85}
+    50%{transform:scale(1.12);opacity:1}
+}
+
+.intro-title{
+    font-size:clamp(22px,4vw,34px);
+    font-weight:800;
+    letter-spacing:.5em;
+    padding-left:.5em;
+    color:var(--text);
+    margin-bottom:22px;
+}
+
+.intro-title span{
+    color:var(--orange);
+    text-shadow:0 0 30px rgba(255,122,24,.5);
+}
+
+.intro-status{
+    font-family:Consolas,Monaco,monospace;
+    font-size:11px;
+    letter-spacing:.15em;
+    color:#888;
+    min-height:16px;
+    margin-bottom:22px;
+}
+
+.intro-status .ok{
+    color:var(--orange);
+}
+
+.intro-bar{
+    width:min(280px,60vw);
+    height:2px;
+    background:rgba(255,122,24,.15);
+    position:relative;
+    overflow:hidden;
+}
+
+.intro-bar-fill{
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:0%;
+    background:var(--orange);
+    box-shadow:0 0 12px var(--orange);
+    transition:width .25s linear;
+}
+
+.intro-skip{
+    position:absolute;
+    bottom:26px;
+    right:26px;
+    font-size:10px;
+    letter-spacing:.15em;
+    color:#555;
+    border:1px solid #222;
+    padding:8px 14px;
+    cursor:pointer;
+    background:transparent;
+    transition:.3s;
+}
+
+.intro-skip:hover{
+    color:var(--orange);
+    border-color:var(--orange);
+}
+
+@media(prefers-reduced-motion: reduce){
+    .intro-core,.intro-ring,.intro-ring.r2,.intro-ring.r3{
+        animation:none;
+    }
+}
+
 </style>
 </head>
 
 <body>
+
+<!-- ================= INTRO BOOT ANIMATION ================= -->
+
+<div id="jarvis-intro">
+
+    <div class="intro-reactor">
+        <div class="intro-ring r3"></div>
+        <div class="intro-ring r2"></div>
+        <div class="intro-ring"></div>
+        <div class="intro-core"></div>
+    </div>
+
+    <div class="intro-title">JARVI<span>S</span></div>
+
+    <div class="intro-status" id="jarvis-intro-status">&nbsp;</div>
+
+    <div class="intro-bar">
+        <div class="intro-bar-fill" id="jarvis-intro-fill"></div>
+    </div>
+
+    <button class="intro-skip" id="jarvis-intro-skip">SKIP</button>
+
+</div>
+
 
 <!-- ================= NAV ================= -->
 
@@ -1693,6 +1876,74 @@ function run(i){
 }
 document.querySelectorAll('.jarvis-live-btn').forEach(b=>b.addEventListener('click',()=>run(Number(b.dataset.demo))));
 run(0);
+})();
+</script>
+
+
+<!-- ================= INTRO BOOT SEQUENCE ================= -->
+<script>
+(function(){
+
+    var overlay = document.getElementById('jarvis-intro');
+    var statusEl = document.getElementById('jarvis-intro-status');
+    var fillEl = document.getElementById('jarvis-intro-fill');
+    var skipBtn = document.getElementById('jarvis-intro-skip');
+    var htmlEl = document.documentElement;
+
+    if(!overlay){ return; }
+
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var lines = [
+        'BOOTING JARVIS CORE',
+        'LOADING NEURAL MEMORY',
+        'CALIBRATING VOICE ENGINE',
+        'LINKING AUTOMATION MODULES',
+        'ALL SYSTEMS ONLINE'
+    ];
+
+    var finished = false;
+
+    function finish(){
+        if(finished){ return; }
+        finished = true;
+        overlay.classList.add('jarvis-intro-hide');
+        htmlEl.classList.remove('jarvis-booting');
+        setTimeout(function(){
+            if(overlay.parentNode){
+                overlay.parentNode.removeChild(overlay);
+            }
+        },800);
+    }
+
+    // Skip on click, or instantly for users who prefer reduced motion
+    skipBtn.addEventListener('click', finish);
+
+    if(reduced){
+        finish();
+        return;
+    }
+
+    var i = 0;
+    var total = lines.length;
+
+    function step(){
+        if(i >= total){
+            setTimeout(finish, 350);
+            return;
+        }
+        statusEl.innerHTML = (i === total - 1 ? '<span class="ok">' + lines[i] + '</span>' : lines[i]);
+        fillEl.style.width = Math.round(((i + 1) / total) * 100) + '%';
+        i++;
+        setTimeout(step, 480);
+    }
+
+    // Small delay so the reactor is visible spinning before text starts
+    setTimeout(step, 350);
+
+    // Safety net: never trap a visitor on the boot screen
+    setTimeout(finish, 6000);
+
 })();
 </script>
 
