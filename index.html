@@ -805,37 +805,27 @@ footer{
 }
 
 
-/* JARVIS PHASE 1 BOOT */
-#jarvis-boot{position:fixed;inset:0;z-index:999999;background:#020202;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#fff;transition:opacity .8s,visibility .8s}
-#jarvis-boot.done{opacity:0;visibility:hidden;pointer-events:none}
-#jarvis-boot .grid{position:absolute;inset:0;opacity:.13;background-image:linear-gradient(rgba(255,122,24,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(255,122,24,.22) 1px,transparent 1px);background-size:42px 42px}
-#jarvis-boot .scan{position:absolute;left:0;right:0;top:-3px;height:2px;background:#ff7a18;box-shadow:0 0 25px #ff7a18;animation:jscan 2.4s linear infinite}
-#jarvis-boot .core{width:min(250px,42vw);aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center}
-#jarvis-boot .ring{position:absolute;inset:0;border:1px solid rgba(255,122,24,.7);border-radius:50%}
-#jarvis-boot .r1{animation:jspin 5s linear infinite}
-#jarvis-boot .r2{inset:12%;border-style:dashed;animation:jspinr 3.8s linear infinite}
-#jarvis-boot .r3{inset:25%;box-shadow:inset 0 0 35px rgba(255,122,24,.2);animation:jpulse 1.2s ease-in-out infinite}
-#jarvis-boot .core:after{content:"";width:34%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff 0,#ffbd83 18%,#ff7a18 43%,transparent 73%);box-shadow:0 0 40px #ff7a18;animation:jpulse 1s infinite}
-#jarvis-boot .txt{position:absolute;top:calc(50% + min(18vw,145px));width:90%;text-align:center}
-#jarvis-boot .title{font-size:clamp(24px,3vw,42px);font-weight:800;letter-spacing:.32em;margin-left:.32em}
-#jarvis-boot .sub{margin-top:10px;color:#ff8a3d;font-size:11px;letter-spacing:.22em}
-#jarvis-boot .status{margin-top:15px;color:#777;font-size:10px;letter-spacing:.16em}
-#jarvis-boot .bar{height:2px;width:min(360px,70vw);margin:14px auto;background:#222}
-#jarvis-boot .bar span{display:block;width:0;height:100%;background:#ff7a18;box-shadow:0 0 14px #ff7a18;animation:jbar 3.1s forwards}
-@keyframes jspin{to{transform:rotate(360deg)}}@keyframes jspinr{to{transform:rotate(-360deg)}}@keyframes jpulse{50%{transform:scale(1.05);opacity:1}}@keyframes jscan{to{top:103%}}@keyframes jbar{to{width:100%}}
-@media(max-width:600px){#jarvis-boot .core{width:55vw}#jarvis-boot .txt{top:calc(50% + 150px)}}
+/* JARVIS PHASE 1 — LIVE COMMAND DEMO */
+.jarvis-live-demo{position:relative;width:min(1100px,92vw);margin:70px auto 90px;padding:1px;background:linear-gradient(120deg,rgba(255,122,24,.45),rgba(255,122,24,.06),rgba(255,122,24,.35));box-shadow:0 0 60px rgba(255,122,24,.08)}
+.jarvis-live-inner{background:linear-gradient(145deg,#070707,#020202);border:1px solid rgba(255,122,24,.14);padding:28px;position:relative;overflow:hidden}
+.jarvis-live-inner:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.012) 4px);pointer-events:none}
+.jarvis-live-top{display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:18px}
+.jarvis-live-title{font-size:clamp(15px,2vw,22px);letter-spacing:.16em;font-weight:800}
+.jarvis-live-status{font-size:9px;letter-spacing:.16em;color:#ff8a3d;display:flex;align-items:center;gap:8px}
+.jarvis-live-dot{width:7px;height:7px;border-radius:50%;background:#ff7a18;box-shadow:0 0 14px #ff7a18;animation:jdot 1s infinite}
+.jarvis-terminal{margin-top:22px;background:#010101;border:1px solid rgba(255,122,24,.12);min-height:300px;padding:22px;font-family:Consolas,Monaco,monospace;font-size:13px;line-height:1.8;box-shadow:inset 0 0 35px rgba(255,122,24,.025)}
+.jarvis-terminal-line{min-height:25px}
+.jarvis-terminal .prompt{color:#ff7a18}.jarvis-terminal .ok{color:#aaa}.jarvis-terminal .muted{color:#555}
+.jarvis-live-controls{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.jarvis-live-btn{cursor:pointer;background:#080808;color:#ddd;border:1px solid rgba(255,122,24,.35);padding:10px 15px;font:inherit;font-size:10px;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
+.jarvis-live-btn:hover{border-color:#ff7a18;box-shadow:0 0 18px rgba(255,122,24,.14);color:#ff9a58}
+@keyframes jdot{50%{opacity:.35;transform:scale(.75)}}
+@media(max-width:600px){.jarvis-live-inner{padding:18px}.jarvis-terminal{font-size:11px;min-height:270px;padding:15px}.jarvis-live-top{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 
 <body>
-<div id="jarvis-boot">
-<div class="grid"></div><div class="scan"></div>
-<div class="core"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div></div>
-<div class="txt"><div class="title">JARVIS</div><div class="sub">AI CORE // INITIALIZATION</div>
-<div class="status" id="jarvis-boot-status">ESTABLISHING CORE LINK...</div>
-<div class="bar"><span></span></div></div>
-</div>
-
 
 <!-- ================= NAV ================= -->
 
@@ -913,6 +903,23 @@ footer{
     </div>
 
 </header>
+<!-- JARVIS PHASE 1 — LIVE COMMAND DEMO -->
+<section class="jarvis-live-demo" aria-label="JARVIS live command demo">
+  <div class="jarvis-live-inner">
+    <div class="jarvis-live-top">
+      <div class="jarvis-live-title">JARVIS // LIVE COMMAND INTERFACE</div>
+      <div class="jarvis-live-status"><span class="jarvis-live-dot"></span>SYSTEM ONLINE</div>
+    </div>
+    <div class="jarvis-terminal" id="jarvis-terminal" aria-live="polite"></div>
+    <div class="jarvis-live-controls">
+      <button class="jarvis-live-btn" data-demo="0">OPEN YOUTUBE</button>
+      <button class="jarvis-live-btn" data-demo="1">WEB SEARCH</button>
+      <button class="jarvis-live-btn" data-demo="2">UPDATE MEMORY</button>
+      <button class="jarvis-live-btn" data-demo="3">SYSTEM STATUS</button>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- ================= JARVIS MOBILE // NEXT PLATFORM ================= -->
@@ -1658,11 +1665,36 @@ window.addEventListener("scroll",()=>{
 
 
 <script>
-(()=>{const b=document.getElementById('jarvis-boot'),s=document.getElementById('jarvis-boot-status');if(!b)return;
-document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';
-['ESTABLISHING CORE LINK...','LOADING NEURAL SYSTEM...','INITIALIZING VOICE ENGINE...','CONNECTING MODULES...','SYSTEM READY.'].forEach((x,i)=>setTimeout(()=>s.textContent=x,i*650));
-setTimeout(()=>{b.classList.add('done');document.documentElement.style.overflow='';document.body.style.overflow='';setTimeout(()=>b.remove(),900)},3600);
+(function(){
+const terminal=document.getElementById('jarvis-terminal');
+if(!terminal)return;
+const demos=[
+['Jarvis, open YouTube','Opening YouTube...','✓ COMMAND EXECUTED'],
+['Jarvis, search latest Python news','Searching the web...','✓ RESULTS READY'],
+['Jarvis, remember my project is JARVIS','Updating neural memory...','✓ MEMORY UPDATED'],
+['Jarvis, system status','Scanning modules...','✓ ALL SYSTEMS ONLINE']
+];
+let timer;
+function run(i){
+ clearTimeout(timer);
+ terminal.innerHTML='';
+ const [cmd,work,done]=demos[i];
+ const lines=[{t:'> '+cmd,c:'prompt'},{t:work,c:'muted'},{t:done,c:'ok'}];
+ let n=0;
+ function next(){
+   if(n>=lines.length)return;
+   const row=document.createElement('div'); row.className='jarvis-terminal-line '+lines[n].c;
+   terminal.appendChild(row);
+   const text=lines[n].t; let k=0;
+   const type=()=>{row.textContent=text.slice(0,k++);if(k<=text.length)timer=setTimeout(type,18);else{n++;timer=setTimeout(next,520)}};
+   type();
+ }
+ next();
+}
+document.querySelectorAll('.jarvis-live-btn').forEach(b=>b.addEventListener('click',()=>run(Number(b.dataset.demo))));
+run(0);
 })();
 </script>
+
 </body>
 </html>
