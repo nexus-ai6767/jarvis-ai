@@ -1233,6 +1233,94 @@ html.jarvis-booting body{
     }
 }
 
+/* ================= HUMAN/ROBOT BADGE ================= */
+
+#jarvis-badge{
+    position:fixed;
+    top:18px;
+    right:18px;
+    width:52px;
+    height:52px;
+    z-index:9000;
+    cursor:pointer;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 50%,#111 0%,#050505 70%);
+    box-shadow:
+        0 0 0 1px rgba(255,122,24,.35),
+        0 0 18px rgba(255,122,24,.25);
+    animation:badgeFloat 4s ease-in-out infinite;
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+
+#jarvis-badge:hover{
+    transform:scale(1.08);
+    box-shadow:
+        0 0 0 1px rgba(255,122,24,.7),
+        0 0 28px rgba(255,122,24,.45);
+}
+
+#jarvis-badge svg{
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+#jarvis-badge .badge-ring{
+    animation:spin 14s linear infinite;
+    transform-origin:50% 50%;
+}
+
+#jarvis-badge .badge-eye-robot{
+    animation:introPulse 1.8s ease-in-out infinite;
+    transform-origin:center;
+}
+
+@keyframes badgeFloat{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-3px)}
+}
+
+.jarvis-badge-tip{
+    position:absolute;
+    top:64px;
+    right:0;
+    font-family:Consolas,Monaco,monospace;
+    font-size:9px;
+    letter-spacing:.15em;
+    color:var(--orange2);
+    background:rgba(5,5,5,.9);
+    border:1px solid var(--line);
+    padding:5px 9px;
+    white-space:nowrap;
+    opacity:0;
+    transform:translateY(-4px);
+    transition:.25s ease;
+    pointer-events:none;
+}
+
+#jarvis-badge:hover + .jarvis-badge-tip{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:600px){
+    #jarvis-badge{
+        width:42px;
+        height:42px;
+        top:12px;
+        right:12px;
+    }
+    .jarvis-badge-tip{
+        display:none;
+    }
+}
+
+@media(prefers-reduced-motion: reduce){
+    #jarvis-badge, #jarvis-badge .badge-ring, #jarvis-badge .badge-eye-robot{
+        animation:none !important;
+    }
+}
+
 </style>
 </head>
 
@@ -1283,6 +1371,56 @@ html.jarvis-booting body{
     <button class="intro-skip" id="jarvis-intro-skip">SKIP INTRO</button>
 
 </div>
+
+<!-- ================= HUMAN / ROBOT BADGE ================= -->
+<div id="jarvis-badge" title="JARVIS">
+    <svg viewBox="0 0 100 100">
+        <defs>
+            <clipPath id="badgeCircle"><circle cx="50" cy="50" r="48"/></clipPath>
+            <linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#e8b48c"/>
+                <stop offset="100%" stop-color="#c48b62"/>
+            </linearGradient>
+            <linearGradient id="metalGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2a2a2a"/>
+                <stop offset="100%" stop-color="#0c0c0c"/>
+            </linearGradient>
+        </defs>
+
+        <g clip-path="url(#badgeCircle)">
+            <rect x="0" y="0" width="100" height="100" fill="#050505"/>
+
+            <!-- ===== LEFT HALF : HUMAN ===== -->
+            <path d="M50,2 A48,48 0 0,0 50,98 Z" fill="url(#skinGrad)"/>
+            <path d="M2,50 A48,48 0 0,0 50,98 L50,50 Z" fill="#000" opacity=".08"/>
+            <path d="M6,18 Q28,4 50,10 L50,26 Q30,18 10,30 Z" fill="#1c130d"/>
+            <path d="M18,42 Q26,36 34,42" stroke="#1c130d" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+            <ellipse cx="30" cy="52" rx="5.5" ry="6.5" fill="#1b1108"/>
+            <circle cx="31.5" cy="49.5" r="1.4" fill="#fff" opacity=".8"/>
+            <path d="M26,72 Q34,80 43,74" stroke="#7a3c26" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+
+            <!-- ===== RIGHT HALF : ROBOT ===== -->
+            <path d="M50,2 A48,48 0 0,1 50,98 Z" fill="url(#metalGrad)"/>
+            <path d="M50,10 L50,90" stroke="#000" stroke-width="0" opacity="0"/>
+            <path d="M56,8 L56,92 M64,4 L64,96 M72,10 L72,90" stroke="rgba(255,122,24,.18)" stroke-width="1"/>
+            <rect x="60" y="42" width="20" height="16" rx="3" fill="#050505" stroke="rgba(255,122,24,.6)" stroke-width="1.2"/>
+            <circle class="badge-eye-robot" cx="70" cy="50" r="5" fill="#ff7a18"/>
+            <path d="M62,68 L78,68 M64,74 L76,74" stroke="rgba(255,122,24,.5)" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M58,22 L82,22 L82,30 L58,30 Z" fill="none" stroke="rgba(255,122,24,.35)" stroke-width="1"/>
+            <circle cx="62" cy="26" r="1.3" fill="var(--orange)"/>
+            <circle cx="68" cy="26" r="1.3" fill="rgba(255,122,24,.4)"/>
+            <circle cx="74" cy="26" r="1.3" fill="rgba(255,122,24,.4)"/>
+
+            <!-- center divide glow -->
+            <rect x="49.3" y="2" width="1.4" height="96" fill="#ff7a18" opacity=".55"/>
+        </g>
+
+        <g class="badge-ring">
+            <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(255,122,24,.5)" stroke-width="1.4" stroke-dasharray="6 10"/>
+        </g>
+    </svg>
+</div>
+<div class="jarvis-badge-tip">HUMAN + AI</div>
 
 
 <!-- ================= NAV ================= -->
