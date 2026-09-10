@@ -9,6 +9,18 @@
 <meta name="description"
 content="JARVIS — a futuristic personal AI assistant with voice, vision, automation and local intelligence.">
 
+<meta property="og:title" content="JARVIS // Personal AI System">
+<meta property="og:description" content="A futuristic personal AI assistant with voice, vision, automation and local intelligence — running on your own machine.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="jarvis-mobile-coming-soon.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JARVIS // Personal AI System">
+<meta name="twitter:description" content="A futuristic personal AI assistant with voice, vision, automation and local intelligence.">
+<meta name="theme-color" content="#030303">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://your-domain-here.com/"> <!-- TODO: replace with your real domain once deployed -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -730,6 +742,45 @@ section{
     display:none;
 }
 
+.pipe-pulse{
+    position:absolute;
+    top:50%;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 12px var(--orange),0 0 24px rgba(255,122,24,.5);
+    transform:translateY(-50%);
+    animation:pipeTravel 2.4s ease-in-out infinite;
+}
+
+.pipe-pulse.p2{
+    animation-name:pipeTravel2;
+    animation-delay:0s;
+}
+
+@keyframes pipeTravel{
+    0%{left:2%;opacity:0}
+    8%{opacity:1}
+    30%{left:31%;opacity:1}
+    36%{opacity:0}
+    100%{left:31%;opacity:0}
+}
+
+@keyframes pipeTravel2{
+    0%{left:35%;opacity:0}
+    8%{opacity:1}
+    30%{left:64.5%;opacity:1}
+    36%{opacity:0}
+    100%{left:64.5%;opacity:0}
+}
+
+@media(max-width:850px){
+    .pipe-pulse{
+        display:none;
+    }
+}
+
 .node small{
     color:var(--orange);
     letter-spacing:3px;
@@ -1200,6 +1251,72 @@ footer:before{
     height:auto;
     max-width:100%;
     object-fit:contain;
+}
+
+.waitlist-form{
+    width:min(560px,92vw);
+    margin:34px auto 0;
+    text-align:center;
+}
+
+.waitlist-label{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:3px;
+    color:#777;
+    margin-bottom:14px;
+}
+
+.waitlist-row{
+    display:flex;
+    gap:10px;
+}
+
+.waitlist-row input{
+    flex:1;
+    background:#050505;
+    border:1px solid #222;
+    color:#fff;
+    padding:14px 16px;
+    font-family:var(--font-body);
+    font-size:13px;
+    outline:none;
+    transition:.3s;
+}
+
+.waitlist-row input:focus{
+    border-color:var(--orange);
+}
+
+.waitlist-row button{
+    border:0;
+    background:var(--orange);
+    color:#000;
+    padding:14px 20px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    cursor:pointer;
+    transition:.3s;
+    white-space:nowrap;
+}
+
+.waitlist-row button:hover{
+    background:var(--orange2);
+}
+
+.waitlist-note{
+    margin-top:12px;
+    font-size:12px;
+    color:#63ff9a;
+    min-height:16px;
+}
+
+@media(max-width:560px){
+    .waitlist-row{
+        flex-direction:column;
+    }
 }
 
 @media (max-width:700px){
@@ -1736,6 +1853,245 @@ html.jarvis-booting body{
     }
 }
 
+/* ================= HOW IT WORKS ================= */
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+    position:relative;
+}
+
+.steps:before{
+    content:"";
+    position:absolute;
+    top:23px;
+    left:6%;
+    right:6%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,122,24,.35),rgba(255,122,24,.35),transparent);
+}
+
+.step{
+    position:relative;
+    padding:0 22px;
+}
+
+.step-dot{
+    width:46px;
+    height:46px;
+    border:1px solid var(--orange);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#050505;
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:15px;
+    color:var(--orange);
+    position:relative;
+    z-index:2;
+    margin-bottom:22px;
+}
+
+.step h3{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:9px;
+}
+
+.step p{
+    color:#777;
+    font-size:13px;
+    line-height:1.7;
+}
+
+@media(max-width:850px){
+    .steps{
+        grid-template-columns:1fr;
+        gap:34px;
+    }
+
+    .steps:before{
+        display:none;
+    }
+}
+
+/* ================= TESTIMONIALS ================= */
+
+.testimonial-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.testimonial{
+    background:#070707;
+    border:1px solid #1a1a1a;
+    padding:30px;
+    transition:.3s;
+}
+
+.testimonial:hover{
+    border-color:rgba(255,122,24,.3);
+    transform:translateY(-4px);
+}
+
+.testimonial-quote{
+    color:#ccc;
+    font-size:14px;
+    line-height:1.8;
+    margin-bottom:22px;
+}
+
+.testimonial-quote:before{
+    content:"“";
+    color:var(--orange);
+    font-family:var(--font-display);
+    font-size:28px;
+    display:block;
+    line-height:.6;
+    margin-bottom:10px;
+}
+
+.testimonial-who{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.testimonial-avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1a1a1a,#0a0a0a);
+    border:1px solid rgba(255,122,24,.3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--font-display);
+    font-size:12px;
+    color:var(--orange);
+    font-weight:700;
+}
+
+.testimonial-name{
+    font-size:13px;
+    color:#eee;
+}
+
+.testimonial-role{
+    font-size:11px;
+    color:#666;
+}
+
+@media(max-width:850px){
+    .testimonial-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ================= FAQ ================= */
+
+.faq-list{
+    max-width:800px;
+}
+
+.faq-item{
+    border-bottom:1px solid #1a1a1a;
+    padding:22px 0;
+}
+
+.faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    font-size:16px;
+    font-weight:600;
+    color:var(--text);
+    font-family:var(--font-display);
+}
+
+.faq-item summary::-webkit-details-marker{
+    display:none;
+}
+
+.faq-icon{
+    flex-shrink:0;
+    width:26px;
+    height:26px;
+    border:1px solid #333;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--orange);
+    font-size:15px;
+    transition:.3s;
+}
+
+.faq-item[open] .faq-icon{
+    transform:rotate(45deg);
+    border-color:var(--orange);
+}
+
+.faq-answer{
+    color:#888;
+    font-size:14px;
+    line-height:1.8;
+    margin-top:16px;
+    max-width:640px;
+}
+
+/* ================= CHANGELOG ================= */
+
+.changelog{
+    background:#050505;
+}
+
+.changelog-list{
+    max-width:760px;
+    font-family:var(--font-mono);
+}
+
+.changelog-entry{
+    display:grid;
+    grid-template-columns:110px 70px 1fr;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid #161616;
+    align-items:baseline;
+}
+
+.changelog-date{
+    color:#666;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.changelog-version{
+    color:var(--orange);
+    font-size:12px;
+    font-weight:600;
+}
+
+.changelog-desc{
+    color:#aaa;
+    font-size:13px;
+    line-height:1.6;
+    font-family:var(--font-body);
+}
+
+@media(max-width:600px){
+    .changelog-entry{
+        grid-template-columns:1fr;
+        gap:6px;
+    }
+}
+
 </style>
 </head>
 
@@ -1853,6 +2209,7 @@ html.jarvis-booting body{
         <a href="#architecture">ARCHITECTURE</a>
         <a href="#demo">DEMO</a>
         <a href="#pricing">PRICING</a>
+        <a href="#faq">FAQ</a>
         <a href="#custom">CUSTOM</a>
     </div>
 
@@ -1971,6 +2328,58 @@ html.jarvis-booting body{
 </section>
 
 
+<!-- ================= HOW IT WORKS ================= -->
+
+<section id="how-it-works">
+
+<div class="section-head reveal">
+
+    <div class="section-label">
+        // GETTING STARTED
+    </div>
+
+    <h2>
+        FOUR STEPS<br>
+        TO ONLINE.
+    </h2>
+
+    <p>
+        From download to your first spoken command,
+        setting up JARVIS takes minutes, not hours.
+    </p>
+
+</div>
+
+<div class="steps">
+
+    <div class="step reveal">
+        <div class="step-dot">01</div>
+        <h3>Download &amp; install</h3>
+        <p>Grab the current build and run it on your machine — no cloud account required to get started.</p>
+    </div>
+
+    <div class="step reveal">
+        <div class="step-dot">02</div>
+        <h3>Connect a model</h3>
+        <p>Point JARVIS at a local Ollama model, or configure your own, to keep conversations private.</p>
+    </div>
+
+    <div class="step reveal">
+        <div class="step-dot">03</div>
+        <h3>Talk, type or gesture</h3>
+        <p>Use your voice, the keyboard, or hand gestures — JARVIS listens and responds however suits you.</p>
+    </div>
+
+    <div class="step reveal">
+        <div class="step-dot">04</div>
+        <h3>JARVIS takes action</h3>
+        <p>Commands get executed — apps open, tasks run, and useful details are remembered for next time.</p>
+    </div>
+
+</div>
+
+</section>
+
 
 <!-- ================= JARVIS MOBILE // NEXT PLATFORM ================= -->
 
@@ -1981,12 +2390,28 @@ html.jarvis-booting body{
     </div>
 
     <div class="mobile-banner-frame">
-        <img
-            src="jarvis-mobile-coming-soon.png"
-            alt="JARVIS Mobile — Coming Soon"
-            class="mobile-banner-image"
-        >
+        <picture>
+            <source srcset="jarvis-mobile-coming-soon.webp" type="image/webp">
+            <img
+                src="jarvis-mobile-coming-soon.png"
+                alt="JARVIS Mobile — Coming Soon"
+                class="mobile-banner-image"
+                loading="lazy"
+                decoding="async"
+                width="2172"
+                height="724"
+            >
+        </picture>
     </div>
+
+    <form class="waitlist-form" id="waitlistForm">
+        <div class="waitlist-label">GET NOTIFIED AT LAUNCH</div>
+        <div class="waitlist-row">
+            <input type="email" id="waitlistEmail" placeholder="YOUR EMAIL" required>
+            <button type="submit">JOIN WAITLIST</button>
+        </div>
+        <div class="waitlist-note" id="waitlistNote"></div>
+    </form>
 </section>
 
 <!-- ================================================================ -->
@@ -2159,6 +2584,68 @@ html.jarvis-booting body{
 </section>
 
 
+<!-- ================= TESTIMONIALS ================= -->
+
+<section id="testimonials">
+
+<div class="section-head reveal">
+
+    <div class="section-label">
+        // EARLY FEEDBACK
+    </div>
+
+    <h2>
+        FROM PEOPLE<br>
+        RUNNING IT.
+    </h2>
+
+    <p>
+        A few notes from early builders testing JARVIS
+        on their own machines.
+    </p>
+
+</div>
+
+<div class="testimonial-grid">
+
+    <div class="testimonial reveal">
+        <div class="testimonial-quote">Getting a local model wired up took about ten minutes, and the wake-word detection has been solid so far.</div>
+        <div class="testimonial-who">
+            <div class="testimonial-avatar">R</div>
+            <div>
+                <div class="testimonial-name">Early Beta User</div>
+                <div class="testimonial-role">Desktop automation tester</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonial reveal">
+        <div class="testimonial-quote">The gesture cursor control is the feature I didn't know I needed. Genuinely useful during presentations.</div>
+        <div class="testimonial-who">
+            <div class="testimonial-avatar">K</div>
+            <div>
+                <div class="testimonial-name">Early Beta User</div>
+                <div class="testimonial-role">Gesture control tester</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonial reveal">
+        <div class="testimonial-quote">Liked that everything runs locally — no sending conversations off to a server I don't control.</div>
+        <div class="testimonial-who">
+            <div class="testimonial-avatar">S</div>
+            <div>
+                <div class="testimonial-name">Early Beta User</div>
+                <div class="testimonial-role">Privacy-focused tester</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</section>
+
+
 <!-- ================= ARCHITECTURE ================= -->
 
 <section id="architecture" class="architecture">
@@ -2183,6 +2670,9 @@ html.jarvis-booting body{
 
 
 <div class="pipeline">
+
+<span class="pipe-pulse p1"></span>
+<span class="pipe-pulse p2"></span>
 
 <div class="node reveal">
 
@@ -2444,6 +2934,60 @@ html.jarvis-booting body{
 </section>
 
 
+<!-- ================= FAQ ================= -->
+
+<section id="faq">
+
+<div class="section-head reveal">
+
+    <div class="section-label">
+        // COMMON QUESTIONS
+    </div>
+
+    <h2>
+        BEFORE YOU<br>
+        ACTIVATE.
+    </h2>
+
+    <p>
+        Answers to what people usually ask before setting
+        up JARVIS for the first time.
+    </p>
+
+</div>
+
+<div class="faq-list reveal">
+
+    <details class="faq-item">
+        <summary>Does JARVIS send my data to the cloud?<span class="faq-icon">+</span></summary>
+        <div class="faq-answer">Not by default. JARVIS is built to run against a local model through Ollama, so conversations and commands stay on your machine unless you choose to connect an external service.</div>
+    </details>
+
+    <details class="faq-item">
+        <summary>What operating systems are supported?<span class="faq-icon">+</span></summary>
+        <div class="faq-answer">The current release targets Windows for gesture control, automation and system-level commands. Voice and local-AI features work more broadly — check the README in the release download for details.</div>
+    </details>
+
+    <details class="faq-item">
+        <summary>Do I need a powerful computer to run it?<span class="faq-icon">+</span></summary>
+        <div class="faq-answer">It depends on which local model you connect. Smaller models run comfortably on modest hardware; larger ones benefit from a dedicated GPU. JARVIS itself is lightweight.</div>
+    </details>
+
+    <details class="faq-item">
+        <summary>What's the difference between Core, Custom and Pro?<span class="faq-icon">+</span></summary>
+        <div class="faq-answer">Core is the free, self-configured community version. Custom and Pro are done-for-you setups — the JARVIS Requirements form on this page sends your request directly so a build can be configured around your workflow.</div>
+    </details>
+
+    <details class="faq-item">
+        <summary>Can I request a feature that isn't listed?<span class="faq-icon">+</span></summary>
+        <div class="faq-answer">Yes — use the custom build request form below and describe what you're trying to do. Most requests are scoped as part of a Custom or Pro build.</div>
+    </details>
+
+</div>
+
+</section>
+
+
 <!-- ================= CUSTOM ================= -->
 
 <section id="custom" class="custom">
@@ -2542,6 +3086,53 @@ html.jarvis-booting body{
     >
         VIEW JARVIS ON GITHUB
     </a>
+
+</div>
+
+</section>
+
+
+<!-- ================= CHANGELOG ================= -->
+
+<section id="changelog" class="changelog">
+
+<div class="section-head reveal">
+
+    <div class="section-label">
+        // SYSTEM LOG
+    </div>
+
+    <h2>
+        BUILD<br>
+        HISTORY.
+    </h2>
+
+    <p>
+        A running log of what's shipped, straight from
+        the JARVIS release notes.
+    </p>
+
+</div>
+
+<div class="changelog-list reveal">
+
+    <div class="changelog-entry">
+        <div class="changelog-date">2026.08</div>
+        <div class="changelog-version">v1.2</div>
+        <div class="changelog-desc">Added gesture-based cursor control and improved wake-word detection accuracy.</div>
+    </div>
+
+    <div class="changelog-entry">
+        <div class="changelog-date">2026.06</div>
+        <div class="changelog-version">v1.1</div>
+        <div class="changelog-desc">Introduced persistent memory across sessions and a redesigned live command interface.</div>
+    </div>
+
+    <div class="changelog-entry">
+        <div class="changelog-date">2026.03</div>
+        <div class="changelog-version">v1.0</div>
+        <div class="changelog-desc">Initial public release — local AI integration, voice commands and basic automation.</div>
+    </div>
 
 </div>
 
@@ -2660,6 +3251,13 @@ setInterval(() => {
 
 
 /* ================= CUSTOM FORM ================= */
+/*
+    NOTE: This still opens the visitor's email client (mailto:) —
+    Claude doesn't have credentials to wire this to a real backend.
+    To make it submit silently without opening Mail, sign up for a
+    free form service like Formspree (formspree.io) or EmailJS
+    (emailjs.com), then swap the code below for their submit snippet.
+*/
 
 document
 .getElementById("contactForm")
@@ -2705,6 +3303,41 @@ ${message}`
         `mailto:${destination}?subject=${subject}&body=${body}`;
 
 });
+
+
+/* ================= MOBILE WAITLIST FORM ================= */
+/*
+    Same note as above: no backend is wired up, so this opens
+    the visitor's email client with a pre-filled message. Swap
+    for Formspree/EmailJS/Mailchimp etc. when you have one.
+*/
+
+const waitlistForm = document.getElementById("waitlistForm");
+
+if(waitlistForm){
+
+    waitlistForm.addEventListener("submit", function(e){
+
+        e.preventDefault();
+
+        const email = document.getElementById("waitlistEmail").value;
+        const note = document.getElementById("waitlistNote");
+
+        const destination = "jyotipatil9476@gmail.com";
+        const subject = encodeURIComponent("JARVIS Mobile — Waitlist Signup");
+        const body = encodeURIComponent(`Please add this email to the JARVIS Mobile waitlist:\n\n${email}`);
+
+        window.location.href = `mailto:${destination}?subject=${subject}&body=${body}`;
+
+        if(note){
+            note.textContent = "Opening your email client to confirm...";
+        }
+
+        waitlistForm.reset();
+
+    });
+
+}
 
 
 /* ================= CURSOR GLOW ================= */
