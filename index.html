@@ -9,6 +9,10 @@
 <meta name="description"
 content="JARVIS — a futuristic personal AI assistant with voice, vision, automation and local intelligence.">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --bg:#030303;
@@ -20,6 +24,9 @@ content="JARVIS — a futuristic personal AI assistant with voice, vision, autom
     --muted:#888;
     --line:rgba(255,122,24,.18);
     --glow:rgba(255,122,24,.25);
+    --font-display:'Space Grotesk',Inter,Arial,sans-serif;
+    --font-body:'Inter',Arial,Helvetica,sans-serif;
+    --font-mono:'JetBrains Mono',Consolas,Monaco,monospace;
 }
 
 *{
@@ -32,12 +39,40 @@ html{
     scroll-behavior:smooth;
 }
 
+::selection{
+    background:rgba(255,122,24,.32);
+    color:#fff;
+}
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#030303;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#241a10;
+    border:2px solid #030303;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:var(--orange);
+}
+
+:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:3px;
+}
+
 body{
     background:
         radial-gradient(circle at 50% 20%,rgba(255,90,0,.08),transparent 30%),
         #030303;
     color:var(--text);
-    font-family:Inter,Arial,Helvetica,sans-serif;
+    font-family:var(--font-body);
     overflow-x:hidden;
 }
 
@@ -52,6 +87,30 @@ body:before{
         linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
     background-size:60px 60px;
     mask-image:linear-gradient(to bottom,black,transparent);
+}
+
+h1,h2,h3,.logo,.price{
+    font-family:var(--font-display);
+}
+
+.eyebrow,.section-label,.card-number,.node small,
+.price-card small,.ticker,.navlinks a,.navbtn,
+.primary,.secondary,.badge,.mobile-coming-label{
+    font-family:var(--font-mono);
+}
+
+/* ================= SCROLL PROGRESS ================= */
+
+#scroll-progress{
+    position:fixed;
+    top:0;
+    left:0;
+    height:2px;
+    width:0%;
+    background:linear-gradient(90deg,var(--orange),var(--orange2));
+    box-shadow:0 0 12px rgba(255,122,24,.6);
+    z-index:10001;
+    transition:width .08s linear;
 }
 
 /* ================= NAV ================= */
@@ -70,11 +129,18 @@ body:before{
     background:rgba(3,3,3,.72);
     backdrop-filter:blur(18px);
     border-bottom:1px solid rgba(255,255,255,.06);
+    transition:height .3s ease, background .3s ease, border-color .3s ease;
+}
+
+.nav.scrolled{
+    height:60px;
+    background:rgba(3,3,3,.92);
+    border-bottom-color:rgba(255,122,24,.16);
 }
 
 .logo{
     font-size:20px;
-    font-weight:800;
+    font-weight:700;
     letter-spacing:5px;
 }
 
@@ -88,18 +154,37 @@ body:before{
 }
 
 .navlinks a{
+    position:relative;
     color:#aaa;
     text-decoration:none;
-    font-size:12px;
+    font-size:11px;
     letter-spacing:2px;
-    transition:.3s;
+    transition:color .3s;
+    padding-bottom:4px;
+}
+
+.navlinks a:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:1px;
+    background:var(--orange);
+    transition:width .3s ease;
 }
 
 .navlinks a:hover{
     color:var(--orange);
 }
 
+.navlinks a:hover:after{
+    width:100%;
+}
+
 .navbtn{
+    position:relative;
+    overflow:hidden;
     text-decoration:none;
     color:white;
     border:1px solid var(--orange);
@@ -123,27 +208,50 @@ body:before{
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    padding:110px 20px 70px;
+    padding:130px 6% 70px;
+}
+
+.hero-inner{
+    position:relative;
+    z-index:3;
+    width:100%;
+    max-width:1280px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:50px;
+    align-items:center;
 }
 
 .hero-content{
     position:relative;
-    z-index:3;
 }
 
 .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
     color:var(--orange);
     font-size:11px;
-    letter-spacing:5px;
+    letter-spacing:4px;
     margin-bottom:25px;
 }
 
+.eyebrow:before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 10px var(--orange);
+    animation:jdot 1.4s infinite;
+}
+
 .hero h1{
-    font-size:clamp(48px,8vw,105px);
-    line-height:.95;
-    letter-spacing:-5px;
-    font-weight:800;
+    font-size:clamp(42px,6vw,80px);
+    line-height:1.02;
+    letter-spacing:-2.5px;
+    font-weight:700;
 }
 
 .hero h1 span{
@@ -152,8 +260,8 @@ body:before{
 }
 
 .hero p{
-    max-width:650px;
-    margin:30px auto;
+    max-width:520px;
+    margin:28px 0;
     color:#999;
     line-height:1.8;
     font-size:16px;
@@ -161,20 +269,38 @@ body:before{
 
 .hero-actions{
     display:flex;
-    justify-content:center;
     gap:14px;
     flex-wrap:wrap;
 }
 
 .primary{
+    position:relative;
+    overflow:hidden;
     background:var(--orange);
     color:#000;
     padding:15px 27px;
     text-decoration:none;
-    font-weight:800;
+    font-weight:700;
     font-size:12px;
     letter-spacing:2px;
     transition:.3s;
+    display:inline-block;
+}
+
+.primary:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(115deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);
+    transition:left .55s ease;
+}
+
+.primary:hover:before{
+    left:130%;
 }
 
 .primary:hover{
@@ -190,11 +316,133 @@ body:before{
     font-size:12px;
     letter-spacing:2px;
     transition:.3s;
+    display:inline-block;
 }
 
 .secondary:hover{
     border-color:var(--orange);
+    transform:translateY(-3px);
 }
+
+/* ---- Hero HUD status panel ---- */
+
+.hero-panel{
+    position:relative;
+    background:linear-gradient(160deg,rgba(15,12,10,.7),rgba(4,4,4,.85));
+    border:1px solid rgba(255,122,24,.22);
+    backdrop-filter:blur(10px);
+    padding:26px;
+    box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(255,122,24,.06);
+    transform-style:preserve-3d;
+    transition:transform .15s ease;
+}
+
+.hero-panel:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    padding:1px;
+    background:linear-gradient(135deg,rgba(255,122,24,.5),transparent 40%,transparent 70%,rgba(255,122,24,.25));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+}
+
+.hero-panel-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-bottom:16px;
+    margin-bottom:18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:2px;
+    color:#777;
+}
+
+.hero-panel-top b{
+    color:#63ff9a;
+    font-weight:600;
+}
+
+.hero-stat{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.hero-stat:last-of-type{
+    border-bottom:none;
+}
+
+.hero-stat-label{
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:#888;
+    font-family:var(--font-mono);
+}
+
+.hero-stat-value{
+    font-family:var(--font-display);
+    font-size:22px;
+    font-weight:700;
+    color:var(--text);
+}
+
+.hero-stat-value span{
+    color:var(--orange);
+    font-size:13px;
+    margin-left:2px;
+}
+
+.hero-bar-track{
+    width:100%;
+    height:3px;
+    background:rgba(255,255,255,.06);
+    margin-top:16px;
+    overflow:hidden;
+}
+
+.hero-bar-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--orange),var(--orange2));
+    box-shadow:0 0 10px rgba(255,122,24,.6);
+    transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+
+@media(max-width:980px){
+    .hero-inner{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .hero-content{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .hero p{
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .hero-actions{
+        justify-content:center;
+    }
+
+    .hero-panel{
+        max-width:420px;
+        margin:0 auto;
+        width:100%;
+    }
+}
+
 
 /* ================= REACTOR ================= */
 
@@ -375,12 +623,60 @@ section{
     background:var(--orange);
     filter:blur(70px);
     opacity:.08;
+    transition:opacity .4s;
+}
+
+.card:after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(90deg,transparent,var(--orange),transparent);
+    opacity:0;
+    transition:opacity .4s;
 }
 
 .card:hover{
     transform:translateY(-7px);
     border-color:rgba(255,122,24,.35);
     box-shadow:0 20px 70px rgba(0,0,0,.5);
+}
+
+.card:hover:before{
+    opacity:.16;
+}
+
+.card:hover:after{
+    opacity:1;
+}
+
+.card-icon{
+    width:44px;
+    height:44px;
+    border:1px solid rgba(255,122,24,.3);
+    background:rgba(255,122,24,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+    transition:.4s;
+}
+
+.card-icon svg{
+    width:20px;
+    height:20px;
+    stroke:var(--orange);
+    fill:none;
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.card:hover .card-icon{
+    background:rgba(255,122,24,.14);
+    box-shadow:0 0 22px rgba(255,122,24,.18);
 }
 
 .card-number{
@@ -390,8 +686,9 @@ section{
 }
 
 .card h3{
-    margin:25px 0 12px;
+    margin:16px 0 12px;
     font-size:20px;
+    font-weight:600;
 }
 
 .card p{
@@ -518,7 +815,7 @@ section{
 .price-card{
     border:1px solid #1d1d1d;
     padding:40px 30px;
-    background:#070707;
+    background:linear-gradient(160deg,#0a0a0a,#050505);
     position:relative;
     transition:.4s;
 }
@@ -526,11 +823,25 @@ section{
 .price-card:hover{
     transform:translateY(-8px);
     border-color:rgba(255,122,24,.4);
+    box-shadow:0 25px 60px rgba(0,0,0,.5);
 }
 
 .price-card.featured{
     border-color:var(--orange);
-    box-shadow:0 0 50px rgba(255,90,0,.08);
+    box-shadow:0 0 50px rgba(255,90,0,.1);
+}
+
+.price-card.featured:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    padding:1px;
+    background:linear-gradient(160deg,var(--orange),transparent 45%,transparent 65%,var(--orange2));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+    opacity:.7;
 }
 
 .badge{
@@ -657,13 +968,117 @@ section{
 /* ================= FOOTER ================= */
 
 footer{
+    position:relative;
     border-top:1px solid #151515;
-    padding:35px 7%;
-    display:flex;
-    justify-content:space-between;
-    color:#555;
+    padding:70px 7% 30px;
+    color:#666;
+}
+
+footer:before{
+    content:"";
+    position:absolute;
+    top:-1px;
+    left:50%;
+    transform:translateX(-50%);
+    width:140px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--orange),transparent);
+    box-shadow:0 0 16px rgba(255,122,24,.5);
+}
+
+.footer-top{
+    display:grid;
+    grid-template-columns:1.4fr repeat(3,1fr);
+    gap:40px;
+    padding-bottom:50px;
+}
+
+.footer-brand .logo{
+    display:block;
+    margin-bottom:14px;
+}
+
+.footer-brand p{
+    font-size:13px;
+    line-height:1.8;
+    color:#666;
+    max-width:280px;
+}
+
+.footer-col h4{
+    font-family:var(--font-mono);
     font-size:11px;
     letter-spacing:2px;
+    color:#999;
+    margin-bottom:16px;
+    font-weight:500;
+}
+
+.footer-col ul{
+    list-style:none;
+}
+
+.footer-col li{
+    margin-bottom:11px;
+}
+
+.footer-col a{
+    color:#666;
+    text-decoration:none;
+    font-size:13px;
+    transition:.25s;
+}
+
+.footer-col a:hover{
+    color:var(--orange);
+}
+
+.footer-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    padding-top:26px;
+    border-top:1px solid #141414;
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:#555;
+    font-family:var(--font-mono);
+}
+
+.footer-status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#63ff9a;
+}
+
+.footer-status span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#63ff9a;
+    box-shadow:0 0 8px #63ff9a;
+    animation:jdot 1.4s infinite;
+}
+
+@media(max-width:850px){
+    .footer-top{
+        grid-template-columns:1fr 1fr;
+        gap:34px;
+    }
+}
+
+@media(max-width:560px){
+    .footer-top{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 }
 
 /* ================= REVEAL ================= */
@@ -1326,6 +1741,8 @@ html.jarvis-booting body{
 
 <body>
 
+<div id="scroll-progress"></div>
+
 <!-- ================= INTRO BOOT ANIMATION ================= -->
 
 <div id="jarvis-intro">
@@ -1467,6 +1884,8 @@ html.jarvis-booting body{
 
     </div>
 
+    <div class="hero-inner">
+
     <div class="hero-content reveal">
 
         <div class="eyebrow">
@@ -1495,6 +1914,41 @@ html.jarvis-booting body{
             </a>
 
         </div>
+
+    </div>
+
+    <div class="hero-panel reveal" id="hero-panel">
+
+        <div class="hero-panel-top">
+            <span>SYSTEM DIAGNOSTICS</span>
+            <span><b>●</b> LIVE</span>
+        </div>
+
+        <div class="hero-stat">
+            <span class="hero-stat-label">UPTIME</span>
+            <span class="hero-stat-value" data-count="99.8" data-suffix="%">0<span>%</span></span>
+        </div>
+
+        <div class="hero-stat">
+            <span class="hero-stat-label">COMMANDS PROCESSED</span>
+            <span class="hero-stat-value" data-count="128400" data-suffix="+">0<span>+</span></span>
+        </div>
+
+        <div class="hero-stat">
+            <span class="hero-stat-label">VOICE ACCURACY</span>
+            <span class="hero-stat-value" data-count="97" data-suffix="%">0<span>%</span></span>
+        </div>
+
+        <div class="hero-stat">
+            <span class="hero-stat-label">RESPONSE TIME</span>
+            <span class="hero-stat-value" data-count="180" data-suffix="ms">0<span>ms</span></span>
+        </div>
+
+        <div class="hero-bar-track">
+            <div class="hero-bar-fill" id="hero-bar-fill"></div>
+        </div>
+
+    </div>
 
     </div>
 
@@ -1593,6 +2047,10 @@ html.jarvis-booting body{
 
 <div class="card reveal">
 
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 7V3M15 7V3M9 21v-4M15 21v-4M7 9H3M7 15H3M21 9h-4M21 15h-4"/></svg>
+    </div>
+
     <div class="card-number">01</div>
 
     <h3>Local AI</h3>
@@ -1607,6 +2065,10 @@ html.jarvis-booting body{
 
 
 <div class="card reveal">
+
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1M12 18v4M9 22h6"/></svg>
+    </div>
 
     <div class="card-number">02</div>
 
@@ -1623,6 +2085,10 @@ html.jarvis-booting body{
 
 <div class="card reveal">
 
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+
     <div class="card-number">03</div>
 
     <h3>Computer Vision</h3>
@@ -1636,6 +2102,10 @@ html.jarvis-booting body{
 
 
 <div class="card reveal">
+
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M8 12V6a2 2 0 1 1 4 0v5M12 11V4a2 2 0 1 1 4 0v7M16 11.5V6a2 2 0 1 1 4 0v8a7 7 0 0 1-7 7h-1a7 7 0 0 1-6-3.4L3.6 13a1.8 1.8 0 0 1 2.9-2.1L8 13"/></svg>
+    </div>
 
     <div class="card-number">04</div>
 
@@ -1651,6 +2121,10 @@ html.jarvis-booting body{
 
 <div class="card reveal">
 
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
+    </div>
+
     <div class="card-number">05</div>
 
     <h3>Persistent Memory</h3>
@@ -1664,6 +2138,10 @@ html.jarvis-booting body{
 
 
 <div class="card reveal">
+
+    <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="4"/></svg>
+    </div>
 
     <div class="card-number">06</div>
 
@@ -2074,12 +2552,51 @@ html.jarvis-booting body{
 
 <footer>
 
-<div>
-    JARVIS // PERSONAL AI SYSTEM
+<div class="footer-top">
+
+    <div class="footer-brand">
+        <div class="logo">JARVIS<span>//</span></div>
+        <p>
+            A personal AI system for voice, vision,
+            automation and local intelligence — built to
+            run on your own machine.
+        </p>
+    </div>
+
+    <div class="footer-col">
+        <h4>PRODUCT</h4>
+        <ul>
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#demo">Live demo</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col">
+        <h4>GET STARTED</h4>
+        <ul>
+            <li><a href="#custom">Custom build</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="JARVIS_PC_RELEASE.zip" target="_blank" rel="noopener">Latest release</a></li>
+        </ul>
+    </div>
+
+    <div class="footer-col">
+        <h4>SYSTEM</h4>
+        <ul>
+            <li><a href="#demo">Voice engine</a></li>
+            <li><a href="#capabilities">Vision module</a></li>
+            <li><a href="#capabilities">Automation grid</a></li>
+        </ul>
+    </div>
+
 </div>
 
-<div>
-    BUILT FOR THE FUTURE
+<div class="footer-bottom">
+    <div>JARVIS // PERSONAL AI SYSTEM</div>
+    <div class="footer-status"><span></span>ALL SYSTEMS ONLINE</div>
+    <div>BUILT FOR THE FUTURE</div>
 </div>
 
 </footer>
@@ -2176,7 +2693,7 @@ document
 
     const body =
         encodeURIComponent(
-`Name: ${Name}
+`Name: ${name}
 
 Email: ${email}
 
@@ -2256,6 +2773,119 @@ window.addEventListener("scroll",()=>{
     });
 
 });
+
+
+/* ================= SCROLL PROGRESS + NAV STATE ================= */
+
+const progressBar = document.getElementById("scroll-progress");
+const navEl = document.querySelector(".nav");
+
+window.addEventListener("scroll", () => {
+
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if(progressBar){
+        progressBar.style.width = pct + "%";
+    }
+
+    if(navEl){
+        navEl.classList.toggle("scrolled", scrollTop > 40);
+    }
+
+},{ passive:true });
+
+
+/* ================= HERO HUD COUNTERS ================= */
+
+function animateHeroStats(){
+
+    const values = document.querySelectorAll(".hero-stat-value");
+
+    values.forEach(el => {
+
+        const target = parseFloat(el.dataset.count);
+        const suffix = el.dataset.suffix || "";
+        const isDecimal = String(el.dataset.count).includes(".");
+        const suffixEl = el.querySelector("span");
+        const duration = 1400;
+        const start = performance.now();
+
+        function frame(now){
+
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = target * eased;
+
+            const display = isDecimal ? current.toFixed(1) : Math.round(current).toLocaleString();
+
+            el.childNodes[0].nodeValue = display;
+
+            if(suffixEl){
+                suffixEl.textContent = suffix;
+            }
+
+            if(progress < 1){
+                requestAnimationFrame(frame);
+            }
+
+        }
+
+        requestAnimationFrame(frame);
+
+    });
+
+    const barFill = document.getElementById("hero-bar-fill");
+
+    if(barFill){
+        requestAnimationFrame(() => {
+            barFill.style.width = "97%";
+        });
+    }
+
+}
+
+const heroPanel = document.getElementById("hero-panel");
+
+if(heroPanel){
+
+    const heroObserver = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+                animateHeroStats();
+                heroObserver.disconnect();
+            }
+
+        });
+
+    },{ threshold:.4 });
+
+    heroObserver.observe(heroPanel);
+
+    /* subtle 3D tilt following the cursor, desktop only */
+    if(window.matchMedia("(pointer:fine)").matches){
+
+        heroPanel.addEventListener("mousemove", e => {
+
+            const rect = heroPanel.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - .5;
+            const y = (e.clientY - rect.top) / rect.height - .5;
+
+            heroPanel.style.transform =
+                `perspective(700px) rotateY(${x * 8}deg) rotateX(${y * -8}deg)`;
+
+        });
+
+        heroPanel.addEventListener("mouseleave", () => {
+            heroPanel.style.transform = "perspective(700px) rotateY(0deg) rotateX(0deg)";
+        });
+
+    }
+
+}
 
 </script>
 
