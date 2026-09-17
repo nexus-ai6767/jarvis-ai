@@ -1253,6 +1253,106 @@ footer:before{
     object-fit:contain;
 }
 
+.pro-banner-frame{
+    padding:70px 6% 60px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.pro-banner-copy{
+    max-width:480px;
+}
+
+.pro-banner-kicker{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:4px;
+    color:#777;
+    margin-bottom:14px;
+}
+
+.pro-banner-title{
+    font-family:var(--font-display);
+    font-size:clamp(40px,6vw,72px);
+    letter-spacing:-2px;
+    line-height:1;
+    margin-bottom:20px;
+    color:var(--text);
+}
+
+.pro-banner-title span{
+    color:var(--orange);
+    text-shadow:0 0 40px rgba(255,122,24,.35);
+}
+
+.pro-banner-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid rgba(255,122,24,.4);
+    padding:10px 18px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:3px;
+    color:var(--orange);
+    margin-bottom:22px;
+}
+
+.pro-dot{
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 10px var(--orange);
+    display:inline-block;
+    animation:blink 1.4s infinite ease-in-out;
+}
+
+.pro-banner-sub{
+    color:#888;
+    line-height:1.7;
+    font-size:14px;
+}
+
+.pro-feature-list{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    min-width:260px;
+}
+
+.pro-feature{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:1.5px;
+    color:#ccc;
+    border-left:2px solid rgba(255,122,24,.3);
+    padding:10px 0 10px 16px;
+}
+
+.pro-feature b{
+    color:var(--orange);
+    font-size:10px;
+}
+
+@media(max-width:900px){
+    .pro-banner-frame{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:50px 6%;
+    }
+
+    .pro-feature-list{
+        width:100%;
+    }
+}
+
 .waitlist-form{
     width:min(560px,92vw);
     margin:34px auto 0;
@@ -2381,27 +2481,31 @@ html.jarvis-booting body{
 </section>
 
 
-<!-- ================= JARVIS MOBILE // NEXT PLATFORM ================= -->
+<!-- ================= JARVIS PRO // NEXT TIER ================= -->
 
-<section class="mobile-coming-banner" aria-label="JARVIS Mobile coming soon">
+<section class="mobile-coming-banner" aria-label="JARVIS Pro coming soon">
     <div class="mobile-coming-label">
-        <span>NEXT PLATFORM // JARVIS MOBILE</span>
+        <span>NEXT TIER // JARVIS PRO</span>
         <span>STATUS // IN DEVELOPMENT</span>
     </div>
 
-    <div class="mobile-banner-frame">
-        <picture>
-            <source srcset="jarvis-mobile-coming-soon.webp" type="image/webp">
-            <img
-                src="jarvis-mobile-coming-soon.png"
-                alt="JARVIS Mobile — Coming Soon"
-                class="mobile-banner-image"
-                loading="lazy"
-                decoding="async"
-                width="2172"
-                height="724"
-            >
-        </picture>
+    <div class="mobile-banner-frame pro-banner-frame">
+
+        <div class="pro-banner-copy">
+            <div class="pro-banner-kicker">UPGRADE YOUR JARVIS</div>
+            <h3 class="pro-banner-title">JARVIS <span>PRO</span></h3>
+            <div class="pro-banner-tag"><i class="pro-dot"></i>COMING SOON</div>
+            <p class="pro-banner-sub">More compute, more memory, zero limits — the same JARVIS you already run, tuned all the way up.</p>
+        </div>
+
+        <div class="pro-feature-list">
+            <div class="pro-feature"><b>01</b>PRIORITY COMPUTE</div>
+            <div class="pro-feature"><b>02</b>EXTENDED MEMORY</div>
+            <div class="pro-feature"><b>03</b>ADVANCED AUTOMATIONS</div>
+            <div class="pro-feature"><b>04</b>PRO-ONLY INTEGRATIONS</div>
+            <div class="pro-feature"><b>05</b>PRIORITY SUPPORT</div>
+        </div>
+
     </div>
 
     <form class="waitlist-form" id="waitlistForm">
@@ -3305,7 +3409,7 @@ ${message}`
 });
 
 
-/* ================= MOBILE WAITLIST FORM ================= */
+/* ================= JARVIS PRO WAITLIST FORM ================= */
 /*
     Same note as above: no backend is wired up, so this opens
     the visitor's email client with a pre-filled message. Swap
@@ -3324,8 +3428,8 @@ if(waitlistForm){
         const note = document.getElementById("waitlistNote");
 
         const destination = "jyotipatil9476@gmail.com";
-        const subject = encodeURIComponent("JARVIS Mobile — Waitlist Signup");
-        const body = encodeURIComponent(`Please add this email to the JARVIS Mobile waitlist:\n\n${email}`);
+        const subject = encodeURIComponent("JARVIS Pro — Waitlist Signup");
+        const body = encodeURIComponent(`Please add this email to the JARVIS Pro waitlist:\n\n${email}`);
 
         window.location.href = `mailto:${destination}?subject=${subject}&body=${body}`;
 
