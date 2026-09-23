@@ -2198,6 +2198,48 @@ html.jarvis-booting body{
 
 <body>
 
+
+<!-- ================= JARVIS PRO LAUNCH LOCK ================= -->
+<div id="pro-launch-lock" class="pro-launch-lock" aria-label="JARVIS PRO pre-launch lock">
+  <div class="pro-lock-grid"></div>
+  <div class="pro-lock-scan"></div>
+  <div class="pro-lock-corner tl"></div>
+  <div class="pro-lock-corner tr"></div>
+  <div class="pro-lock-corner bl"></div>
+  <div class="pro-lock-corner br"></div>
+
+  <div class="pro-lock-panel">
+    <div class="pro-lock-topline">
+      <span><i></i> JARVIS PRO // SECURE LAUNCH</span>
+      <span id="pro-lock-clock">PRE-LAUNCH</span>
+    </div>
+
+    <div class="pro-lock-reactor" aria-hidden="true">
+      <div class="pro-lock-ring r1"></div>
+      <div class="pro-lock-ring r2"></div>
+      <div class="pro-lock-ring r3"></div>
+      <div class="pro-lock-core"></div>
+      <div class="pro-lock-cross h"></div>
+      <div class="pro-lock-cross v"></div>
+    </div>
+
+    <div class="pro-lock-status">ACCESS <strong>LOCKED</strong></div>
+    <h1>JARVIS <span>PRO</span></h1>
+    <p class="pro-lock-sub">SYSTEM SEALED UNTIL LAUNCH</p>
+    <p class="pro-lock-date">19 OCTOBER 2026 // 00:00 IST</p>
+
+    <div class="pro-lock-countdown">
+      <div><strong id="launch-days">00</strong><small>DAYS</small></div>
+      <div><strong id="launch-hours">00</strong><small>HOURS</small></div>
+      <div><strong id="launch-minutes">00</strong><small>MINUTES</small></div>
+      <div><strong id="launch-seconds">00</strong><small>SECONDS</small></div>
+    </div>
+
+    <div class="pro-lock-progress"><span id="launch-progress"></span></div>
+    <div class="pro-lock-footer" id="launch-message">LAUNCH SEQUENCE ARMED // STANDBY</div>
+  </div>
+</div>
+
 <div id="scroll-progress"></div>
 
 <!-- ================= INTRO BOOT ANIMATION ================= -->
@@ -3923,6 +3965,47 @@ run(0);
     startBirthdayCountdown();
   }
 })();
+</script>
+<script>
+
+/* ================= JARVIS PRO LAUNCH LOCK ================= */
+(function(){
+  'use strict';
+  const TARGET = Date.UTC(2026,9,18,18,30,0); // 19 Oct 2026 00:00 IST
+  const START = Date.UTC(2026,8,20,18,30,0);
+  const pad=n=>String(Math.max(0,n)).padStart(2,'0');
+  function initProLaunchLock(){
+    const lock=document.getElementById('pro-launch-lock');
+    if(!lock) return;
+    const els={
+      d:document.getElementById('launch-days'), h:document.getElementById('launch-hours'),
+      m:document.getElementById('launch-minutes'), s:document.getElementById('launch-seconds'),
+      bar:document.getElementById('launch-progress'), msg:document.getElementById('launch-message')
+    };
+    function unlock(){
+      document.documentElement.classList.add('jarvis-pro-launched');
+      lock.classList.add('unlocked');
+      if(els.msg) els.msg.textContent='JARVIS PRO ONLINE // LAUNCH COMPLETE';
+      document.title='JARVIS PRO // ONLINE';
+      setTimeout(()=>lock.remove(),1000);
+    }
+    function tick(){
+      const now=Date.now(), diff=TARGET-now;
+      if(diff<=0){ unlock(); return; }
+      const total=Math.floor(diff/1000);
+      if(els.d) els.d.textContent=String(Math.floor(total/86400));
+      if(els.h) els.h.textContent=pad(Math.floor(total%86400/3600));
+      if(els.m) els.m.textContent=pad(Math.floor(total%3600/60));
+      if(els.s) els.s.textContent=pad(total%60);
+      if(els.bar) els.bar.style.width=Math.max(0,Math.min(100,((now-START)/(TARGET-START))*100))+'%';
+    }
+    tick();
+    window.setInterval(tick,1000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initProLaunchLock);
+  else initProLaunchLock();
+})();
+
 </script>
 <script src="script.js" defer></script>
 

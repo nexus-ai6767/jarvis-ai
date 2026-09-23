@@ -47,3 +47,43 @@ if(glow){document.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initBirthdayCountdown);
   else initBirthdayCountdown();
 })();
+
+
+/* ================= JARVIS PRO LAUNCH LOCK ================= */
+(function(){
+  'use strict';
+  const TARGET = Date.UTC(2026,9,18,18,30,0); // 19 Oct 2026 00:00 IST
+  const START = Date.UTC(2026,8,20,18,30,0);
+  const pad=n=>String(Math.max(0,n)).padStart(2,'0');
+  function initProLaunchLock(){
+    const lock=document.getElementById('pro-launch-lock');
+    if(!lock) return;
+    const els={
+      d:document.getElementById('launch-days'), h:document.getElementById('launch-hours'),
+      m:document.getElementById('launch-minutes'), s:document.getElementById('launch-seconds'),
+      bar:document.getElementById('launch-progress'), msg:document.getElementById('launch-message')
+    };
+    function unlock(){
+      document.documentElement.classList.add('jarvis-pro-launched');
+      lock.classList.add('unlocked');
+      if(els.msg) els.msg.textContent='JARVIS PRO ONLINE // LAUNCH COMPLETE';
+      document.title='JARVIS PRO // ONLINE';
+      setTimeout(()=>lock.remove(),1000);
+    }
+    function tick(){
+      const now=Date.now(), diff=TARGET-now;
+      if(diff<=0){ unlock(); return; }
+      const total=Math.floor(diff/1000);
+      if(els.d) els.d.textContent=String(Math.floor(total/86400));
+      if(els.h) els.h.textContent=pad(Math.floor(total%86400/3600));
+      if(els.m) els.m.textContent=pad(Math.floor(total%3600/60));
+      if(els.s) els.s.textContent=pad(total%60);
+      if(els.bar) els.bar.style.width=Math.max(0,Math.min(100,((now-START)/(TARGET-START))*100))+'%';
+    }
+    tick();
+    window.setInterval(tick,1000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initProLaunchLock);
+  else initProLaunchLock();
+})();
+
