@@ -2203,6 +2203,52 @@ html.jarvis-booting body{
 <div id="pro-launch-lock" class="pro-launch-lock" aria-label="JARVIS PRO pre-launch lock">
   <div class="pro-lock-grid"></div>
   <div class="pro-lock-scan"></div>
+  <div class="pro-lock-face" aria-hidden="true">
+    <div class="face-halo"></div>
+    <svg viewBox="0 0 520 720" role="presentation">
+      <defs>
+        <linearGradient id="hfSkin" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f3c7a0"/>
+          <stop offset="1" stop-color="#9d5d38"/>
+        </linearGradient>
+        <linearGradient id="hfMetal" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#1e3440"/>
+          <stop offset=".55" stop-color="#071117"/>
+          <stop offset="1" stop-color="#030609"/>
+        </linearGradient>
+        <linearGradient id="hfGlow" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#43cfff" stop-opacity="0"/>
+          <stop offset=".5" stop-color="#43cfff"/>
+          <stop offset="1" stop-color="#ff8d2b" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="hfBlur"><feGaussianBlur stdDeviation="18"/></filter>
+        <clipPath id="hfClip"><path d="M260 28 C150 28 78 112 78 238v176c0 137 83 248 182 248s182-111 182-248V238C442 112 370 28 260 28Z"/></clipPath>
+      </defs>
+      <g clip-path="url(#hfClip)">
+        <rect width="520" height="720" fill="#020508"/>
+        <path d="M0 0H260V720H0Z" fill="url(#hfSkin)"/>
+        <path d="M260 0H520V720H260Z" fill="url(#hfMetal)"/>
+        <ellipse cx="260" cy="350" rx="205" ry="270" fill="#42cfff" opacity=".06" filter="url(#hfBlur)"/>
+        <path d="M108 225 Q170 160 258 182 L258 235 Q170 214 110 282Z" fill="#17100d" opacity=".9"/>
+        <path d="M305 182 L410 125 L452 206 L415 260 L452 330 L415 400 L452 482 L390 545 L312 505Z" fill="#10212a" stroke="#4bd6ff" stroke-opacity=".35" stroke-width="4"/>
+        <path d="M264 58V650" stroke="#70ddff" stroke-opacity=".55" stroke-width="3"/>
+        <path d="M287 82 L420 150 L390 190 L445 248 L390 298 L442 355 L386 414 L438 472 L374 540" fill="none" stroke="#ff8d2b" stroke-opacity=".45" stroke-width="6"/>
+        <path d="M292 108 L388 150 M292 158 L414 210 M292 220 L405 275 M292 294 L418 350 M292 370 L408 430 M292 448 L392 500" stroke="#47d5ff" stroke-opacity=".35" stroke-width="3"/>
+        <path d="M120 330 Q175 300 230 330" stroke="#351d14" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <ellipse cx="177" cy="350" rx="25" ry="18" fill="#19100b"/>
+        <circle cx="184" cy="347" r="6" fill="#fff" opacity=".8"/>
+        <path d="M295 333 L398 333 L386 370 L305 370Z" fill="#02070a" stroke="#48d8ff" stroke-width="5"/>
+        <path d="M318 348 H378" stroke="#fff" stroke-width="5" opacity=".9"/>
+        <circle cx="350" cy="348" r="18" fill="#39d9ff" opacity=".18"/>
+        <path d="M160 470 Q205 505 242 475" stroke="#783c29" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M308 475 H405 M320 500 H390" stroke="#ff8d2b" stroke-width="5" opacity=".7" stroke-linecap="round"/>
+        <path d="M0 610 Q130 550 260 600 T520 610 V720 H0Z" fill="#020406" opacity=".7"/>
+        <path d="M40 635 H480" stroke="url(#hfGlow)" stroke-width="3"/>
+      </g>
+      <path d="M260 28 C150 28 78 112 78 238v176c0 137 83 248 182 248s182-111 182-248V238C442 112 370 28 260 28Z" fill="none" stroke="#65dfff" stroke-opacity=".35" stroke-width="3"/>
+    </svg>
+    <div class="face-vignette"></div>
+  </div>
   <div class="pro-lock-corner tl"></div>
   <div class="pro-lock-corner tr"></div>
   <div class="pro-lock-corner bl"></div>
@@ -2229,6 +2275,7 @@ html.jarvis-booting body{
     <p class="pro-lock-date">19 OCTOBER 2026 // 00:00 IST</p>
 
     <div class="pro-lock-countdown">
+      <div><strong id="launch-months">00</strong><small>MONTHS</small></div>
       <div><strong id="launch-days">00</strong><small>DAYS</small></div>
       <div><strong id="launch-hours">00</strong><small>HOURS</small></div>
       <div><strong id="launch-minutes">00</strong><small>MINUTES</small></div>
@@ -3982,6 +4029,7 @@ run(0);
     document.body.classList.add('jarvis-pro-lock-active');
 
     const els = {
+      mo: document.getElementById('launch-months'),
       d: document.getElementById('launch-days'),
       h: document.getElementById('launch-hours'),
       m: document.getElementById('launch-minutes'),
@@ -3999,6 +4047,7 @@ run(0);
       launched = true;
       if(timer) window.clearInterval(timer);
 
+      if(els.mo) els.mo.textContent='00';
       if(els.d) els.d.textContent='00';
       if(els.h) els.h.textContent='00';
       if(els.m) els.m.textContent='00';
@@ -4028,7 +4077,15 @@ run(0);
       }
 
       const total = Math.floor(diff/1000);
-      if(els.d) els.d.textContent = String(Math.floor(total/86400));
+      const nowDate = new Date(now);
+      const targetDate = new Date(TARGET);
+      let months = (targetDate.getUTCFullYear()-nowDate.getUTCFullYear())*12 + (targetDate.getUTCMonth()-nowDate.getUTCMonth());
+      if (targetDate.getUTCDate() < nowDate.getUTCDate()) months = Math.max(0, months-1);
+      const anchor = new Date(Date.UTC(nowDate.getUTCFullYear(), nowDate.getUTCMonth()+months, nowDate.getUTCDate(), nowDate.getUTCHours(), nowDate.getUTCMinutes(), nowDate.getUTCSeconds()));
+      const remainingAfterMonths = Math.max(0, Math.floor((TARGET-anchor.getTime())/1000));
+      const days = Math.floor(remainingAfterMonths/86400);
+      if(els.mo) els.mo.textContent = pad(months);
+      if(els.d) els.d.textContent = pad(days);
       if(els.h) els.h.textContent = pad(Math.floor((total%86400)/3600));
       if(els.m) els.m.textContent = pad(Math.floor((total%3600)/60));
       if(els.s) els.s.textContent = pad(total%60);
