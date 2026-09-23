@@ -3967,45 +3967,86 @@ run(0);
 })();
 </script>
 <script>
-
 /* ================= JARVIS PRO LAUNCH LOCK ================= */
 (function(){
   'use strict';
   const TARGET = Date.UTC(2026,9,18,18,30,0); // 19 Oct 2026 00:00 IST
-  const START = Date.UTC(2026,8,20,18,30,0);
-  const pad=n=>String(Math.max(0,n)).padStart(2,'0');
+  const START  = Date.UTC(2026,8,20,18,30,0);
+  const pad = n => String(Math.max(0,n)).padStart(2,'0');
+
   function initProLaunchLock(){
-    const lock=document.getElementById('pro-launch-lock');
+    const lock = document.getElementById('pro-launch-lock');
     if(!lock) return;
-    const els={
-      d:document.getElementById('launch-days'), h:document.getElementById('launch-hours'),
-      m:document.getElementById('launch-minutes'), s:document.getElementById('launch-seconds'),
-      bar:document.getElementById('launch-progress'), msg:document.getElementById('launch-message')
+
+    document.documentElement.classList.add('jarvis-pro-lock-active');
+    document.body.classList.add('jarvis-pro-lock-active');
+
+    const els = {
+      d: document.getElementById('launch-days'),
+      h: document.getElementById('launch-hours'),
+      m: document.getElementById('launch-minutes'),
+      s: document.getElementById('launch-seconds'),
+      bar: document.getElementById('launch-progress'),
+      msg: document.getElementById('launch-message'),
+      clock: document.getElementById('pro-lock-clock')
     };
+
+    let launched = false;
+    let timer = null;
+
     function unlock(){
-      document.documentElement.classList.add('jarvis-pro-launched');
-      lock.classList.add('unlocked');
+      if(launched) return;
+      launched = true;
+      if(timer) window.clearInterval(timer);
+
+      if(els.d) els.d.textContent='00';
+      if(els.h) els.h.textContent='00';
+      if(els.m) els.m.textContent='00';
+      if(els.s) els.s.textContent='00';
+      if(els.bar) els.bar.style.width='100%';
+      if(els.clock) els.clock.textContent='LAUNCHING';
       if(els.msg) els.msg.textContent='JARVIS PRO ONLINE // LAUNCH COMPLETE';
+
+      document.documentElement.classList.remove('jarvis-pro-lock-active');
+      document.body.classList.remove('jarvis-pro-lock-active');
+      document.documentElement.classList.add('jarvis-pro-launched');
       document.title='JARVIS PRO // ONLINE';
-      setTimeout(()=>lock.remove(),1000);
+      lock.setAttribute('aria-hidden','true');
+      lock.classList.add('unlocked');
+
+      // Let the HUD burst play before removing the overlay completely.
+      window.setTimeout(()=>lock.remove(), 1050);
     }
+
     function tick(){
-      const now=Date.now(), diff=TARGET-now;
-      if(diff<=0){ unlock(); return; }
-      const total=Math.floor(diff/1000);
-      if(els.d) els.d.textContent=String(Math.floor(total/86400));
-      if(els.h) els.h.textContent=pad(Math.floor(total%86400/3600));
-      if(els.m) els.m.textContent=pad(Math.floor(total%3600/60));
-      if(els.s) els.s.textContent=pad(total%60);
-      if(els.bar) els.bar.style.width=Math.max(0,Math.min(100,((now-START)/(TARGET-START))*100))+'%';
+      const now = Date.now();
+      const diff = TARGET - now;
+
+      if(diff <= 0){
+        unlock();
+        return;
+      }
+
+      const total = Math.floor(diff/1000);
+      if(els.d) els.d.textContent = String(Math.floor(total/86400));
+      if(els.h) els.h.textContent = pad(Math.floor((total%86400)/3600));
+      if(els.m) els.m.textContent = pad(Math.floor((total%3600)/60));
+      if(els.s) els.s.textContent = pad(total%60);
+      if(els.clock) els.clock.textContent = 'PRE-LAUNCH';
+
+      if(els.bar){
+        const progress = Math.max(0,Math.min(100,((now-START)/(TARGET-START))*100));
+        els.bar.style.width = progress+'%';
+      }
     }
+
     tick();
-    window.setInterval(tick,1000);
+    timer = window.setInterval(tick,1000);
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initProLaunchLock);
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initProLaunchLock,{once:true});
   else initProLaunchLock();
 })();
-
 </script>
 <script src="script.js" defer></script>
 

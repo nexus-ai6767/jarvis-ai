@@ -42,7 +42,7 @@
     rgba(2,2,2,.985);
   overflow:hidden; color:#f4f4f4; transition:opacity .9s ease, visibility .9s ease;
 }
-.pro-launch-lock.unlocked{opacity:0;visibility:hidden;pointer-events:none}
+.pro-launch-lock.unlocked{opacity:0;visibility:hidden;pointer-events:none}.pro-launch-lock.unlocked .pro-lock-panel{transform:scale(1.045);filter:blur(4px);opacity:0;transition:transform .9s ease,filter .9s ease,opacity .7s ease}.pro-launch-lock.unlocked .pro-lock-reactor{animation:proLaunchBurst .9s ease-out both}.jarvis-pro-lock-active{overflow:hidden}.jarvis-pro-launched .pro-launch-lock{display:none}@keyframes proLaunchBurst{0%{transform:scale(1)}45%{transform:scale(1.22);filter:brightness(1.7)}100%{transform:scale(1.05);opacity:0}}
 .pro-lock-grid{position:absolute;inset:0;opacity:.16;background-image:linear-gradient(rgba(255,122,24,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,122,24,.08) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(circle at center,black,transparent 75%)}
 .pro-lock-scan{position:absolute;left:0;right:0;top:-20%;height:20%;background:linear-gradient(180deg,transparent,rgba(255,122,24,.09),transparent);animation:proLockScan 4s linear infinite}
 .pro-lock-corner{position:absolute;width:70px;height:70px;border-color:rgba(255,122,24,.65)}
