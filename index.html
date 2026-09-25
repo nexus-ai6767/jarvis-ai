@@ -2194,6 +2194,17 @@ html.jarvis-booting body{
 }
 
 </style>
+
+<style id="starter-preview-css">
+#starter-preview-banner{
+  position:fixed;left:18px;bottom:18px;z-index:999999;
+  padding:8px 12px;border:1px solid rgba(255,122,24,.65);
+  background:rgba(8,8,8,.92);color:#ff8a2a;
+  font:700 11px/1.2 Arial,sans-serif;letter-spacing:1.5px;
+  border-radius:6px;box-shadow:0 0 22px rgba(255,110,20,.18);
+}
+</style>
+
 </head>
 
 <body>
@@ -2399,6 +2410,7 @@ html.jarvis-booting body{
         <a href="#architecture">ARCHITECTURE</a>
         <a href="#demo">DEMO</a>
         <a href="#pricing">PRICING</a>
+        <a href="#starter">STARTER</a>
         <a href="#faq">FAQ</a>
         <a href="#custom">CUSTOM</a>
     </div>
@@ -3049,6 +3061,65 @@ html.jarvis-booting body{
 
 </div>
 
+</div>
+
+</section>
+
+
+<!-- ================= JARVIS STARTER ================= -->
+
+<section id="starter" class="starter-section">
+
+<div class="section-head reveal">
+
+    <div class="section-label">
+        04.5 // STARTER EDITION
+    </div>
+
+    <h2>
+        BUILD YOUR<br>
+        FIRST JARVIS.
+    </h2>
+
+    <p>
+        A beginner-friendly edition for anyone who wants to
+        start with voice, local AI, memory and everyday commands.
+    </p>
+
+</div>
+
+<div class="starter-panel reveal">
+    <div class="starter-copy">
+        <span class="starter-badge">BEGINNER EDITION</span>
+        <h3>JARVIS <span>STARTER</span></h3>
+        <p>
+            Learn the foundations of a personal AI assistant without
+            jumping straight into the advanced V2 architecture.
+        </p>
+
+        <div class="starter-features">
+            <div><b>01</b> VOICE ASSISTANT</div>
+            <div><b>02</b> LOCAL AI / OLLAMA</div>
+            <div><b>03</b> NOTES + MEMORY</div>
+            <div><b>04</b> BASIC PC COMMANDS</div>
+            <div><b>05</b> FUTURISTIC DESKTOP HUD</div>
+        </div>
+
+        <a href="./JARVIS_STARTER.zip" class="primary starter-btn" target="_blank" rel="noopener">
+            DOWNLOAD STARTER
+        </a>
+        <span class="starter-note">BEGINNER • LOCAL-FIRST • WINDOWS</span>
+    </div>
+
+    <div class="starter-terminal">
+        <div class="terminal-top"><span></span><span></span><span></span><em>JARVIS STARTER // BOOT</em></div>
+        <div class="terminal-line">&gt; INITIALIZING PERSONAL AI...</div>
+        <div class="terminal-line">&gt; VOICE CORE ........ READY</div>
+        <div class="terminal-line">&gt; MEMORY CORE ....... READY</div>
+        <div class="terminal-line">&gt; LOCAL AI .......... READY</div>
+        <div class="terminal-line">&gt; COMMAND SYSTEM .... READY</div>
+        <div class="terminal-line accent">&gt; STATUS: STARTER ONLINE_</div>
+    </div>
 </div>
 
 </section>
@@ -4106,6 +4177,45 @@ run(0);
 })();
 </script>
 <script src="script.js" defer></script>
+
+
+<script id="starter-preview-script">
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  if (p.get("preview") !== "starter") return;
+
+  function activateStarterPreview(){
+    // Remove the real launch-lock state from the document for preview only.
+    document.documentElement.classList.remove("jarvis-pro-lock-active");
+    document.body.classList.remove("jarvis-pro-lock-active");
+    document.documentElement.classList.remove("jarvis-pro-launched");
+
+    const lock = document.getElementById("pro-launch-lock");
+    if (lock) {
+      lock.style.display = "none";
+      lock.setAttribute("data-preview-hidden", "true");
+    }
+
+    document.body.classList.add("starter-preview-mode");
+
+    const banner = document.createElement("div");
+    banner.id = "starter-preview-banner";
+    banner.textContent = "STARTER PREVIEW MODE";
+    document.body.appendChild(banner);
+
+    const starter = document.querySelector("#starter, #jarvis-starter, [data-section='starter']");
+    if (starter) {
+      setTimeout(() => starter.scrollIntoView({behavior:"smooth", block:"start"}), 300);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", activateStarterPreview, {once:true});
+  } else {
+    activateStarterPreview();
+  }
+})();
+</script>
 
 </body>
 </html>
