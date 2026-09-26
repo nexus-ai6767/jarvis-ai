@@ -87,3 +87,81 @@ if(glow){document.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'
   else initProLaunchLock();
 })();
 
+
+/* ================= COMMAND LAB ================= */
+(function(){
+  'use strict';
+  function initCommandLab(){
+    const input=document.getElementById('commandLabInput');
+    const run=document.getElementById('commandLabRun');
+    const lab=document.querySelector('.command-lab');
+    const output=document.getElementById('commandLabOutput');
+    const nodes=[...document.querySelectorAll('#commandPipeline .pipeline-node')];
+    const presets=[...document.querySelectorAll('.command-presets button[data-command]')];
+    if(!input||!run||!lab||!output||nodes.length!==4) return;
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    function setNode(i,status){
+      nodes.forEach((n,k)=>{n.classList.toggle('active',k===i);const sm=n.querySelector('small');if(sm) sm.textContent=k===i?status:(k<i?'COMPLETE':'STANDBY');});
+    }
+    async function execute(raw){
+      const command=(raw||'').trim();
+      if(!command) return;
+      lab.classList.add('running'); run.disabled=true; input.value=command;
+      output.innerHTML='JARVIS // PROCESSING<br><span>Command received: '+escapeHtml(command)+'</span>';
+      setNode(0,'RECEIVED'); await sleep(420);
+      setNode(1,'ANALYSING'); output.innerHTML='JARVIS // BRAIN<br><span>Intent detected from command input.</span>'; await sleep(520);
+      setNode(2,'EXECUTING'); output.innerHTML='JARVIS // ACTION<br><span>Simulating the requested action pipeline...</span>'; await sleep(620);
+      setNode(3,'COMPLETE'); output.innerHTML='JARVIS // COMPLETE<br><span>'+escapeHtml(responseFor(command))+'</span>';
+      lab.classList.remove('running'); run.disabled=false;
+    }
+    function responseFor(c){
+      const x=c.toLowerCase();
+      if(x.includes('youtube')) return 'Opening YouTube...';
+      if(x.includes('search')) return 'Web search intent ready.';
+      if(x.includes('note')) return 'Note action queued.';
+      if(x.includes('remember')||x.includes('memory')) return 'Memory update intent detected.';
+      if(x.includes('status')) return 'All visible JARVIS systems report READY.';
+      if(x.includes('gesture')) return 'Gesture control module enabled.';
+      return 'Command understood. Action pipeline complete.';
+    }
+    function escapeHtml(v){return v.replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));}
+    run.addEventListener('click',()=>execute(input.value));
+    input.addEventListener('keydown',e=>{if(e.key==='Enter') execute(input.value);});
+    presets.forEach(b=>b.addEventListener('click',()=>execute(b.dataset.command)));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initCommandLab); else initCommandLab();
+})();
+
+
+/* ================= COMMANDS IN MOTION ================= */
+(function(){
+  'use strict';
+  function initMotion(){
+    const board=document.querySelector('[data-motion-board]');
+    if(!board) return;
+    const steps=[...board.querySelectorAll('.motion-step')];
+    const status=document.getElementById('motionStatus');
+    const timer=document.getElementById('motionTimer');
+    const command=document.getElementById('motionCommand');
+    const buttons=[...board.querySelectorAll('[data-motion-command]')];
+    const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+    let busy=false;
+    async function run(raw){
+      if(busy) return;
+      busy=true; board.classList.add('running'); command.textContent='"'+raw+'"';
+      steps.forEach(x=>x.classList.remove('active','complete'));
+      const start=performance.now();
+      status.textContent='EXECUTING // COMMAND FLOW';
+      for(let i=0;i<steps.length;i++){
+        steps[i].classList.add('active');
+        await sleep(i===2?720:480);
+        steps[i].classList.remove('active'); steps[i].classList.add('complete');
+        timer.textContent=((performance.now()-start)/1000).toFixed(2)+'s';
+      }
+      status.textContent='SIMULATION COMPLETE';
+      board.classList.remove('running'); busy=false;
+    }
+    buttons.forEach(b=>b.addEventListener('click',()=>run(b.dataset.motionCommand)));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initMotion); else initMotion();
+})();

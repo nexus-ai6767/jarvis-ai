@@ -461,10 +461,10 @@ h1,h2,h3,.logo,.price{
 
 .reactor{
     position:absolute;
-    width:min(650px,90vw);
-    height:min(650px,90vw);
+    width:min(700px,82vw);
+    height:min(700px,82vw);
     border-radius:50%;
-    opacity:.45;
+    opacity:.58;
     pointer-events:none;
 }
 
@@ -475,10 +475,11 @@ h1,h2,h3,.logo,.price{
     background:
         radial-gradient(circle,
         #fff 0%,
-        #ffd0a0 5%,
-        var(--orange) 18%,
-        rgba(255,90,0,.45) 42%,
-        transparent 70%);
+        #ffd0a0 7%,
+        var(--orange) 24%,
+        rgba(255,90,0,.72) 48%,
+        rgba(255,90,0,.28) 68%,
+        transparent 78%);
     box-shadow:
         0 0 35px #ff7a18,
         0 0 100px rgba(255,100,0,.45),
@@ -488,20 +489,20 @@ h1,h2,h3,.logo,.price{
 
 .ring{
     position:absolute;
-    inset:10%;
+    inset:8%;
     border:1px solid rgba(255,122,24,.28);
     border-radius:50%;
     animation:spin 14s linear infinite;
 }
 
 .ring:nth-child(2){
-    inset:20%;
+    inset:18%;
     animation-duration:9s;
     animation-direction:reverse;
 }
 
 .ring:nth-child(3){
-    inset:2%;
+    inset:1%;
     border-style:dashed;
     animation-duration:22s;
 }
@@ -529,9 +530,9 @@ h1,h2,h3,.logo,.price{
 
 .energy{
     position:absolute;
-    inset:28%;
+    inset:25%;
     border-radius:50%;
-    border:1px solid rgba(255,180,90,.35);
+    border:1px solid rgba(255,180,90,.42);
     filter:blur(.3px);
     transform:rotate(30deg) scaleX(1.8);
     animation:energy 4s infinite ease-in-out;
@@ -1175,7 +1176,9 @@ footer:before{
     }
 
     .reactor{
-        opacity:.22;
+        width:min(520px,88vw);
+        height:min(520px,88vw);
+        opacity:.32;
     }
 
     footer{
@@ -2409,8 +2412,12 @@ html.jarvis-booting body{
         <a href="#capabilities">CAPABILITIES</a>
         <a href="#architecture">ARCHITECTURE</a>
         <a href="#demo">DEMO</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#compatibility">CHECK</a>
         <a href="#pricing">PRICING</a>
         <a href="#starter">STARTER</a>
+        <a href="#setup">SETUP</a>
+        <a href="#command-playground">COMMAND LAB</a>
         <a href="#faq">FAQ</a>
         <a href="#custom">CUSTOM</a>
     </div>
@@ -2634,6 +2641,108 @@ html.jarvis-booting body{
 </section>
 
 
+
+<!-- ================= JARVIS PRODUCT PROOF ================= -->
+<section id="setup" class="product-proof-section">
+  <div class="section-head reveal">
+    <div class="section-label">03 // GET RUNNING</div>
+    <h2>FROM ZERO<br><span>TO JARVIS.</span></h2>
+    <p>A simple setup path for the current desktop build. Keep the AI local, connect your model, and start issuing commands.</p>
+  </div>
+
+  <div class="setup-grid">
+    <div class="setup-card reveal"><div class="setup-num">01</div><h3>DOWNLOAD</h3><p>Get the current JARVIS PC release and extract it to a folder you control.</p><code>JARVIS_PC_RELEASE.zip</code></div>
+    <div class="setup-card reveal"><div class="setup-num">02</div><h3>PYTHON</h3><p>Use a supported Python installation and install the project's required packages.</p><code>pip install -r requirements.txt</code></div>
+    <div class="setup-card reveal"><div class="setup-num">03</div><h3>OLLAMA</h3><p>Install Ollama and pull a local model such as the model configured for your build.</p><code>ollama run &lt;your-model&gt;</code></div>
+    <div class="setup-card reveal"><div class="setup-num">04</div><h3>LAUNCH</h3><p>Start JARVIS, allow the requested microphone/camera permissions, then test a command.</p><code>python main.py</code></div>
+  </div>
+
+  <div class="interface-preview reveal">
+    <div class="preview-top"><span>JARVIS // DESKTOP HUD PREVIEW</span><span class="preview-online">● ONLINE</span></div>
+    <div class="preview-body">
+      <div class="preview-core"><div class="preview-ring r1"></div><div class="preview-ring r2"></div><div class="preview-orb">J</div><small>LOCAL AI CORE</small></div>
+      <div class="preview-console">
+        <div>&gt; JARVIS online. Systems ready.</div>
+        <div>&gt; VOICE ................. READY</div>
+        <div>&gt; VISION ................. READY</div>
+        <div>&gt; GESTURES ............... READY</div>
+        <div>&gt; MEMORY ................. CONNECTED</div>
+        <div class="preview-cursor">&gt; awaiting command<span>_</span></div>
+      </div>
+      <div class="preview-stats"><b>LOCAL</b><span>AI ENGINE</span><b>READY</b><span>COMMAND BUS</span><b>ONLINE</b><span>AUTOMATION</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMMANDS IN MOTION ================= -->
+
+<section id="motion" class="motion-section">
+
+<div class="section-head reveal">
+    <div class="section-label">// LIVE FLOW</div>
+    <h2>COMMANDS<br>IN MOTION.</h2>
+    <p>Watch a JARVIS request move from voice intent to AI reasoning and action execution.</p>
+</div>
+
+<div class="motion-board reveal" data-motion-board>
+    <div class="motion-status"><span class="motion-dot"></span><span id="motionStatus">SIMULATION READY</span><b id="motionTimer">00.00s</b></div>
+    <div class="motion-track">
+        <div class="motion-step" data-step="0"><span>01</span><b>WAKE</b><small>LISTENING</small></div>
+        <div class="motion-arrow">→</div>
+        <div class="motion-step" data-step="1"><span>02</span><b>UNDERSTAND</b><small>INTENT</small></div>
+        <div class="motion-arrow">→</div>
+        <div class="motion-step" data-step="2"><span>03</span><b>THINK</b><small>LOCAL AI</small></div>
+        <div class="motion-arrow">→</div>
+        <div class="motion-step" data-step="3"><span>04</span><b>ACT</b><small>AUTOMATION</small></div>
+        <div class="motion-arrow">→</div>
+        <div class="motion-step" data-step="4"><span>05</span><b>CONFIRM</b><small>READY</small></div>
+    </div>
+    <div class="motion-command"><span>JARVIS //</span><strong id="motionCommand">"Open YouTube and get ready."</strong></div>
+    <div class="motion-actions">
+        <button type="button" data-motion-command="Open YouTube and get ready.">RUN DEMO</button>
+        <button type="button" data-motion-command="Remember that my workspace is ready.">MEMORY FLOW</button>
+        <button type="button" data-motion-command="Show system status.">STATUS FLOW</button>
+    </div>
+</div>
+
+</section>
+
+
+<!-- ================= COMMAND PLAYGROUND ================= -->
+<section id="command-playground" class="command-playground-section">
+  <div class="section-head reveal">
+    <div class="section-label">04 // COMMAND LAB</div>
+    <h2>TRY THE<br><span>COMMAND FLOW.</span></h2>
+    <p>Type a command or choose a preset. The website simulates the same pipeline JARVIS uses: input → intent → action → result.</p>
+  </div>
+
+  <div class="command-lab reveal">
+    <div class="command-input-row">
+      <span class="prompt-mark">&gt;</span>
+      <input id="commandLabInput" type="text" autocomplete="off" placeholder="Try: Open YouTube">
+      <button id="commandLabRun">RUN COMMAND</button>
+    </div>
+    <div class="command-presets">
+      <button data-command="Open YouTube">OPEN YOUTUBE</button>
+      <button data-command="Search the web for Iron Man">WEB SEARCH</button>
+      <button data-command="Take a note">TAKE NOTE</button>
+      <button data-command="Remember this">MEMORY</button>
+      <button data-command="System status">SYSTEM STATUS</button>
+      <button data-command="Enable gestures">GESTURES</button>
+    </div>
+    <div class="command-pipeline" id="commandPipeline">
+      <div class="pipeline-node active"><span>01</span><b>INPUT</b><small>WAITING</small></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-node"><span>02</span><b>BRAIN</b><small>STANDBY</small></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-node"><span>03</span><b>ACTION</b><small>STANDBY</small></div>
+      <div class="pipeline-line"></div>
+      <div class="pipeline-node"><span>04</span><b>STATUS</b><small>READY</small></div>
+    </div>
+    <div class="command-output" id="commandLabOutput">JARVIS // COMMAND LAB READY<br><span>Enter a command to start the simulation.</span></div>
+  </div>
+</section>
+
 <!-- ================= JARVIS PRO // NEXT TIER ================= -->
 
 <section class="mobile-coming-banner" aria-label="JARVIS Pro coming soon">
@@ -2702,6 +2811,32 @@ html.jarvis-booting body{
 
 
 <!-- ================= CAPABILITIES ================= -->
+
+
+<section id="gallery" class="site-section gallery-section">
+  <div class="section-kicker">03 // INTERFACE ARCHIVE</div>
+  <h2>JARVIS // <span>VISUALS</span></h2>
+  <p class="section-lead">A cinematic preview of the desktop experience. These panels are interface mockups — replace them with real JARVIS screenshots when you have them.</p>
+  <div class="hud-gallery">
+    <article class="hud-shot hud-shot-main">
+      <div class="hud-shot-bar"><b>JARVIS CORE</b><span>LOCAL // ONLINE</span></div>
+      <div class="hud-reactor"><div class="reactor-ring r1"></div><div class="reactor-ring r2"></div><div class="reactor-core">J</div></div>
+      <div class="hud-readout"><span>CPU 18%</span><span>RAM 42%</span><span>VOICE READY</span></div>
+    </article>
+    <article class="hud-shot">
+      <div class="hud-shot-bar"><b>VOICE INTELLIGENCE</b><span>LISTENING</span></div>
+      <div class="voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="shot-command">“OPEN YOUTUBE”</p>
+      <div class="shot-result">INTENT DETECTED // ACTION READY</div>
+    </article>
+    <article class="hud-shot">
+      <div class="hud-shot-bar"><b>GESTURE CONTROL</b><span>CAMERA</span></div>
+      <div class="gesture-hand">✋</div>
+      <div class="gesture-labels"><span>CURSOR</span><span>CLICK</span><span>SCROLL</span><span>STOP</span></div>
+      <div class="shot-result">HAND TRACKING // ACTIVE</div>
+    </article>
+  </div>
+</section>
 
 <section id="capabilities">
 
@@ -3373,6 +3508,101 @@ html.jarvis-booting body{
 </section>
 
 
+<!-- ================= TRUST / REQUIREMENTS ================= -->
+
+
+<section id="compatibility" class="site-section compatibility-section">
+  <div class="section-kicker">06 // PRE-FLIGHT CHECK</div>
+  <h2>CAN YOUR PC RUN <span>JARVIS?</span></h2>
+  <p class="section-lead">Run a browser-side checklist before installing. This is a quick readiness guide, not a hardware benchmark.</p>
+  <div class="compat-grid">
+    <div class="compat-panel">
+      <div class="compat-row"><span>OPERATING SYSTEM</span><b id="checkOs">CHECKING</b></div>
+      <div class="compat-row"><span>CPU / MEMORY</span><b id="checkRam">CHECKING</b></div>
+      <div class="compat-row"><span>MICROPHONE</span><b id="checkMic">CHECKING</b></div>
+      <div class="compat-row"><span>BROWSER</span><b id="checkBrowser">CHECKING</b></div>
+      <div class="compat-row"><span>LOCAL AI</span><b>OLLAMA REQUIRED</b></div>
+    </div>
+    <div class="compat-score">
+      <div class="score-ring"><strong id="compatScore">--</strong><span>READINESS</span></div>
+      <p id="compatMessage" aria-live="polite">Running pre-flight diagnostics...</p>
+      <button type="button" id="compatRun" onclick="window.JARVISPreflight && window.JARVISPreflight()">RUN PRE-FLIGHT CHECK</button>
+      <div id="compatDebug" class="compat-debug" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  function runPreflight(){
+    var os=document.getElementById('checkOs'), ram=document.getElementById('checkRam'), mic=document.getElementById('checkMic'), browser=document.getElementById('checkBrowser'), score=document.getElementById('compatScore'), msg=document.getElementById('compatMessage'), btn=document.getElementById('compatRun'), debug=document.getElementById('compatDebug');
+    if(!btn) return;
+    var set=function(el,v){if(el) el.textContent=v;};
+    btn.disabled=true; btn.textContent='CHECKING...';
+    [os,ram,mic,browser].forEach(function(e){set(e,'CHECKING');}); set(msg,'Running JARVIS pre-flight diagnostics...'); set(debug,'');
+    try{
+      var ua=navigator.userAgent||'';
+      var windows=/Windows NT/i.test(ua);
+      var cores=Number(navigator.hardwareConcurrency||0);
+      var memory=Number(navigator.deviceMemory||0);
+      var micApi=!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+      var secure=window.isSecureContext===true;
+      var browserName=/Edg\//i.test(ua)?'EDGE':/Chrome\//i.test(ua)?'CHROME':/Firefox\//i.test(ua)?'FIREFOX':'BROWSER';
+      set(os,windows?'PASS — WINDOWS':'INFO — NON-WINDOWS');
+      set(ram,(cores?('PASS — '+cores+' CPU THREADS'):'INFO — CPU API LIMITED')+(memory?' · '+memory+' GB HINT':''));
+      set(mic,micApi?(secure?'PASS — MIC API AVAILABLE':'INFO — HTTPS REQUIRED'):'INFO — MIC API UNAVAILABLE');
+      set(browser,'PASS — '+browserName);
+      var points=(windows?30:10)+(cores>=4?20:cores?15:10)+(memory>=4?20:memory?15:10)+(micApi&&secure?20:10)+((browserName==='EDGE'||browserName==='CHROME'||browserName==='FIREFOX')?10:5);
+      set(score,Math.max(0,Math.min(100,points))+'%');
+      set(msg,'PRE-FLIGHT COMPLETE — browser readiness checked. JARVIS still requires the PC release dependencies and Ollama.');
+      set(debug,'LAST CHECK: '+new Date().toLocaleTimeString());
+    }catch(e){
+      set(score,'--'); set(msg,'CHECK ERROR — '+(e&&e.message?e.message:'Please try again.')); set(debug,'Open browser console for details.'); console.error(e);
+      [os,ram,mic,browser].forEach(function(x){set(x,'RETRY');});
+    }finally{btn.disabled=false; btn.textContent='RUN PRE-FLIGHT CHECK';}
+  }
+  window.JARVISPreflight=runPreflight;
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){runPreflight();},{once:true}); else setTimeout(runPreflight,50);
+})();
+</script>
+
+<section id="requirements" class="requirements-section">
+
+<div class="section-head reveal">
+    <div class="section-label">05 // DEPLOYMENT INTEL</div>
+    <h2>KNOW YOUR<br>JARVIS.</h2>
+    <p>A transparent product layer for setup, compatibility and control. Check the release package before installation.</p>
+</div>
+
+<div class="requirements-grid reveal">
+    <article class="requirements-card">
+        <span class="req-tag">HARDWARE</span>
+        <h3>DESKTOP READY</h3>
+        <p>Designed for a modern 64-bit Windows PC. Performance depends on the selected local AI model and enabled vision features.</p>
+        <div class="req-row"><span>OS</span><b>WINDOWS</b></div>
+        <div class="req-row"><span>ARCH</span><b>x64</b></div>
+        <div class="req-row"><span>GPU</span><b>OPTIONAL</b></div>
+    </article>
+    <article class="requirements-card">
+        <span class="req-tag">CONTROL</span>
+        <h3>YOU STAY IN CHARGE</h3>
+        <p>Commands, automation and connected features should be enabled deliberately. Review what each module can access before use.</p>
+        <div class="req-row"><span>VOICE</span><b>OPTIONAL</b></div>
+        <div class="req-row"><span>VISION</span><b>OPTIONAL</b></div>
+        <div class="req-row"><span>AUTOMATION</span><b>USER CONTROLLED</b></div>
+    </article>
+    <article class="requirements-card">
+        <span class="req-tag">RELEASE</span>
+        <h3>VERIFY BEFORE DEPLOY</h3>
+        <p>This website is a product interface. The bundled release notes remain the source of truth for the exact installation requirements and commands.</p>
+        <div class="req-row"><span>PACKAGE</span><b>JARVIS_PC_RELEASE</b></div>
+        <div class="req-row"><span>DOCS</span><b>RELEASE NOTES</b></div>
+        <div class="req-row"><span>STATUS</span><b>CHECK FIRST</b></div>
+    </article>
+</div>
+
+</section>
+
+
 <!-- ================= DOWNLOAD ================= -->
 
 <section id="download" class="download">
@@ -3400,7 +3630,7 @@ html.jarvis-booting body{
         target="_blank"
         class="primary"
     >
-        VIEW JARVIS ON GITHUB
+        DOWNLOAD JARVIS BUILD
     </a>
 
 </div>
@@ -3485,6 +3715,8 @@ html.jarvis-booting body{
         <ul>
             <li><a href="#custom">Custom build</a></li>
             <li><a href="#download">Download</a></li>
+            <li><a href="#setup">Setup</a></li>
+            <li><a href="#command-playground">Command Lab</a></li>
             <li><a href="JARVIS_PC_RELEASE.zip" target="_blank" rel="noopener">Latest release</a></li>
         </ul>
     </div>
