@@ -1345,6 +1345,67 @@ footer:before{
     font-size:10px;
 }
 
+.pro-windows-download{
+    flex:1 1 320px;
+    max-width:390px;
+    border:1px solid rgba(255,122,24,.28);
+    padding:24px;
+    background:rgba(255,255,255,.015);
+    box-shadow:0 0 28px rgba(255,122,24,.05);
+}
+.pro-download-kicker{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:2.5px;
+    color:var(--orange);
+    margin-bottom:10px;
+}
+.pro-windows-download h4{
+    font-family:var(--font-display);
+    font-size:24px;
+    letter-spacing:-.5px;
+    color:var(--text);
+    margin:0 0 12px;
+}
+.pro-windows-download p{
+    color:#888;
+    line-height:1.65;
+    font-size:12px;
+    margin:0 0 20px;
+}
+.pro-download-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:46px;
+    box-sizing:border-box;
+    border:1px solid var(--orange);
+    background:rgba(255,122,24,.08);
+    color:var(--orange);
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:1.8px;
+    text-decoration:none;
+    transition:background .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.pro-download-button:hover{
+    background:var(--orange);
+    color:#080808;
+    box-shadow:0 0 24px rgba(255,122,24,.25);
+    transform:translateY(-1px);
+}
+.pro-download-button:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:3px;
+}
+@media(max-width:900px){
+    .pro-windows-download{
+        width:100%;
+        max-width:none;
+    }
+}
+
 @media(max-width:900px){
     .pro-banner-frame{
         flex-direction:column;
@@ -2766,6 +2827,15 @@ html.jarvis-booting body{
             <div class="pro-feature"><b>03</b>ADVANCED AUTOMATIONS</div>
             <div class="pro-feature"><b>04</b>PRO-ONLY INTEGRATIONS</div>
             <div class="pro-feature"><b>05</b>PRIORITY SUPPORT</div>
+        </div>
+
+        <div class="pro-windows-download">
+            <div class="pro-download-kicker">WINDOWS PC // AVAILABLE NOW</div>
+            <h4>JARVIS PRO — Windows PC</h4>
+            <p>Download the full JARVIS AI PC application with Vision, Voice, Smart Command Engine, Serious Mode, local AI, OCR, and other existing features.</p>
+            <a class="pro-download-button" href="downloads/JARVIS_SETUP.exe" download="JARVIS_SETUP.exe">
+                DOWNLOAD JARVIS FOR WINDOWS
+            </a>
         </div>
 
     </div>
