@@ -2512,6 +2512,83 @@ html.jarvis-booting body{
 
 </style>
 
+
+<style id="jarvis-cinematic-ambient-bg">
+/* ================= GLOBAL CINEMATIC AMBIENT BACKGROUND ================= */
+body::before{
+    opacity:.09;
+    background-image:
+        linear-gradient(rgba(70,190,255,.032) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,122,24,.024) 1px,transparent 1px);
+    background-size:72px 72px;
+    mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.75) 42%,transparent 92%);
+}
+
+html,body{
+    background-color:#02050a;
+}
+
+body{
+    background:
+        radial-gradient(circle at 18% 16%,rgba(255,102,26,.10),transparent 28%),
+        radial-gradient(circle at 79% 20%,rgba(30,189,255,.10),transparent 26%),
+        radial-gradient(circle at 51% 76%,rgba(0,118,210,.075),transparent 31%),
+        radial-gradient(circle at 93% 72%,rgba(255,126,24,.055),transparent 22%),
+        linear-gradient(180deg,#02050a 0%,#03060b 34%,#020409 70%,#010308 100%);
+    background-attachment:fixed;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:-18%;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.72;
+    background:
+        radial-gradient(ellipse at 50% 12%,rgba(60,170,255,.055),transparent 36%),
+        radial-gradient(ellipse at 20% 46%,rgba(255,105,20,.055),transparent 28%),
+        radial-gradient(ellipse at 84% 62%,rgba(0,154,255,.045),transparent 30%),
+        repeating-linear-gradient(90deg,transparent 0 11.8%,rgba(74,192,255,.018) 11.85%,transparent 11.95%),
+        repeating-linear-gradient(0deg,transparent 0 13.5%,rgba(255,122,24,.015) 13.55%,transparent 13.7%);
+    filter:blur(.2px);
+    animation:jarvisAmbientDrift 18s ease-in-out infinite alternate;
+}
+
+body > section:not(.hero),
+body > footer{
+    background-color:rgba(2,5,9,.80);
+    background-blend-mode:normal;
+}
+
+body > section:not(.hero)::after{
+    content:"";
+    position:absolute;
+    left:7%;
+    right:7%;
+    bottom:0;
+    height:1px;
+    pointer-events:none;
+    background:linear-gradient(90deg,transparent 0%,rgba(40,196,255,.10) 25%,rgba(255,122,24,.16) 50%,rgba(40,196,255,.10) 75%,transparent 100%);
+    box-shadow:0 0 18px rgba(28,159,255,.055);
+}
+
+@keyframes jarvisAmbientDrift{
+    0%{transform:translate3d(-1.5%,0,0) scale(1);}
+    50%{transform:translate3d(1%,1.2%,0) scale(1.015);}
+    100%{transform:translate3d(-.7%,-.8%,0) scale(1.01);}
+}
+
+@media(max-width:850px){
+    body::after{opacity:.48;}
+    body > section:not(.hero){background-color:rgba(2,5,9,.86);}
+}
+
+@media(prefers-reduced-motion:reduce){
+    body::after{animation:none;}
+}
+</style>
+
 <style id="starter-preview-css">
 #starter-preview-banner{
   position:fixed;left:18px;bottom:18px;z-index:999999;
