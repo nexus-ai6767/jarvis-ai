@@ -2731,6 +2731,77 @@ section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-p
 
 </style>
 
+
+<style id="jarvis-tech-background-visible-v8">
+/* USER REFERENCE BACKGROUND — keep the actual tech artwork visible across the full site */
+html, body {
+  background: #05052a !important;
+  min-height: 100%;
+}
+body { position: relative; }
+
+/* Left artwork */
+body::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -20 !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  background: url("jarvis-tech-global-bg.png") left center / min(760px, 58vw) auto no-repeat !important;
+  transform: none !important;
+  mask-image: none !important;
+}
+
+/* Mirrored artwork on the right so the page does not become a plain empty field */
+body::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: -19 !important;
+  pointer-events: none !important;
+  opacity: .62 !important;
+  background: url("jarvis-tech-global-bg.png") right center / min(760px, 58vw) auto no-repeat !important;
+  transform: scaleX(-1) !important;
+  filter: saturate(1.12) contrast(1.03) !important;
+  animation: jarvisTechSides 28s ease-in-out infinite alternate !important;
+}
+
+/* Transparent cinematic surfaces: artwork remains visible through every section */
+body > section, body > footer, section, footer {
+  background-color: rgba(3, 3, 28, .035) !important;
+  background-image: none !important;
+}
+
+/* Soft center atmosphere without hiding the reference artwork */
+body {
+  box-shadow: inset 0 0 180px rgba(2, 4, 24, .48);
+}
+
+@keyframes jarvisTechSides {
+  0%   { background-position: right 49% center; opacity: .52; }
+  50%  { background-position: right 51% center; opacity: .66; }
+  100% { background-position: right 50% center; opacity: .58; }
+}
+
+@media (max-width: 900px) {
+  body::before {
+    background-size: min(620px, 88vw) auto !important;
+    background-position: left 20% center !important;
+    opacity: .82 !important;
+  }
+  body::after {
+    background-size: min(620px, 88vw) auto !important;
+    background-position: right 80% center !important;
+    opacity: .38 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { animation: none !important; }
+}
+</style>
+
 </head>
 
 <body>
