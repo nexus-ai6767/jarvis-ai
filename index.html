@@ -1345,6 +1345,67 @@ footer:before{
     font-size:10px;
 }
 
+.pro-windows-download{
+    flex:1 1 320px;
+    max-width:390px;
+    border:1px solid rgba(255,122,24,.28);
+    padding:24px;
+    background:rgba(255,255,255,.015);
+    box-shadow:0 0 28px rgba(255,122,24,.05);
+}
+.pro-download-kicker{
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:2.5px;
+    color:var(--orange);
+    margin-bottom:10px;
+}
+.pro-windows-download h4{
+    font-family:var(--font-display);
+    font-size:24px;
+    letter-spacing:-.5px;
+    color:var(--text);
+    margin:0 0 12px;
+}
+.pro-windows-download p{
+    color:#888;
+    line-height:1.65;
+    font-size:12px;
+    margin:0 0 20px;
+}
+.pro-download-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:46px;
+    box-sizing:border-box;
+    border:1px solid var(--orange);
+    background:rgba(255,122,24,.08);
+    color:var(--orange);
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:1.8px;
+    text-decoration:none;
+    transition:background .2s ease,color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.pro-download-button:hover{
+    background:var(--orange);
+    color:#080808;
+    box-shadow:0 0 24px rgba(255,122,24,.25);
+    transform:translateY(-1px);
+}
+.pro-download-button:focus-visible{
+    outline:2px solid var(--orange);
+    outline-offset:3px;
+}
+@media(max-width:900px){
+    .pro-windows-download{
+        width:100%;
+        max-width:none;
+    }
+}
+
 @media(max-width:900px){
     .pro-banner-frame{
         flex-direction:column;
@@ -2768,6 +2829,15 @@ html.jarvis-booting body{
             <div class="pro-feature"><b>05</b>PRIORITY SUPPORT</div>
         </div>
 
+        <div class="pro-windows-download">
+            <div class="pro-download-kicker">WINDOWS PC // AVAILABLE NOW</div>
+            <h4>JARVIS PRO — Windows PC</h4>
+            <p>Download the full JARVIS AI PC application with Vision, Voice, Smart Command Engine, Serious Mode, local AI, OCR, and other existing features.</p>
+            <a class="pro-download-button" href="#jarvis-pro-payment">
+                GET JARVIS PRO — ₹1,499
+            </a>
+        </div>
+
     </div>
 
     <form class="waitlist-form" id="waitlistForm">
@@ -2778,6 +2848,237 @@ html.jarvis-booting body{
         </div>
         <div class="waitlist-note" id="waitlistNote"></div>
     </form>
+</section>
+
+<!-- ================================================================ -->
+
+<!-- ================= JARVIS PRO // MANUAL UPI PAYMENT ================= -->
+<style>
+.pro-payment-section{
+    padding:70px 6% 90px;
+    border-top:1px solid var(--line);
+}
+.pro-payment-head{
+    text-align:center;
+    max-width:620px;
+    margin:0 auto 46px;
+}
+.pro-payment-kicker{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:4px;
+    color:var(--orange);
+    margin-bottom:14px;
+}
+.pro-payment-head h3{
+    font-family:var(--font-display);
+    font-size:clamp(30px,4.5vw,46px);
+    letter-spacing:-1.5px;
+    color:var(--text);
+    margin:0 0 16px;
+}
+.pro-payment-head h3 span{
+    color:var(--orange);
+    text-shadow:0 0 30px rgba(255,122,24,.3);
+}
+.pro-payment-price{
+    display:inline-flex;
+    align-items:baseline;
+    gap:10px;
+    margin:0 0 18px;
+}
+.pro-payment-price b{
+    font-family:var(--font-display);
+    font-size:clamp(34px,5vw,52px);
+    color:var(--text);
+}
+.pro-payment-price small{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:2.5px;
+    color:var(--orange2);
+    border:1px solid rgba(255,122,24,.35);
+    padding:4px 10px;
+}
+.pro-payment-head p{
+    color:var(--muted);
+    line-height:1.7;
+    font-size:14px;
+}
+.pro-payment-grid{
+    display:flex;
+    gap:40px;
+    flex-wrap:wrap;
+    max-width:1000px;
+    margin:0 auto;
+    align-items:flex-start;
+    justify-content:center;
+}
+.pro-payment-steps{
+    flex:1 1 420px;
+    min-width:280px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+.pro-step{
+    display:flex;
+    gap:16px;
+    border-left:2px solid rgba(255,122,24,.3);
+    padding:4px 0 4px 16px;
+}
+.pro-step b{
+    font-family:var(--font-mono);
+    font-size:11px;
+    color:var(--orange);
+    flex:0 0 auto;
+}
+.pro-step span{
+    font-size:13px;
+    color:#ccc;
+    line-height:1.6;
+}
+.pro-upi-box{
+    margin-top:6px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:1px solid rgba(255,122,24,.28);
+    background:rgba(255,255,255,.015);
+    padding:12px 14px;
+    flex-wrap:wrap;
+}
+.pro-upi-box code{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--text);
+    letter-spacing:.5px;
+}
+.pro-upi-copy{
+    margin-left:auto;
+    border:1px solid var(--orange);
+    background:rgba(255,122,24,.08);
+    color:var(--orange);
+    font-family:var(--font-mono);
+    font-size:9px;
+    letter-spacing:1.5px;
+    padding:8px 12px;
+    cursor:pointer;
+    transition:background .2s ease,color .2s ease;
+}
+.pro-upi-copy:hover{
+    background:var(--orange);
+    color:#080808;
+}
+.pro-payment-note{
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:1px;
+    color:var(--muted);
+    margin-top:4px;
+}
+.pro-payment-qr{
+    flex:0 1 280px;
+    min-width:220px;
+    border:1px solid rgba(255,122,24,.28);
+    background:rgba(255,255,255,.015);
+    padding:22px;
+    text-align:center;
+}
+.pro-payment-qr .pro-download-kicker{
+    text-align:left;
+}
+.pro-qr-frame{
+    width:100%;
+    max-width:200px;
+    aspect-ratio:1/1;
+    margin:14px auto;
+    border:1px dashed rgba(255,122,24,.4);
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    background:#050505;
+}
+.pro-qr-frame img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+.pro-payment-contact{
+    margin-top:18px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    min-height:44px;
+    box-sizing:border-box;
+    border:1px solid var(--orange);
+    background:rgba(255,122,24,.08);
+    color:var(--orange);
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:1.6px;
+    text-decoration:none;
+    transition:background .2s ease,color .2s ease;
+}
+.pro-payment-contact:hover{
+    background:var(--orange);
+    color:#080808;
+}
+.pro-verify-note{
+    text-align:center;
+    margin-top:36px;
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:1.5px;
+    color:var(--muted);
+}
+@media(max-width:720px){
+    .pro-payment-section{padding:50px 6% 70px;}
+    .pro-payment-grid{gap:28px;}
+}
+</style>
+
+<section id="jarvis-pro-payment" class="pro-payment-section" aria-label="JARVIS PRO manual UPI payment">
+
+    <div class="pro-payment-head">
+        <div class="pro-payment-kicker">UNLOCK // JARVIS PRO</div>
+        <h3>JARVIS <span>PRO</span></h3>
+        <div class="pro-payment-price"><b>₹1,499</b><small>ONE-TIME PAYMENT</small></div>
+        <p>Get the full JARVIS AI PC application with Vision, Voice, Smart Command Engine, Serious Mode, local AI, OCR, and the existing JARVIS PRO features.</p>
+    </div>
+
+    <div class="pro-payment-grid">
+
+        <div class="pro-payment-steps">
+            <div class="pro-step"><b>01</b><span>Pay ₹1,499 using UPI to the ID shown here.</span></div>
+            <div class="pro-step"><b>02</b><span>Save the transaction / reference ID from your payment app.</span></div>
+            <div class="pro-step"><b>03</b><span>Send your payment proof + transaction ID using the contact button below.</span></div>
+            <div class="pro-step"><b>04</b><span>Payment is manually verified and the JARVIS setup file is provided to you.</span></div>
+
+            <div class="pro-upi-box">
+                <code id="proUpiId">7387947607@ibl</code>
+                <button type="button" class="pro-upi-copy" id="proUpiCopyBtn" onclick="(function(b){var t=document.getElementById('proUpiId').innerText;function done(ok){b.textContent=ok?'COPIED':'COPY FAILED';setTimeout(function(){b.textContent='COPY UPI ID';},1600);}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){done(false);});}else{try{var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);done(true);}catch(e){done(false);}}})(this)">COPY UPI ID</button>
+            </div>
+            <div class="pro-payment-note">UPI ID shown is a placeholder — verify the current ID before paying.</div>
+
+            <a class="pro-payment-contact" href="mailto:jyotipatil9476@gmail.com?subject=JARVIS%20PRO%20Payment%20Proof">
+                SEND PAYMENT PROOF
+            </a>
+        </div>
+
+        <div class="pro-payment-qr">
+            <div class="pro-download-kicker">SCAN TO PAY // UPI</div>
+            <div class="pro-qr-frame">
+                <img src="jarvis-pro-upi-qr.jpg" alt="JARVIS PRO UPI payment QR code placeholder" loading="lazy">
+            </div>
+            <div class="pro-payment-note">QR code placeholder — replace with your verified UPI QR.</div>
+        </div>
+
+    </div>
+
+    <div class="pro-verify-note">MANUAL VERIFICATION // no automatic payment confirmation — access is granted after your proof is checked.</div>
+
 </section>
 
 <!-- ================================================================ -->
