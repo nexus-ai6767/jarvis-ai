@@ -2731,6 +2731,24 @@ section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-p
 
 </style>
 
+<style id="jarvis-pro-payment-css">
+.jarvis-pro-payment{padding:90px 6vw;border-top:1px solid rgba(255,255,255,.08)}
+.jarvis-pro-payment .section-head{max-width:900px}
+.jarvis-pro-payment .section-head h2 span{color:#8fdcff}
+.pro-payment-grid{max-width:1100px;margin:42px auto 0;display:grid;grid-template-columns:minmax(280px,390px) 1fr;gap:42px;align-items:center}
+.pro-payment-card,.pro-payment-steps{border:1px solid rgba(120,210,255,.22);background:rgba(5,12,24,.72);box-shadow:0 0 35px rgba(40,150,255,.08);padding:28px}
+.pro-payment-card{text-align:center}
+.pro-payment-kicker{font-size:11px;letter-spacing:.18em;opacity:.72;margin-bottom:18px}
+.pro-payment-qr{display:block;width:250px;height:250px;margin:0 auto 18px;background:#fff;padding:10px;box-sizing:border-box}
+.pro-payment-amount{font-size:30px;font-weight:800;letter-spacing:.04em}
+.pro-payment-upi{margin:8px 0 18px;opacity:.78;font-family:monospace}
+.pro-copy-upi{border:1px solid rgba(120,210,255,.4);background:transparent;color:inherit;padding:11px 18px;cursor:pointer;letter-spacing:.12em;font-size:11px}
+.pro-copy-upi:hover{background:rgba(120,210,255,.1)}
+.pro-step{display:grid;grid-template-columns:45px 1fr;gap:14px;padding:17px 0;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.55}
+.pro-step b{color:#8fdcff;letter-spacing:.1em}
+.pro-payment-note{margin-top:20px;font-size:12px;line-height:1.6;opacity:.62}
+@media(max-width:760px){.pro-payment-grid{grid-template-columns:1fr}.pro-payment-qr{width:220px;height:220px}.jarvis-pro-payment{padding:70px 5vw}}
+</style>
 </head>
 
 <body>
@@ -4121,15 +4139,15 @@ section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-p
 
 <div class="price-card reveal">
 
-    <small>PRO BUILD</small>
+    <small>JARVIS PRO // WINDOWS PC</small>
 
     <div class="price">
-        ₹1,499<span>+</span>
+        ₹1,499<span> ONE-TIME</span>
     </div>
 
     <p>
-        Advanced custom assistant architecture
-        for users wanting a deeper automation system.
+        The full JARVIS AI PC application with Vision, Voice,
+        Smart Command Engine, Serious Mode, local AI and OCR.
     </p>
 
     <ul class="features">
@@ -4142,8 +4160,8 @@ section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-p
 
     </ul>
 
-    <a href="#custom" class="secondary">
-        TALK TO BUILDER
+    <a href="#jarvis-pro-payment" class="primary">
+        BUY JARVIS PRO
     </a>
 
 </div>
@@ -4153,6 +4171,32 @@ section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-p
 
 </section>
 
+<!-- ================= JARVIS PRO // PAYMENT ================= -->
+<section id="jarvis-pro-payment" class="jarvis-pro-payment">
+  <div class="section-head reveal">
+    <div class="section-label">04.5 // JARVIS PRO PAYMENT</div>
+    <h2>ACTIVATE <span>JARVIS PRO.</span></h2>
+    <p>One-time purchase — ₹1,499. Scan the QR with any UPI app to pay.</p>
+  </div>
+
+  <div class="pro-payment-grid reveal">
+    <div class="pro-payment-card">
+      <div class="pro-payment-kicker">UPI // FIXED AMOUNT</div>
+      <img class="pro-payment-qr" src="jarvis-pro-qr.png" alt="UPI QR for JARVIS PRO ₹1,499">
+      <div class="pro-payment-amount">₹1,499</div>
+      <div class="pro-payment-upi">7387947607@ibl</div>
+      <button class="pro-copy-upi" type="button" onclick="navigator.clipboard.writeText('7387947607@ibl')">COPY UPI ID</button>
+    </div>
+
+    <div class="pro-payment-steps">
+      <div class="pro-step"><b>01</b><span>Open PhonePe, Google Pay, Paytm or another UPI app.</span></div>
+      <div class="pro-step"><b>02</b><span>Scan the QR. The payment amount is pre-filled as ₹1,499.</span></div>
+      <div class="pro-step"><b>03</b><span>Verify the receiver and amount in your UPI app, then authorize the payment.</span></div>
+      <div class="pro-step"><b>04</b><span>Keep your transaction/reference ID. Use the existing JARVIS Requirements form for payment confirmation.</span></div>
+      <div class="pro-payment-note">Manual payment confirmation is required for this static website. Never share your UPI PIN or OTP.</div>
+    </div>
+  </div>
+</section>
 
 <!-- ================= FAQ ================= -->
 
