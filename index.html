@@ -2678,6 +2678,55 @@ body .jarvis-page-atmosphere{display:block;}
 @media(prefers-reduced-motion:reduce){
     body::after{animation:none;}
 }
+<style id="jarvis-tech-global-background">
+/* ================= GLOBAL TECH BACKGROUND // USER REFERENCE ================= */
+html, body{
+    background-color:#05052a !important;
+}
+body::after{
+    background-image:
+        linear-gradient(180deg,rgba(2,3,28,.46),rgba(2,3,28,.62)),
+        linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,.04),rgba(0,0,0,.22)),
+        url("jarvis-tech-global-bg.png") !important;
+    background-size:cover,cover,cover !important;
+    background-position:center,center,center !important;
+    background-repeat:no-repeat !important;
+    background-attachment:fixed !important;
+    opacity:.96 !important;
+    filter:saturate(1.08) contrast(1.04) !important;
+    animation:jarvisTechBgDrift 26s ease-in-out infinite alternate !important;
+}
+body::before{
+    opacity:.12 !important;
+    background-image:
+        linear-gradient(rgba(80,170,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(120,80,255,.028) 1px,transparent 1px) !important;
+    background-size:64px 64px !important;
+}
+section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-payment-section{
+    background-color:rgba(3,3,28,.34) !important;
+}
+@keyframes jarvisTechBgDrift{
+    0%{background-position:center,center,center center;transform:scale(1.01);}
+    50%{background-position:center,center,51% 49%;transform:scale(1.025);}
+    100%{background-position:center,center,49% 51%;transform:scale(1.01);}
+}
+@media(max-width:720px){
+    body::after{
+        background-position:center,center,42% center !important;
+        background-size:cover,cover,auto 100% !important;
+        opacity:.82 !important;
+        animation:none !important;
+    }
+    section, footer, .architecture, .custom, .pricing, .mobile-coming-banner, .pro-payment-section{
+        background-color:rgba(3,3,28,.52) !important;
+    }
+}
+@media(prefers-reduced-motion:reduce){
+    body::after{animation:none !important;}
+}
+</style>
+
 </style>
 
 </head>
