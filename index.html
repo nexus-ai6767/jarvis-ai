@@ -221,63 +221,103 @@ h1,h2,h3,.logo,.price{
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:130px 6% 70px;
+    padding:118px 6% 88px;
+    overflow:hidden;
+    isolation:isolate;
+    background:
+        radial-gradient(circle at 30% 50%,rgba(255,122,24,.13),transparent 34%),
+        radial-gradient(circle at 80% 35%,rgba(32,185,255,.12),transparent 28%),
+        #020202;
+}
+
+.hero-backdrop{
+    position:absolute;
+    inset:-2%;
+    z-index:-4;
+    background:
+        linear-gradient(90deg,rgba(2,2,2,.96) 0%,rgba(2,2,2,.72) 36%,rgba(2,2,2,.2) 68%,rgba(2,2,2,.76) 100%),
+        linear-gradient(180deg,rgba(2,2,2,.55),transparent 28%,rgba(2,2,2,.84) 100%),
+        url('jarvis-pro-launch-bg.png') center/cover no-repeat;
+    filter:saturate(.92) contrast(1.05);
+    transform:scale(1.04);
+}
+
+.hero-grid-glow{
+    position:absolute;
+    inset:-20%;
+    z-index:-3;
+    background:
+        repeating-linear-gradient(90deg,transparent 0,transparent 8%,rgba(255,255,255,.012) 8.05%,transparent 8.1%),
+        repeating-linear-gradient(0deg,transparent 0,transparent 12%,rgba(255,255,255,.01) 12.05%,transparent 12.1%);
+    mask-image:radial-gradient(circle at center,black 16%,transparent 72%);
+    opacity:.35;
 }
 
 .hero-inner{
     position:relative;
-    z-index:3;
+    z-index:4;
     width:100%;
-    max-width:1280px;
+    max-width:1360px;
     margin:0 auto;
     display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:50px;
+    grid-template-columns:minmax(0,1.08fr) minmax(360px,.72fr);
+    gap:42px;
     align-items:center;
 }
 
 .hero-content{
     position:relative;
+    max-width:760px;
+    padding:38px 0 20px;
+    text-shadow:0 6px 30px rgba(0,0,0,.5);
 }
 
-.eyebrow{
+.hero-kicker{
     display:inline-flex;
     align-items:center;
-    gap:9px;
-    color:var(--orange);
-    font-size:11px;
-    letter-spacing:4px;
-    margin-bottom:25px;
+    gap:10px;
+    color:#d7d7d7;
+    font-family:var(--font-mono);
+    font-size:10px;
+    letter-spacing:3.8px;
+    margin-bottom:18px;
+    text-transform:uppercase;
 }
 
-.eyebrow:before{
-    content:"";
+.hero-kicker span{
     width:7px;
     height:7px;
     border-radius:50%;
-    background:var(--orange);
-    box-shadow:0 0 10px var(--orange);
+    background:#63e6ff;
+    box-shadow:0 0 14px rgba(99,230,255,.9),0 0 28px rgba(99,230,255,.36);
     animation:jdot 1.4s infinite;
 }
 
 .hero h1{
-    font-size:clamp(42px,6vw,80px);
-    line-height:1.02;
-    letter-spacing:-2.5px;
-    font-weight:700;
+    margin:0;
+    font-size:clamp(46px,6.4vw,92px);
+    line-height:.94;
+    letter-spacing:-4px;
+    font-weight:800;
+    text-transform:uppercase;
 }
 
 .hero h1 span{
-    color:var(--orange);
-    text-shadow:0 0 45px rgba(255,122,24,.3);
+    color:#67e8ff;
+    text-shadow:0 0 34px rgba(71,216,255,.28);
+}
+
+.hero h1 em{
+    font-style:normal;
+    color:#fff;
 }
 
 .hero p{
-    max-width:520px;
-    margin:28px 0;
-    color:#999;
-    line-height:1.8;
-    font-size:16px;
+    max-width:600px;
+    margin:26px 0 24px;
+    color:#b8b8b8;
+    line-height:1.78;
+    font-size:15px;
 }
 
 .hero-actions{
@@ -289,15 +329,16 @@ h1,h2,h3,.logo,.price{
 .primary{
     position:relative;
     overflow:hidden;
-    background:var(--orange);
-    color:#000;
-    padding:15px 27px;
+    background:linear-gradient(135deg,#ff8b2b,#ff6710);
+    color:#050505;
+    padding:15px 28px;
     text-decoration:none;
-    font-weight:700;
-    font-size:12px;
-    letter-spacing:2px;
+    font-weight:800;
+    font-size:11px;
+    letter-spacing:2.2px;
     transition:.3s;
     display:inline-block;
+    box-shadow:0 14px 40px rgba(255,104,16,.18);
 }
 
 .primary:before{
@@ -305,9 +346,9 @@ h1,h2,h3,.logo,.price{
     position:absolute;
     top:0;
     left:-120%;
-    width:60%;
+    width:62%;
     height:100%;
-    background:linear-gradient(115deg,transparent,rgba(255,255,255,.55),transparent);
+    background:linear-gradient(115deg,transparent,rgba(255,255,255,.58),transparent);
     transform:skewX(-20deg);
     transition:left .55s ease;
 }
@@ -318,59 +359,80 @@ h1,h2,h3,.logo,.price{
 
 .primary:hover{
     transform:translateY(-3px);
-    box-shadow:0 15px 40px rgba(255,122,24,.25);
+    box-shadow:0 18px 50px rgba(255,122,24,.32);
 }
 
 .secondary{
-    border:1px solid #333;
+    border:1px solid rgba(103,232,255,.35);
     color:white;
-    padding:15px 27px;
+    padding:15px 28px;
     text-decoration:none;
-    font-size:12px;
-    letter-spacing:2px;
+    font-size:11px;
+    letter-spacing:2.2px;
     transition:.3s;
     display:inline-block;
+    background:rgba(0,0,0,.16);
+    backdrop-filter:blur(8px);
 }
 
 .secondary:hover{
-    border-color:var(--orange);
+    border-color:#67e8ff;
+    background:rgba(103,232,255,.07);
     transform:translateY(-3px);
 }
 
-/* ---- Hero HUD status panel ---- */
+.hero-microline{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:24px;
+    color:#777;
+    font:600 9px/1 var(--font-mono);
+    letter-spacing:2px;
+}
+
+.hero-microline i{
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background:#ff7a18;
+    box-shadow:0 0 8px rgba(255,122,24,.7);
+}
 
 .hero-panel{
     position:relative;
-    background:linear-gradient(160deg,rgba(15,12,10,.7),rgba(4,4,4,.85));
-    border:1px solid rgba(255,122,24,.22);
-    backdrop-filter:blur(10px);
-    padding:26px;
-    box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(255,122,24,.06);
+    background:linear-gradient(145deg,rgba(10,11,12,.48),rgba(3,3,3,.7));
+    border:1px solid rgba(255,255,255,.13);
+    backdrop-filter:blur(16px) saturate(120%);
+    padding:24px;
+    box-shadow:0 30px 100px rgba(0,0,0,.52),0 0 50px rgba(69,221,255,.06);
     transform-style:preserve-3d;
     transition:transform .15s ease;
 }
 
-.hero-panel:before{
+.hero-panel:after{
     content:"";
     position:absolute;
-    inset:0;
-    padding:1px;
-    background:linear-gradient(135deg,rgba(255,122,24,.5),transparent 40%,transparent 70%,rgba(255,122,24,.25));
-    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
+    inset:-1px;
+    border-radius:inherit;
+    background:
+        linear-gradient(135deg,rgba(103,232,255,.26),transparent 30%),
+        linear-gradient(315deg,rgba(255,122,24,.22),transparent 38%);
     pointer-events:none;
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    mask-composite:exclude;
+    padding:1px;
 }
 
 .hero-panel-top{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding-bottom:16px;
-    margin-bottom:18px;
+    padding-bottom:15px;
+    margin-bottom:14px;
     border-bottom:1px solid rgba(255,255,255,.08);
     font-family:var(--font-mono);
-    font-size:10px;
+    font-size:9px;
     letter-spacing:2px;
     color:#777;
 }
@@ -384,8 +446,8 @@ h1,h2,h3,.logo,.price{
     display:flex;
     align-items:baseline;
     justify-content:space-between;
-    padding:13px 0;
-    border-bottom:1px solid rgba(255,255,255,.06);
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,.055);
 }
 
 .hero-stat:last-of-type{
@@ -393,22 +455,22 @@ h1,h2,h3,.logo,.price{
 }
 
 .hero-stat-label{
-    font-size:11px;
-    letter-spacing:1.5px;
-    color:#888;
+    font-size:9px;
+    letter-spacing:1.6px;
+    color:#858585;
     font-family:var(--font-mono);
 }
 
 .hero-stat-value{
     font-family:var(--font-display);
-    font-size:22px;
+    font-size:21px;
     font-weight:700;
     color:var(--text);
 }
 
 .hero-stat-value span{
-    color:var(--orange);
-    font-size:13px;
+    color:#67e8ff;
+    font-size:12px;
     margin-left:2px;
 }
 
@@ -416,28 +478,66 @@ h1,h2,h3,.logo,.price{
     width:100%;
     height:3px;
     background:rgba(255,255,255,.06);
-    margin-top:16px;
+    margin-top:14px;
     overflow:hidden;
 }
 
 .hero-bar-fill{
     height:100%;
     width:0%;
-    background:linear-gradient(90deg,var(--orange),var(--orange2));
-    box-shadow:0 0 10px rgba(255,122,24,.6);
+    background:linear-gradient(90deg,#ff7a18,#67e8ff);
+    box-shadow:0 0 12px rgba(255,122,24,.55);
     transition:width 1.4s cubic-bezier(.2,.8,.2,1);
 }
 
+.hero-bottom-status{
+    position:absolute;
+    left:6%;
+    right:6%;
+    bottom:23px;
+    z-index:5;
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    color:#606060;
+    font:600 8px/1 var(--font-mono);
+    letter-spacing:2.3px;
+    text-transform:uppercase;
+    border-top:1px solid rgba(255,255,255,.07);
+    padding-top:11px;
+}
+
+.hero-bottom-status span:nth-child(2){
+    color:#888;
+}
+
 @media(max-width:980px){
+    .hero{
+        padding:116px 6% 86px;
+        align-items:flex-end;
+    }
+
+    .hero-backdrop{
+        background:
+            linear-gradient(180deg,rgba(2,2,2,.54),rgba(2,2,2,.45) 34%,rgba(2,2,2,.94) 78%),
+            url('jarvis-pro-launch-bg.png') center/cover no-repeat;
+    }
+
     .hero-inner{
         grid-template-columns:1fr;
-        text-align:center;
+        gap:18px;
     }
 
     .hero-content{
-        display:flex;
-        flex-direction:column;
-        align-items:center;
+        text-align:center;
+        padding-top:40px;
+        margin:0 auto;
+    }
+
+    .hero-kicker,
+    .hero-microline,
+    .hero-actions{
+        justify-content:center;
     }
 
     .hero p{
@@ -445,27 +545,69 @@ h1,h2,h3,.logo,.price{
         margin-right:auto;
     }
 
-    .hero-actions{
-        justify-content:center;
-    }
-
     .hero-panel{
-        max-width:420px;
+        max-width:520px;
         margin:0 auto;
         width:100%;
     }
-}
 
+    .hero-bottom-status{
+        left:6%;
+        right:6%;
+        flex-wrap:wrap;
+        justify-content:center;
+        bottom:16px;
+        line-height:1.5;
+    }
+}
 
 /* ================= REACTOR ================= */
 
 .reactor{
     position:absolute;
-    width:min(700px,82vw);
-    height:min(700px,82vw);
+    left:3%;
+    top:50%;
+    width:min(620px,55vw);
+    height:min(620px,55vw);
     border-radius:50%;
-    opacity:.58;
+    transform:translateY(-50%);
     pointer-events:none;
+    z-index:1;
+    opacity:.9;
+    perspective:900px;
+    filter:drop-shadow(0 0 36px rgba(255,103,16,.08));
+}
+
+.reactor:before{
+    content:"";
+    position:absolute;
+    inset:16%;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 50% 48%,rgba(255,235,210,.22) 0 10%,rgba(255,122,24,.12) 26%,transparent 57%),
+        repeating-radial-gradient(circle,rgba(255,255,255,.05) 0 1px,transparent 1px 9px);
+    mix-blend-mode:screen;
+    animation:reactor-breathe 3.2s ease-in-out infinite;
+}
+
+.reactor:after{
+    content:"";
+    position:absolute;
+    inset:8%;
+    border-radius:50%;
+    border:1px solid rgba(103,232,255,.13);
+    box-shadow:inset 0 0 80px rgba(103,232,255,.04),0 0 60px rgba(103,232,255,.04);
+    animation:reactor-frame 9s linear infinite reverse;
+}
+
+.reactor-ghost{
+    position:absolute;
+    inset:22%;
+    border-radius:50%;
+    border:1px solid rgba(255,122,24,.12);
+    box-shadow:0 0 70px rgba(255,122,24,.14);
+    transform:rotateX(66deg) rotateY(-12deg);
+    animation:ghost-orbit 8s ease-in-out infinite;
 }
 
 .reactor-core{
@@ -474,48 +616,75 @@ h1,h2,h3,.logo,.price{
     border-radius:50%;
     background:
         radial-gradient(circle,
-        #fff 0%,
-        #ffd0a0 7%,
-        var(--orange) 24%,
-        rgba(255,90,0,.72) 48%,
-        rgba(255,90,0,.28) 68%,
-        transparent 78%);
+            #fff 0%,
+            #fff5e5 5%,
+            #ffd2a6 11%,
+            #ff9d47 19%,
+            #ff6e12 31%,
+            rgba(255,91,0,.76) 46%,
+            rgba(255,91,0,.25) 67%,
+            transparent 79%);
     box-shadow:
-        0 0 35px #ff7a18,
-        0 0 100px rgba(255,100,0,.45),
-        0 0 180px rgba(255,80,0,.2);
-    animation:pulse 2.5s infinite ease-in-out;
+        0 0 22px rgba(255,247,233,.88),
+        0 0 48px rgba(255,122,24,.85),
+        0 0 100px rgba(255,104,16,.5),
+        0 0 170px rgba(255,72,0,.19);
+    animation:pulse 2.15s infinite ease-in-out;
+}
+
+.core-inner{
+    position:absolute;
+    inset:17%;
+    border-radius:50%;
+    background:
+        conic-gradient(from 30deg,rgba(255,255,255,.95),rgba(255,122,24,.35),rgba(255,255,255,.03),rgba(255,122,24,.52),rgba(255,255,255,.95));
+    filter:blur(1px);
+    opacity:.75;
+    animation:core-spin 2.8s linear infinite;
+}
+
+.core-highlight{
+    position:absolute;
+    inset:7%;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.62);
+    box-shadow:inset 0 0 16px rgba(255,255,255,.18);
+    opacity:.65;
 }
 
 .ring{
     position:absolute;
-    inset:8%;
-    border:1px solid rgba(255,122,24,.28);
+    inset:6%;
+    border:1px solid rgba(255,124,31,.24);
     border-radius:50%;
-    animation:spin 14s linear infinite;
-}
-
-.ring:nth-child(2){
-    inset:18%;
-    animation-duration:9s;
-    animation-direction:reverse;
+    transform:rotateX(66deg) rotateZ(0deg);
+    animation:orbit-a 11s linear infinite;
 }
 
 .ring:nth-child(3){
-    inset:1%;
+    inset:18%;
+    border-color:rgba(103,232,255,.28);
+    transform:rotateX(74deg) rotateY(14deg) rotateZ(24deg);
+    animation:orbit-b 8.4s linear infinite reverse;
+}
+
+.ring:nth-child(4){
+    inset:0%;
+    border-color:rgba(255,255,255,.12);
     border-style:dashed;
-    animation-duration:22s;
+    transform:rotateX(72deg) rotateY(-10deg);
+    animation:orbit-c 18s linear infinite;
 }
 
 .ring:before,
 .ring:after{
     content:"";
     position:absolute;
-    width:7px;
-    height:7px;
+    width:6px;
+    height:6px;
     border-radius:50%;
-    background:var(--orange);
-    box-shadow:0 0 15px var(--orange);
+    background:#ff9c4c;
+    box-shadow:0 0 15px #ff7a18,0 0 26px rgba(103,232,255,.32);
 }
 
 .ring:before{
@@ -526,21 +695,24 @@ h1,h2,h3,.logo,.price{
 .ring:after{
     bottom:12%;
     right:18%;
+    background:#67e8ff;
+    box-shadow:0 0 15px #67e8ff;
 }
 
 .energy{
     position:absolute;
-    inset:25%;
+    inset:23%;
     border-radius:50%;
-    border:1px solid rgba(255,180,90,.42);
-    filter:blur(.3px);
-    transform:rotate(30deg) scaleX(1.8);
-    animation:energy 4s infinite ease-in-out;
+    border:1px solid rgba(255,190,115,.48);
+    filter:blur(.25px);
+    transform:rotateX(67deg) rotateZ(28deg) scaleX(1.78);
+    animation:energy 4.2s infinite ease-in-out;
 }
 
 .energy:nth-child(6){
-    transform:rotate(-35deg) scaleX(1.8);
-    animation-delay:-1s;
+    transform:rotateX(70deg) rotateZ(-32deg) scaleX(1.82);
+    border-color:rgba(103,232,255,.3);
+    animation-delay:-1.1s;
 }
 
 @keyframes spin{
@@ -548,14 +720,95 @@ h1,h2,h3,.logo,.price{
 }
 
 @keyframes pulse{
-    0%,100%{transform:scale(.94);opacity:.8}
+    0%,100%{transform:scale(.93);opacity:.82}
     50%{transform:scale(1.08);opacity:1}
 }
 
 @keyframes energy{
-    0%,100%{transform:rotate(0deg) scaleX(1.7)}
-    50%{transform:rotate(180deg) scaleX(.8)}
+    0%,100%{transform:rotateX(67deg) rotateZ(0deg) scaleX(1.7)}
+    50%{transform:rotateX(67deg) rotateZ(180deg) scaleX(.82)}
 }
+
+@keyframes orbit-a{
+    to{transform:rotateX(66deg) rotateZ(360deg)}
+}
+
+@keyframes orbit-b{
+    to{transform:rotateX(74deg) rotateY(14deg) rotateZ(-336deg)}
+}
+
+@keyframes orbit-c{
+    to{transform:rotateX(72deg) rotateY(-10deg) rotateZ(360deg)}
+}
+
+@keyframes core-spin{
+    to{transform:rotate(360deg)}
+}
+
+@keyframes ghost-orbit{
+    0%,100%{transform:rotateX(66deg) rotateY(-12deg) rotateZ(0deg) scale(.98)}
+    50%{transform:rotateX(66deg) rotateY(-12deg) rotateZ(180deg) scale(1.04)}
+}
+
+@keyframes reactor-breathe{
+    0%,100%{transform:scale(.98);opacity:.62}
+    50%{transform:scale(1.03);opacity:1}
+}
+
+@keyframes reactor-frame{
+    to{transform:rotate(360deg)}
+}
+
+@media(max-width:980px){
+    .reactor{
+        left:50%;
+        top:37%;
+        width:min(520px,86vw);
+        height:min(520px,86vw);
+        transform:translate(-50%,-50%);
+        opacity:.46;
+    }
+}
+
+@media(max-width:620px){
+    .hero{
+        min-height:92vh;
+        padding-top:120px;
+    }
+
+    .hero h1{
+        font-size:clamp(38px,12vw,56px);
+        letter-spacing:-2.2px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .hero-actions a{
+        width:100%;
+        text-align:center;
+    }
+
+    .hero-microline{
+        flex-wrap:wrap;
+        row-gap:9px;
+    }
+
+    .hero-panel{
+        padding:18px;
+    }
+
+    .hero-stat-value{
+        font-size:18px;
+    }
+
+    .hero-bottom-status{
+        font-size:7px;
+        letter-spacing:1.5px;
+    }
+}
+
 
 /* ================= TICKER ================= */
 
@@ -2496,206 +2749,93 @@ html.jarvis-booting body{
 
 <!-- ================= HERO ================= -->
 
-<style>
-/* ===== HERO CINEMATIC CORE UPGRADE (additive, hero-only) ===== */
-.hero{
-    background:
-        radial-gradient(ellipse at 50% 38%, rgba(255,130,40,.07), transparent 55%),
-        #020202;
-    overflow:hidden;
-}
-#heroParticles{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    z-index:1;
-    pointer-events:none;
-    opacity:.55;
-}
-.reactor{
-    opacity:.8;
-}
-.reactor-halo{
-    position:absolute;
-    inset:-18%;
-    border-radius:50%;
-    background:radial-gradient(circle,rgba(255,140,40,.16),transparent 65%);
-    filter:blur(6px);
-    animation:heroHaloPulse 6s ease-in-out infinite;
-}
-.reactor-arc{
-    position:absolute;
-    inset:-4%;
-    border-radius:50%;
-    border:1px solid transparent;
-    border-top-color:rgba(255,160,60,.55);
-    border-right-color:rgba(255,160,60,.15);
-    filter:drop-shadow(0 0 6px rgba(255,140,40,.45));
-    animation:spin 10s linear infinite;
-}
-.reactor-arc.arc2{
-    inset:6%;
-    border-top-color:rgba(255,200,120,.4);
-    border-left-color:rgba(255,160,60,.12);
-    border-top-style:solid;
-    animation-duration:16s;
-    animation-direction:reverse;
-}
-.reactor-arc.arc3{
-    inset:-12%;
-    border-top-color:rgba(255,122,24,.3);
-    animation-duration:26s;
-    border-style:dashed;
-}
-.reactor-sparks{
-    position:absolute;
-    inset:0;
-}
-.reactor-spark{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:3px;
-    height:3px;
-    border-radius:50%;
-    background:#ffcf9b;
-    box-shadow:0 0 8px 2px rgba(255,150,50,.8);
-    opacity:0;
-    animation:heroSparkOut 3.2s ease-out infinite;
-    animation-delay:var(--d,0s);
-}
-.hero-vignette{
-    position:absolute;
-    inset:0;
-    z-index:2;
-    pointer-events:none;
-    background:radial-gradient(ellipse at 50% 42%, transparent 0%, transparent 38%, rgba(2,2,2,.5) 74%, #020202 100%);
-}
-@keyframes heroHaloPulse{
-    0%,100%{opacity:.5;transform:scale(1)}
-    50%{opacity:.85;transform:scale(1.08)}
-}
-@keyframes heroSparkOut{
-    0%{transform:translate(-50%,-50%) rotate(var(--a)) translateX(10px);opacity:0}
-    12%{opacity:1}
-    100%{transform:translate(-50%,-50%) rotate(var(--a)) translateX(220px);opacity:0}
-}
-@media(max-width:850px){
-    #heroParticles{opacity:.35;}
-    .reactor-spark:nth-child(n+7){display:none;}
-}
-@media(prefers-reduced-motion: reduce){
-    .reactor-arc,.reactor-halo,.reactor-spark{animation:none!important;}
-}
-</style>
-
 <header class="hero">
 
-    <canvas id="heroParticles" aria-hidden="true"></canvas>
+    <div class="hero-backdrop" aria-hidden="true"></div>
+    <div class="hero-grid-glow" aria-hidden="true"></div>
 
-    <div class="reactor">
-
-        <div class="reactor-halo"></div>
-
+    <div class="reactor" aria-hidden="true">
+        <div class="reactor-ghost"></div>
         <div class="ring"></div>
         <div class="ring"></div>
         <div class="ring"></div>
-
-        <div class="reactor-arc"></div>
-        <div class="reactor-arc arc2"></div>
-        <div class="reactor-arc arc3"></div>
-
         <div class="energy"></div>
         <div class="energy"></div>
-
-        <div class="reactor-core"></div>
-
-        <div class="reactor-sparks" aria-hidden="true">
-            <i class="reactor-spark" style="--a:0deg;--d:0.00s"></i>
-            <i class="reactor-spark" style="--a:30deg;--d:0.26s"></i>
-            <i class="reactor-spark" style="--a:60deg;--d:0.52s"></i>
-            <i class="reactor-spark" style="--a:90deg;--d:0.78s"></i>
-            <i class="reactor-spark" style="--a:120deg;--d:1.04s"></i>
-            <i class="reactor-spark" style="--a:150deg;--d:1.30s"></i>
-            <i class="reactor-spark" style="--a:180deg;--d:1.56s"></i>
-            <i class="reactor-spark" style="--a:210deg;--d:1.82s"></i>
-            <i class="reactor-spark" style="--a:240deg;--d:2.08s"></i>
-            <i class="reactor-spark" style="--a:270deg;--d:2.34s"></i>
-            <i class="reactor-spark" style="--a:300deg;--d:2.60s"></i>
-            <i class="reactor-spark" style="--a:330deg;--d:2.86s"></i>
+        <div class="reactor-core">
+            <div class="core-inner"></div>
+            <div class="core-highlight"></div>
         </div>
-
     </div>
-
-    <div class="hero-vignette" aria-hidden="true"></div>
 
     <div class="hero-inner">
 
-    <div class="hero-content reveal">
+        <div class="hero-content reveal">
+            <div class="hero-kicker"><span></span> VOICE-FIRST AI // LOCAL INTELLIGENCE</div>
 
-        <div class="eyebrow">
-            PERSONAL AI // LOCAL INTELLIGENCE
+            <h1>
+                JARVIS <span>SPARK</span><br>
+                VOICE-FIRST AI<br>
+                <em>ASSISTANT.</em>
+            </h1>
+
+            <p>
+                A cinematic personal AI system built for voice, vision,
+                automation, memory and intelligent control — running
+                directly on your machine.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#download" class="primary">
+                    GET JARVIS
+                </a>
+
+                <a href="#demo" class="secondary">
+                    WATCH SYSTEM
+                </a>
+            </div>
+
+            <div class="hero-microline">
+                <span>LOCAL AI</span><i></i><span>VISION</span><i></i><span>VOICE</span><i></i><span>MEMORY</span>
+            </div>
         </div>
 
-        <h1>
-            INTELLIGENCE<br>
-            <span>AT YOUR COMMAND.</span>
-        </h1>
+        <div class="hero-panel reveal" id="hero-panel">
+            <div class="hero-panel-top">
+                <span>JARVIS // SYSTEM READOUT</span>
+                <span><b>●</b> LIVE</span>
+            </div>
 
-        <p>
-            A futuristic personal AI system built for voice,
-            vision, automation, memory and intelligent control —
-            running directly on your machine.
-        </p>
+            <div class="hero-stat">
+                <span class="hero-stat-label">UPTIME</span>
+                <span class="hero-stat-value" data-count="99.8" data-suffix="%">0<span>%</span></span>
+            </div>
 
-        <div class="hero-actions">
+            <div class="hero-stat">
+                <span class="hero-stat-label">COMMANDS PROCESSED</span>
+                <span class="hero-stat-value" data-count="128400" data-suffix="+">0<span>+</span></span>
+            </div>
 
-            <a href="#download" class="primary">
-                GET JARVIS
-            </a>
+            <div class="hero-stat">
+                <span class="hero-stat-label">VOICE ACCURACY</span>
+                <span class="hero-stat-value" data-count="97" data-suffix="%">0<span>%</span></span>
+            </div>
 
-            <a href="#demo" class="secondary">
-                WATCH SYSTEM
-            </a>
+            <div class="hero-stat">
+                <span class="hero-stat-label">RESPONSE TIME</span>
+                <span class="hero-stat-value" data-count="180" data-suffix="ms">0<span>ms</span></span>
+            </div>
 
+            <div class="hero-bar-track">
+                <div class="hero-bar-fill" id="hero-bar-fill"></div>
+            </div>
         </div>
 
     </div>
 
-    <div class="hero-panel reveal" id="hero-panel">
-
-        <div class="hero-panel-top">
-            <span>SYSTEM DIAGNOSTICS</span>
-            <span><b>●</b> LIVE</span>
-        </div>
-
-        <div class="hero-stat">
-            <span class="hero-stat-label">UPTIME</span>
-            <span class="hero-stat-value" data-count="99.8" data-suffix="%">0<span>%</span></span>
-        </div>
-
-        <div class="hero-stat">
-            <span class="hero-stat-label">COMMANDS PROCESSED</span>
-            <span class="hero-stat-value" data-count="128400" data-suffix="+">0<span>+</span></span>
-        </div>
-
-        <div class="hero-stat">
-            <span class="hero-stat-label">VOICE ACCURACY</span>
-            <span class="hero-stat-value" data-count="97" data-suffix="%">0<span>%</span></span>
-        </div>
-
-        <div class="hero-stat">
-            <span class="hero-stat-label">RESPONSE TIME</span>
-            <span class="hero-stat-value" data-count="180" data-suffix="ms">0<span>ms</span></span>
-        </div>
-
-        <div class="hero-bar-track">
-            <div class="hero-bar-fill" id="hero-bar-fill"></div>
-        </div>
-
-    </div>
-
+    <div class="hero-bottom-status" aria-hidden="true">
+        <span>JARVIS CORE // ONLINE</span>
+        <span>AUTHENTICATED</span>
+        <span>READY FOR COMMAND</span>
     </div>
 
 </header>
@@ -4490,133 +4630,6 @@ if(heroPanel){
 
 </script>
 
-<script>
-/* ===== HERO CINEMATIC PARTICLE LAYER (additive, hero-only, self-contained) ===== */
-(function(){
-    var canvas = document.getElementById('heroParticles');
-    if(!canvas) return;
-    var hero = canvas.closest('.hero');
-    if(!hero || !canvas.getContext) return;
-
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var ctx = canvas.getContext('2d');
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var particles = [];
-    var running = false;
-    var rafId = null;
-    var isSmall = window.matchMedia('(max-width:850px)').matches;
-
-    function particleCount(){
-        return isSmall ? 16 : 42;
-    }
-
-    function resize(){
-        var rect = hero.getBoundingClientRect();
-        canvas.width = Math.max(1, rect.width * dpr);
-        canvas.height = Math.max(1, rect.height * dpr);
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function makeParticle(rect){
-        return {
-            x: Math.random() * rect.width,
-            y: Math.random() * rect.height,
-            r: Math.random() * 1.6 + 0.4,
-            vy: -(Math.random() * 0.12 + 0.03),
-            vx: (Math.random() - 0.5) * 0.05,
-            a: Math.random() * 0.5 + 0.15,
-            tw: Math.random() * Math.PI * 2
-        };
-    }
-
-    function drawFrame(rect, animate){
-        ctx.clearRect(0, 0, rect.width, rect.height);
-        particles.forEach(function(pt){
-            if(animate){
-                pt.x += pt.vx;
-                pt.y += pt.vy;
-                pt.tw += 0.02;
-                if(pt.y < -4){
-                    pt.y = rect.height + 4;
-                    pt.x = Math.random() * rect.width;
-                }
-            }
-            var flicker = pt.a * (0.7 + 0.3 * Math.sin(pt.tw));
-            ctx.beginPath();
-            ctx.fillStyle = 'rgba(255,170,90,' + flicker.toFixed(3) + ')';
-            ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
-            ctx.fill();
-        });
-    }
-
-    function tick(){
-        if(!running) return;
-        drawFrame(hero.getBoundingClientRect(), true);
-        rafId = requestAnimationFrame(tick);
-    }
-
-    function start(){
-        if(running || reduceMotion) return;
-        running = true;
-        rafId = requestAnimationFrame(tick);
-    }
-
-    function stop(){
-        running = false;
-        if(rafId){
-            cancelAnimationFrame(rafId);
-            rafId = null;
-        }
-    }
-
-    function init(){
-        resize();
-        var rect = hero.getBoundingClientRect();
-        var count = particleCount();
-        particles = [];
-        for(var i = 0; i < count; i++){
-            particles.push(makeParticle(rect));
-        }
-        drawFrame(rect, false);
-    }
-
-    var resizeTimer;
-    window.addEventListener('resize', function(){
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function(){
-            isSmall = window.matchMedia('(max-width:850px)').matches;
-            init();
-        }, 200);
-    });
-
-    document.addEventListener('visibilitychange', function(){
-        if(document.hidden){
-            stop();
-        } else if(!reduceMotion){
-            start();
-        }
-    });
-
-    if('IntersectionObserver' in window){
-        var io = new IntersectionObserver(function(entries){
-            entries.forEach(function(entry){
-                if(entry.isIntersecting){
-                    start();
-                } else {
-                    stop();
-                }
-            });
-        }, { threshold: 0 });
-        io.observe(hero);
-    } else if(!reduceMotion){
-        start();
-    }
-
-    init();
-})();
-</script>
 
 <script>
 (function(){
