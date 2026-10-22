@@ -357,35 +357,3 @@
         inset:34% !important;
     }
 }
-
-
-/* ================= JARVIS PRO POSTPONED ANNOUNCEMENT ================= */
-.pro-launch-lock.postponed-lock{
-  position:relative;inset:auto;z-index:1;width:100%;min-height:100svh;height:auto;
-  padding:clamp(34px,7vh,76px) 18px;overflow:hidden;align-items:center;justify-content:center;
-  border-bottom:1px solid rgba(255,164,74,.24);
-}
-.pro-launch-lock.postponed-lock:before{
-  background:radial-gradient(ellipse at 50% 45%,rgba(255,145,45,.12),transparent 48%),
-    radial-gradient(ellipse at center,rgba(0,0,0,.2) 0%,rgba(0,0,0,.66) 100%),
-    linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.56));
-}
-.pro-launch-lock.postponed-lock .pro-lock-panel{width:min(1040px,94vw);padding:clamp(28px,5vw,58px);border:1px solid rgba(255,153,65,.27);background:rgba(5,8,10,.55);box-shadow:0 0 55px rgba(255,125,35,.08),inset 0 0 40px rgba(255,255,255,.018);backdrop-filter:blur(8px)}
-.pro-launch-lock.postponed-lock .pro-lock-topline{position:static;margin-bottom:clamp(34px,7vh,72px);font-size:clamp(7px,.8vw,10px);color:rgba(255,255,255,.72)}
-.pro-launch-lock.postponed-lock .pro-lock-topline i{background:#ff654d;box-shadow:0 0 12px rgba(255,101,77,.9)}
-.pro-launch-lock.postponed-lock .postponed-status{display:inline-flex;align-items:center;gap:10px;margin:0 auto 24px;padding:10px 15px;border:1px solid rgba(255,111,77,.48);background:rgba(120,29,18,.18);color:#ffb17a;font-size:clamp(10px,1.2vw,13px);letter-spacing:2.5px}
-.pro-launch-lock.postponed-lock .postponed-status:before{content:"";width:7px;height:7px;border-radius:50%;background:#ff654d;box-shadow:0 0 13px #ff654d;animation:jdot 1.4s infinite}
-.pro-launch-lock.postponed-lock .postponed-heading{max-width:950px;margin:0 auto 22px;font-size:clamp(30px,5.6vw,70px);letter-spacing:-.045em;line-height:1.04;overflow-wrap:anywhere}
-.pro-launch-lock.postponed-lock .postponed-heading span{display:block;margin-top:8px;color:#ff9b59;text-shadow:0 0 26px rgba(255,122,24,.26)}
-.pro-launch-lock.postponed-lock .postponed-copy{max-width:690px;margin:0 auto;color:rgba(255,255,255,.82);font:400 clamp(14px,1.5vw,18px)/1.8 Inter,Arial,sans-serif;letter-spacing:0;text-shadow:none}
-.postponed-divider{height:1px;width:min(420px,70%);margin:30px auto 0;background:linear-gradient(90deg,transparent,rgba(255,148,67,.75),transparent)}
-.pro-launch-lock.postponed-lock .pro-lock-footer{margin-top:22px;color:rgba(255,177,122,.8);font-size:clamp(7px,.8vw,10px);letter-spacing:2px}
-.postponed-inline-tag{color:#ffad70!important}
-.postponed-inline-tag .pro-dot{background:#ff654d!important;box-shadow:0 0 12px rgba(255,101,77,.8)!important}
-@media(max-width:600px){
-  .pro-launch-lock.postponed-lock{min-height:90svh;padding:26px 14px}
-  .pro-launch-lock.postponed-lock .pro-lock-panel{width:100%;padding:28px 18px}
-  .pro-launch-lock.postponed-lock .pro-lock-topline{margin-bottom:34px;top:auto;gap:12px;letter-spacing:1px}
-  .pro-launch-lock.postponed-lock .postponed-heading{letter-spacing:-.035em}
-  .pro-launch-lock.postponed-lock .postponed-copy{line-height:1.7}
-}
