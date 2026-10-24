@@ -1,0 +1,104 @@
+/* ASTRON red core intro — isolated. Every selector is prefixed #astron-core-intro. Remove this file + its <link> to disable.
+   Base styles are the FINAL visual state; animations only add motion, so reduced-motion shows a clean static core. */
+#astron-core-intro{
+  --aci-s:min(50vmin,380px);
+  position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at 50% 46%,#1c0407 0%,#090103 52%,#020001 100%);
+  color:#ff5a4d;font-family:Consolas,Monaco,"Courier New",monospace;overflow:hidden;
+  opacity:1;transition:opacity 1s cubic-bezier(.4,0,.2,1),visibility 0s linear 1s;
+}
+#astron-core-intro *{box-sizing:border-box}
+#astron-core-intro.aci-out{opacity:0;visibility:hidden;pointer-events:none}
+#astron-core-intro.aci-out .aci-reactor{animation:aciExit 1s cubic-bezier(.5,0,.2,1) forwards}
+#astron-core-intro.aci-out .aci-word,#astron-core-intro.aci-out .aci-status,#astron-core-intro.aci-out .aci-bar{opacity:0;transition:opacity .4s ease}
+#astron-core-intro.aci-out .aci-flash{animation:aciFlash .9s ease-out forwards}
+
+/* backdrop */
+#astron-core-intro .aci-grid{position:absolute;inset:0;opacity:.06;
+  background-image:linear-gradient(rgba(255,60,50,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(255,60,50,.6) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:radial-gradient(circle,#000 15%,transparent 68%);mask-image:radial-gradient(circle,#000 15%,transparent 68%)}
+#astron-core-intro .aci-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 42%,rgba(0,0,0,.8) 100%);pointer-events:none}
+#astron-core-intro .aci-scan{position:absolute;left:0;right:0;top:0;height:22vh;opacity:.0;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(255,50,40,.07) 60%,rgba(255,90,70,.16) 98%,transparent);
+  animation:aciScan 5.5s 1.4s linear infinite}
+#astron-core-intro .aci-flash{position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 46%,rgba(255,235,225,.9),rgba(255,60,40,.35) 40%,transparent 70%)}
+#astron-core-intro .aci-particles{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+#astron-core-intro .aci-p{position:absolute;left:0;top:0;border-radius:50%;opacity:0;
+  background:#ff7a64;box-shadow:0 0 6px rgba(255,60,40,.9);
+  animation:aciDrift var(--t,6s) var(--d,0s) ease-out infinite}
+
+/* reactor */
+#astron-core-intro .aci-reactor{position:relative;width:var(--aci-s);height:var(--aci-s);margin-top:-2vh;animation:aciIn 1.1s cubic-bezier(.16,.84,.24,1) both}
+#astron-core-intro .aci-ring{position:absolute;border-radius:50%}
+#astron-core-intro .aci-glow{position:absolute;inset:-26%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,45,30,.26) 0%,rgba(255,30,20,.09) 38%,transparent 64%);animation:aciBreathe 3s 1.6s ease-in-out infinite}
+#astron-core-intro .aci-wave{position:absolute;inset:30%;border-radius:50%;border:1px solid rgba(255,90,70,.55);opacity:0;
+  animation:aciWave 3.4s var(--d,1.5s) cubic-bezier(.2,.6,.3,1) infinite}
+#astron-core-intro .aci-w2{--d:3.2s}
+#astron-core-intro .aci-ticks{inset:2%;opacity:.6;
+  background:repeating-conic-gradient(from 0deg,rgba(255,95,75,.75) 0 .55deg,transparent .55deg 6deg);
+  -webkit-mask:radial-gradient(circle,transparent 94%,#000 95%);mask:radial-gradient(circle,transparent 94%,#000 95%);
+  animation:aciSpin 60s linear infinite}
+#astron-core-intro .aci-r1{inset:0;border:1px solid rgba(255,70,55,.32);
+  background:conic-gradient(from 0deg,rgba(255,60,50,0),rgba(255,60,50,.26),rgba(255,60,50,0) 32%,rgba(255,60,50,0) 52%,rgba(255,60,50,.2),rgba(255,60,50,0) 84%);
+  animation:aciSpin 12s linear infinite}
+#astron-core-intro .aci-seg{inset:8%;
+  background:repeating-conic-gradient(from 0deg,#8e130d 0 38deg,transparent 38deg 45deg);
+  -webkit-mask:radial-gradient(circle,transparent 90%,#000 91%,#000 97%,transparent 98%);mask:radial-gradient(circle,transparent 90%,#000 91%,#000 97%,transparent 98%);
+  filter:drop-shadow(0 0 5px rgba(255,40,30,.55));animation:aciSpin 26s linear infinite reverse}
+#astron-core-intro .aci-r2{inset:15%;border:2px solid transparent;border-top-color:#d02a1f;border-bottom-color:#d02a1f;
+  box-shadow:0 0 16px rgba(255,40,30,.22);animation:aciSpin 8s linear infinite reverse}
+#astron-core-intro .aci-metal{inset:21%;
+  background:conic-gradient(from 20deg,#2a2a2f,#8b8b94 12%,#2b2b30 25%,#5a5a62 40%,#1a1a1e 55%,#9a9aa3 70%,#26262b 85%,#2a2a2f);
+  -webkit-mask:radial-gradient(circle,transparent 78%,#000 79%);mask:radial-gradient(circle,transparent 78%,#000 79%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.05);opacity:.9;animation:aciSpin 40s linear infinite}
+#astron-core-intro .aci-r3{inset:25%;border:1px dashed rgba(255,115,95,.5);animation:aciSpin 20s linear infinite}
+#astron-core-intro .aci-plate{position:absolute;inset:30%;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#55555b 0%,#212125 42%,#0b0b0d 100%);
+  border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 0 18px rgba(0,0,0,.95),0 0 0 4px rgba(125,12,10,.38),0 0 30px rgba(255,30,20,.12)}
+#astron-core-intro .aci-blades{inset:34%;
+  background:repeating-conic-gradient(from 0deg,rgba(150,14,10,.75) 0 14deg,rgba(10,2,2,.9) 14deg 30deg);
+  -webkit-mask:radial-gradient(circle,transparent 30%,#000 31%);mask:radial-gradient(circle,transparent 30%,#000 31%);
+  animation:aciSpin 18s linear infinite reverse}
+#astron-core-intro .aci-core{position:absolute;inset:40%;border-radius:50%;
+  background:radial-gradient(circle,#fff6f1 0%,#ff9378 13%,#ff3426 38%,#a3110b 70%,#3b0302 100%);
+  box-shadow:0 0 26px rgba(255,45,28,.95),0 0 80px rgba(255,30,20,.5),inset 0 0 12px rgba(255,255,255,.35);
+  animation:aciIgnite 1.8s .5s cubic-bezier(.2,.9,.2,1) both,aciPulse 2.8s 2.3s ease-in-out infinite}
+#astron-core-intro .aci-spec{position:absolute;inset:30%;border-radius:50%;pointer-events:none;
+  background:linear-gradient(135deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 38%)}
+#astron-core-intro .aci-streak{position:absolute;left:-60%;right:-60%;top:50%;height:2px;margin-top:-1px;opacity:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,80,60,.85) 50%,transparent);filter:blur(1px);animation:aciStreak 1.4s .8s ease-out both}
+
+/* speech reactive: gentler, brighter core + faster waves while the greeting is playing */
+#astron-core-intro.aci-live .aci-core{animation:aciPulse 1.5s ease-in-out infinite}
+#astron-core-intro.aci-live .aci-glow{animation:aciBreathe 1.5s ease-in-out infinite}
+#astron-core-intro.aci-live .aci-wave{animation-duration:2.2s}
+
+/* text */
+#astron-core-intro .aci-word{margin-top:clamp(24px,5.5vh,48px);font-size:clamp(22px,4.2vw,40px);letter-spacing:.55em;padding-left:.55em;font-weight:700;color:#ffe9e6;
+  text-shadow:0 0 22px rgba(255,50,40,.55);animation:aciFade 1.2s 1.1s ease both}
+#astron-core-intro .aci-status{margin-top:12px;font-size:11px;letter-spacing:.3em;color:rgba(255,120,105,.78);animation:aciFade 1.2s 1.4s ease both}
+#astron-core-intro .aci-bar{margin-top:22px;width:min(52vw,260px);height:1px;background:rgba(255,70,55,.2);overflow:hidden;animation:aciFade 1s 1.6s ease both}
+#astron-core-intro .aci-bar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,transparent,#ff3b2d,transparent);animation:aciSweep 2.2s ease-in-out infinite}
+
+@keyframes aciIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes aciIgnite{0%{opacity:0;transform:scale(.15);filter:brightness(.3)}45%{opacity:1;transform:scale(1.22);filter:brightness(1.6)}100%{opacity:1;transform:scale(1);filter:brightness(1)}}
+@keyframes aciStreak{0%{opacity:0;transform:scaleX(.1)}30%{opacity:.9}100%{opacity:0;transform:scaleX(1)}}
+@keyframes aciFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes aciSpin{to{transform:rotate(360deg)}}
+@keyframes aciPulse{0%,100%{opacity:.86;transform:scale(.97)}50%{opacity:1;transform:scale(1.045)}}
+@keyframes aciBreathe{0%,100%{opacity:.75;transform:scale(.97)}50%{opacity:1;transform:scale(1.05)}}
+@keyframes aciWave{0%{opacity:0;transform:scale(.8)}12%{opacity:.7}100%{opacity:0;transform:scale(2.15)}}
+@keyframes aciScan{0%{opacity:.0;transform:translateY(-25vh)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(105vh)}}
+@keyframes aciSweep{0%{transform:translateX(-110%)}100%{transform:translateX(280%)}}
+@keyframes aciDrift{0%{opacity:0;transform:translate(var(--sx),var(--sy))}15%{opacity:.85}100%{opacity:0;transform:translate(var(--dx),var(--dy))}}
+@keyframes aciExit{0%{transform:scale(1);filter:brightness(1)}35%{transform:scale(1.06);filter:brightness(1.7)}100%{transform:scale(1.5);filter:brightness(1)}}
+@keyframes aciFlash{0%{opacity:0}25%{opacity:.8}100%{opacity:0}}
+
+@media (max-width:600px){#astron-core-intro{--aci-s:min(62vmin,300px)}#astron-core-intro .aci-word{letter-spacing:.4em;padding-left:.4em}}
+@media (prefers-reduced-motion:reduce){
+  #astron-core-intro,#astron-core-intro *{animation:none !important}
+  #astron-core-intro{transition:opacity .3s ease,visibility 0s linear .3s}
+  #astron-core-intro .aci-particles,#astron-core-intro .aci-wave,#astron-core-intro .aci-scan,#astron-core-intro .aci-streak{display:none}
+}

@@ -117,3 +117,17 @@ if(glow){document.addEventListener('pointermove',e=>{glow.style.left=e.clientX+'
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initMotion); else initMotion();
 })();
+
+/* ================= RESPONSIVE NAVIGATION ================= */
+(function(){
+  const nav=document.querySelector('.nav');
+  const toggle=document.querySelector('.nav-toggle');
+  const panel=document.getElementById('astron-mobile-nav');
+  if(!nav||!toggle||!panel) return;
+  function close(){panel.hidden=true;nav.classList.remove('menu-open');document.body.classList.remove('mobile-menu-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation menu');}
+  toggle.addEventListener('click',()=>{const opening=panel.hidden;panel.hidden=!opening;nav.classList.toggle('menu-open',opening);document.body.classList.toggle('mobile-menu-open',opening);toggle.setAttribute('aria-expanded',String(opening));toggle.setAttribute('aria-label',opening?'Close navigation menu':'Open navigation menu');});
+  panel.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  window.addEventListener('resize',()=>{if(window.innerWidth>900) close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+})();
+
