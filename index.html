@@ -4111,9 +4111,17 @@ function animateHeroStats(){
 
     values.forEach(el => {
 
-        const target = parseFloat(el.dataset.count);
+        // These hero values are descriptive labels (READY, AVAILABLE, etc.)
+        // unless an explicit numeric data-count is provided. Never animate
+        // missing/non-numeric values, which would otherwise render as "NaN".
+        const rawCount = el.dataset.count;
+        if (rawCount === undefined || rawCount.trim() === "") return;
+
+        const target = Number(rawCount);
+        if (!Number.isFinite(target)) return;
+
         const suffix = el.dataset.suffix || "";
-        const isDecimal = String(el.dataset.count).includes(".");
+        const isDecimal = rawCount.includes(".");
         const suffixEl = el.querySelector("span");
         const duration = 1400;
         const start = performance.now();
