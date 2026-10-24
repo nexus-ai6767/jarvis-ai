@@ -22,6 +22,31 @@ function save(orders){const tmp=ORDERS_FILE+'.tmp';fs.writeFileSync(tmp,JSON.str
 function clean(s,n=254){return typeof s==='string'?s.trim().slice(0,n):'';}
 function validEmail(s){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);}
 function admin(req,res,next){const got=req.get('x-admin-token')||'';if(!crypto.timingSafeEqual(Buffer.from(got.padEnd(ADMIN_TOKEN.length,'\0').slice(0,ADMIN_TOKEN.length)),Buffer.from(ADMIN_TOKEN))||got.length!==ADMIN_TOKEN.length)return res.status(401).json({error:'Admin authentication failed'});next();}
+app.post('/api/assistant', async (req,res)=>{
+ const question=clean(req.body && req.body.question,500);
+ if(!question || question.length<2)return res.status(400).json({error:'Please enter a question.'});
+ const system='You are the ASTRON website guide. Answer visitor questions using only these verified website facts: ASTRON is presented as a cinematic personal AI system focused on voice, vision, automation, memory and local intelligence, designed to run on the user’s machine. Feature availability depends on build/configuration. For current prices, tell users to check the website pricing cards; never invent prices. For installation requirements, direct users to the relevant product documentation. Do not invent guarantees, capabilities, policies, contact details or product claims. Be concise, friendly and transparent when information is unknown.';
+ const key=process.env.AI_API_KEY;
+ if(!key){
+  const q=question.toLowerCase(); let answer='I do not have a verified answer to that specific question in the published website information yet. I can explain ASTRON’s listed features, getting started, or published pricing. The site owner can enable more flexible answers by configuring the secure AI backend.';
+  if(/what is astron|about astron|what does astron do/.test(q))answer='ASTRON is presented on this website as a cinematic personal AI system focused on voice, vision, automation, memory and local intelligence, designed to run on your own machine.';
+  else if(/feature|capabilit|what can it do|voice|vision|memory|automation/.test(q))answer='The website highlights voice assistance, vision tools, automation, memory and local AI. Exact capabilities depend on the specific ASTRON build and its configured components.';
+  else if(/price|pricing|cost|free|₹|payment/.test(q))answer='Please check the pricing cards currently displayed on this website for the latest listed price and plan details. I will not guess prices or payment terms that may have changed.';
+  else if(/get started|install|installation|download|how do i start/.test(q))answer='Use the Get Started buttons and follow the instructions on the relevant ASTRON page. Check the published requirements and choose the package that matches your device.';
+  return res.json({answer,mode:'guide'});
+ }
+ try{
+  const endpoint=(process.env.AI_API_URL||'https://api.openai.com/v1/chat/completions').replace(/\/$/,'');
+  const model=process.env.AI_MODEL||'gpt-4o-mini';
+  const upstream=await fetch(endpoint,{method:'POST',headers:{'Authorization':'Bearer '+key,'Content-Type':'application/json'},body:JSON.stringify({model,temperature:0.3,max_tokens:350,messages:[{role:'system',content:system},{role:'user',content:question}] }),signal:AbortSignal.timeout(12000)});
+  const payload=await upstream.json().catch(()=>({}));
+  if(!upstream.ok)throw new Error('AI provider returned '+upstream.status);
+  const answer=payload.choices&&payload.choices[0]&&payload.choices[0].message&&payload.choices[0].message.content;
+  if(typeof answer!=='string'||!answer.trim())throw new Error('AI provider returned no answer');
+  return res.json({answer:answer.trim().slice(0,3000),mode:'ai'});
+ }catch(err){console.error('ASTRON assistant provider error:',err.message);return res.status(503).json({error:'Live AI is temporarily unavailable. Please try again.'});}
+});
+
 app.post('/api/orders',(req,res)=>{
  const buyerName=clean(req.body.buyerName,100),email=clean(req.body.email).toLowerCase(),payerName=clean(req.body.payerName,100),utr=clean(req.body.utr,80).replace(/\s/g,'').toUpperCase();
  if(!buyerName||!validEmail(email)||! /^[A-Z0-9-]{8,80}$/.test(utr)||req.body.amountConfirmed!==true)return res.status(400).json({error:'Enter valid details and confirm that ₹950 was paid.'});

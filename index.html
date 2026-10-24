@@ -1772,6 +1772,9 @@ footer:before{
 .jarvis-live-btn{cursor:pointer;background:#080808;color:#ddd;border:1px solid rgba(22,140,255,.35);padding:10px 15px;font:inherit;font-size:10px;letter-spacing:.12em;text-transform:uppercase;transition:.2s}
 .jarvis-live-btn:hover{border-color:#168cff;box-shadow:0 0 18px rgba(22,140,255,.14);color:#ff9a58}
 @keyframes jdot{50%{opacity:.35;transform:scale(.75)}}
+
+.as-assistant-voice{margin-left:auto;flex:0 0 auto;background:rgba(22,140,255,.12);border:1px solid rgba(99,215,255,.35);border-radius:7px;color:#aeeaff;font-size:9px;font-weight:800;letter-spacing:.08em;padding:8px;cursor:pointer}.as-assistant-voice[aria-pressed="false"]{color:#8b9eaa;border-color:rgba(180,220,240,.18);background:rgba(255,255,255,.03)}.as-assistant-head .as-assistant-close{margin-left:0}.as-assistant-mic{flex:0 0 39px!important;padding:0!important;font-size:17px!important;background:rgba(22,140,255,.1)!important}.as-assistant-mic.listening{background:rgba(255,65,90,.22)!important;border-color:#ff6478!important;box-shadow:0 0 15px rgba(255,65,90,.25)}.as-assistant-mic:disabled{opacity:.5;cursor:not-allowed}
+
 @media(max-width:600px){.jarvis-live-inner{padding:18px}.jarvis-terminal{font-size:11px;min-height:270px;padding:15px}.jarvis-live-top{align-items:flex-start;flex-direction:column}}
 
 /* Old boot-intro CSS removed. Keyframes below are still used by #jarvis-badge. */
@@ -4384,6 +4387,38 @@ run(0);
  if(statusForm)statusForm.addEventListener('submit',async e=>{e.preventDefault();const b=statusForm.querySelector('button[type=submit]'),s=document.getElementById('proOrderStatus');b.disabled=true;say(s,'Checking order…');const f=new FormData(statusForm);try{const j=await request('/orders/status',{orderId:f.get('orderId'),email:f.get('email')});if(j.status==='approved'&&j.downloadUrl){say(s,'Payment approved. Your secure download is ready.','success');const a=document.createElement('a');a.href=j.downloadUrl;a.className='pro-copy-upi';a.textContent='DOWNLOAD ASTRON PRO WINDOWS ZIP';a.style.display='block';a.style.textAlign='center';a.style.marginTop='12px';s.insertAdjacentElement('afterend',a);}else if(j.status==='rejected')say(s,'This submission was not approved. Contact support with your order reference.','error');else say(s,'Payment is awaiting manual verification. Download is still locked.');}catch(err){say(s,err.message,'error')}finally{b.disabled=false;}});
 })();
 </script>
+
+
+<!-- ASTRON Website Assistant: isolated floating help widget -->
+<style id="astron-site-assistant-css">
+#astron-site-assistant{position:fixed;right:20px;bottom:22px;z-index:9998;font-family:var(--font-body,Inter,Arial,sans-serif);color:#eaf6ff}
+#astron-assistant-launch{width:62px;height:62px;border:1px solid rgba(99,215,255,.75);border-radius:50%;background:radial-gradient(circle at 35% 28%,#183c59,#07121f 58%,#030609);color:#dff7ff;box-shadow:0 0 0 5px rgba(22,140,255,.08),0 0 28px rgba(22,140,255,.28);cursor:pointer;display:grid;place-items:center;transition:transform .2s ease,box-shadow .2s ease}
+#astron-assistant-launch:hover{transform:translateY(-3px);box-shadow:0 0 0 7px rgba(22,140,255,.1),0 0 36px rgba(22,140,255,.42)}
+#astron-assistant-launch svg{width:31px;height:31px}#astron-assistant-launch .as-orb{animation:asOrbPulse 2.8s ease-in-out infinite;transform-origin:center}
+@keyframes asOrbPulse{0%,100%{opacity:.75;transform:scale(.94)}50%{opacity:1;transform:scale(1.05)}}
+#astron-assistant-panel{position:absolute;right:0;bottom:76px;width:min(370px,calc(100vw - 28px));height:min(520px,calc(100dvh - 130px));min-height:350px;box-sizing:border-box;padding:0;display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(99,215,255,.34);border-radius:16px;background:linear-gradient(160deg,rgba(9,19,30,.98),rgba(3,7,12,.99));box-shadow:0 20px 70px rgba(0,0,0,.65),0 0 35px rgba(22,140,255,.12);backdrop-filter:blur(18px)}
+#astron-assistant-panel[hidden]{display:none}
+.as-assistant-head{position:relative;flex:0 0 auto;display:flex;align-items:center;gap:11px;padding:15px;border-bottom:1px solid rgba(99,215,255,.17);background:linear-gradient(100deg,rgba(22,140,255,.12),transparent)}
+.as-assistant-mark{width:37px;height:37px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#1e5b82,#08101a 70%);border:1px solid rgba(99,215,255,.5);color:#9be8ff;font-weight:800;font-size:12px;box-shadow:0 0 18px rgba(22,140,255,.2)}
+.as-assistant-title{font-size:13px;letter-spacing:.12em;font-weight:700}.as-assistant-status{font-size:10px;color:#8db6ca;margin-top:4px;letter-spacing:.08em}.as-assistant-close{margin-left:auto;background:transparent;border:1px solid rgba(180,220,240,.2);border-radius:7px;color:#d9efff;font-size:21px;line-height:1;width:31px;height:31px;cursor:pointer}
+#astron-assistant-messages{min-height:0;padding:15px;display:flex;flex-direction:column;gap:11px;overflow:auto;flex:1;scroll-behavior:smooth}
+.as-assistant-msg{max-width:91%;white-space:pre-wrap;overflow-wrap:anywhere;padding:11px 12px;border-radius:11px;font-size:13px;line-height:1.55}.as-assistant-msg.bot{align-self:flex-start;background:rgba(125,185,220,.09);border:1px solid rgba(125,185,220,.14);color:#e5f5ff;border-top-left-radius:3px}.as-assistant-msg.user{align-self:flex-end;background:rgba(22,140,255,.2);border:1px solid rgba(99,190,255,.3);color:#f4fbff;border-top-right-radius:3px}.as-assistant-msg small{display:block;margin-top:7px;color:#93b9cc;font-size:10px}
+.as-assistant-suggestions{display:flex;gap:7px;flex-wrap:wrap;padding:0 13px 12px}.as-assistant-suggestions button{font-size:11px;color:#c8eaff;border:1px solid rgba(99,190,255,.25);background:rgba(22,140,255,.07);padding:7px 9px;border-radius:20px;cursor:pointer}.as-assistant-suggestions button:hover{background:rgba(22,140,255,.16)}
+.as-assistant-form{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(99,215,255,.16);background:rgba(0,0,0,.22)}.as-assistant-form input{min-width:0;flex:1;background:#050b11;border:1px solid rgba(120,190,220,.25);border-radius:9px;padding:11px 10px;color:#f1f9ff;font:inherit;font-size:13px;outline:none}.as-assistant-form input:focus{border-color:#63d7ff;box-shadow:0 0 0 2px rgba(22,140,255,.1)}.as-assistant-form button{border:1px solid rgba(99,215,255,.5);border-radius:9px;background:linear-gradient(135deg,#1477c8,#0b416f);color:white;font-size:12px;font-weight:700;padding:0 13px;cursor:pointer}.as-assistant-form button:disabled{opacity:.55;cursor:wait}.as-assistant-note{font-size:9px;line-height:1.4;color:#6f91a4;padding:0 13px 10px;background:rgba(0,0,0,.22)}
+@media(max-width:600px){#astron-site-assistant{right:13px;bottom:15px}#astron-assistant-launch{width:56px;height:56px}#astron-assistant-panel{bottom:67px;width:min(360px,calc(100vw - 26px));height:min(490px,calc(100dvh - 105px));min-height:320px}.as-assistant-msg{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#astron-assistant-launch,.as-assistant-msg,#astron-assistant-messages{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div id="astron-site-assistant">
+  <section id="astron-assistant-panel" role="dialog" aria-label="ASTRON website assistant" aria-modal="false" hidden>
+    <header class="as-assistant-head"><div class="as-assistant-mark" aria-hidden="true">A//</div><div><div class="as-assistant-title">ASTRON ASSISTANT</div><div class="as-assistant-status">WEBSITE GUIDE // ONLINE</div></div><button type="button" id="astron-assistant-voice" class="as-assistant-voice" aria-pressed="true" title="Turn spoken answers on or off">VOICE ON</button><button type="button" id="astron-assistant-close" class="as-assistant-close" aria-label="Close assistant">×</button></header>
+    <div id="astron-assistant-messages" aria-live="polite"><div class="as-assistant-msg bot">Hello! I’m the ASTRON website guide. Ask me about ASTRON, its features, getting started, or the information published on this website.</div></div>
+    <div class="as-assistant-suggestions" id="astron-assistant-suggestions"><button type="button">What is ASTRON?</button><button type="button">What features does it have?</button><button type="button">How do I get started?</button></div>
+    <form class="as-assistant-form" id="astron-assistant-form"><input id="astron-assistant-input" maxlength="500" autocomplete="off" placeholder="Ask ASTRON a question…" aria-label="Your question" required><button type="button" id="astron-assistant-mic" class="as-assistant-mic" aria-label="Ask by voice" title="Ask by voice">🎙</button><button type="submit" id="astron-assistant-send">SEND</button></form>
+    <div class="as-assistant-note" id="astron-assistant-note">Answers use published website information. Live AI requires server-side AI configuration.</div>
+  </section>
+  <button type="button" id="astron-assistant-launch" aria-label="Open ASTRON website assistant" aria-expanded="false" aria-controls="astron-assistant-panel"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle class="as-orb" cx="20" cy="20" r="14" stroke="#8ee9ff" stroke-width="1.5"/><path d="M20 8 23.5 16.5 32 20 23.5 23.5 20 32 16.5 23.5 8 20 16.5 16.5 20 8Z" fill="#c8f6ff"/><circle cx="20" cy="20" r="3" fill="#168cff"/><path d="M6 12 10 10M30 30 34 28M29 8 32 6" stroke="#168cff" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+</div>
+<script src="astron-assistant.js" defer></script>
 
 </body>
 </html>
